@@ -1,0 +1,110 @@
+{
+  "nav": {
+    "whatisthis": "Ce este asta?",
+    "archive": "Arhiva poveștilor",
+    "halloffame": "Sala Gloriei",
+    "signup": "Înregistrează-te",
+    "login": "Autentifică-te",
+    "wallet": "Portofel"
+  },
+  "likebutton": {
+    "like": "Îmi place!",
+    "unlike": "Nu îmi mai place!"
+  },
+  "command": {
+    "wrote": "a srcis:",
+    "comment": "Comentează:",
+    "logintovote": "Autentifică-te pentru a vota!",
+    "edit": "modifică",
+    "editmodal": {
+      "title": "Modifică Sugestie"
+    }
+  },
+  "index": {
+    "themagicfrog": "Broasca Magică",
+    "storymachine": "Și Mașina Magică de spus Povești",
+    "helpremember": "Ajută broasca magică să își amintească toate poveștile interesante și amuzante prin introducerea ideilor tale despre cum povestea ar putea continua în Mașina Magică de spus Povești! Mașina calculează apoi cel mai posibil (sau amuzant) răspuns și generează niște bănuți de aur pe care îi poți câștiga, whenever a story is completed. Ai putea găsi bănuți prin simpla ta participare.",
+    "fullofgold": "O oala plină cu aur",
+    "currentvalue": "Valoarea actuală:",
+    "endollar": "$",
+    "frdollar": "",
+    "logintogeneratemore": "Loghează-te pentru a mina aur pentru oală!",
+    "generatemore": "Minează aur pentru oală!",
+    "undogenerate": "Deja ai minat aur astăzi.",
+    "itsfree": "Da, este gratuit să participi și chiar poți primi ceva prin simpla participare! Nu este grozav? Și da, vorbim despre bani. Poate te întrebi cine plătește pentru asta. Pai, acest site este într-adevăr magic. Nu este doar despre poveștile \"magice\" dar și despre magia tehnologiei, magia <b>Blockchain-ului</b> și a crypto-monedelor.",
+    "thiswebsite": "Acest site emite o crypto-monedă numită <b>STEEM</b> bazată pe un proces decentralizat de votare. Poți folosi această monedă pentru ca votul tău să cântărească mai mult sau o poți vinde pentru bani reali. Pe scurt, STEEM îti permite să câștigi, să vinzi și să cumperi <b>influență</b> într-o rețea decentralizată și globală.",
+    "theinfluence": "Influența <b>Broaștei Magice</b> și a întregii comunități STEEM este folosită pentru a răsplati oamenii care iau parte în aceast proiect de povestire colaborativă. Conținutul poveștii însă este pur bazat pe numărul de voturi și nu pe influența individului.",
+    "read": "Citește povestea actuală",
+    "tobe": "Va urma...",
+    "howwillthestorygoon": "Cum va continua această poveste?",
+    "firstread": "Prima dată, citește cum alții cred că va evolua povestea și voteaza-i daca îți place.",
+    "thereareno": "Nu există niciun comentariu astăzi. Fii primul!",
+    "nowitsyourturn": "Este rândul tău!",
+    "continuewriting": "Continuă povestea de unde sa oprit, astfel încât este amuzantă sau interesanta de citit și poate chiar are și sens. Fii creativ!",
+    "form": {
+      "appendplaceholder": "Și au trăit fericiți până la adânci bătrâneți!",
+      "charactersleft": "caractere rămase.",
+      "youcaneven": "Poți încărca și imagini daca vrei.",
+      "yesupload": "Da, încarcă o imagine!",
+      "licensenote": "Vă rugăm să rețineți că doar imagini sub <a href=\"https://wiki.creativecommons.org/wiki/CC0\" target=\"_blank\">CC0 license</a> pot fi incluse în povestea finală. Preferabil e să îți încarci propriile fotografii și făcând asta ești de acord să o acorzi <a href=\"https://wiki.creativecommons.org/wiki/Public_domain\" target=\"_blank\">domeniului public</a>.",
+      "changedmymind": "M-am răzgândit. Fără imagine!",
+      "stopit": "Nu, cred că povestea ar trebui să se termine acum!",
+      "theend": "Sfârșit!",
+      "after10days": "(După 10 zile poți sugera ca povestea să se încheie și ca oala să fie distribuită.)",
+      "endalreadysuggested": "Cineva deja a sugerat ca povestea să se termine. Votează pentru el/ea ca asta sa se întâmple! Oala ($ {potValue}) va fi distribuită participanților care au contribuit poveștii și una noua va începe mâine!",
+      "ifthecommunity": "Dacă comunitatea crede același lucru, oala ($ {potValue}) va fi distribuită participanților care au contribuit poveștii (inclusiv tu) și una noua va începe mâine!",
+      "justkidding": "Nu, doar glumeam....",
+      "addpersonalnote": "Aici poți adăuga o notă personală dacă vrei:",
+      "thanksforparticipating": "Mulțumim pentru participare! Dacă ai mai multe idei, ești liber să le trimiți și pe ele.",
+      "submit": "Trimite!",
+      "logintowrite": "Autentifică-te pentru a scrie!",
+      "commentplaceholder": "Ce poveste minunată!"
+    },
+    "startingsoon": {
+      "title": "Prima poveste va începe în curând!",
+      "text": "Urmărește <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a> pentru a fi la curent!"
+    }
+  },
+  "archive": {
+    "title": "Arhiva Poveștilor"
+  },
+  "halloffame": {
+    "title": "Sala Gloriei",
+    "sponsors": "Sponsori",
+    "delegated": "Delegat",
+    "storytellers": "Povestitori",
+    "contributions": "Contribuții"
+  },
+  "auth": {
+    "openthedoor": "Se încearcă intrarea...",
+    "nokey": "Nicio cheie magică!"
+  },
+  "thismodal": {
+    "title": "Ce este asta?",
+    "text1": "Pe acest site poți lua parte la o povestire colaborativă. Toată lumea își poate trimite mica lor piesă din poveste și comunitatea decide în fiecare zi, prin vot, ce parte este adăugată. Astfel poți trimite ceva în fiecare zi. Astfel dacă contribuția ta va face parte din poveste, ai o șansă să câștigi oala poveștii. Cu cât contribui mai mult poveștii, cu atât șansele tale sunt mai mari.",
+    "text2": "Utilizarea <a href=\"https://steem.io\" target=\"_blank\"><b>blockchain-ului STEEM</b></a>, acest site generează <b>Crypto-monede</b>, de fiecare dată când povestea continuă. Aceste monede sunt colectate în oala poveștii și împărțite de fiecare dată când povestea se încheie. De asemenea este la latitudinea ta, cand se va întâmpla asta. După primele 10 zile ale fiecărei povești, vei putea sugera încheierea poveștii. Dacă comunitatea este de acord, o nouă poveste va începe ziua următoare și oala actuală va fi trasă la sorți între toți contribuitorii.<br><br>Chiar dacă nu ajungi în povest, vei câștiga puțin de STEEM, de fiecare dată când trimiți ceva, indiferent dacă comunitatea decide să o adauge poveștii sau nu.<br><br>Prima poveste este despre Broasca Magică și Maestul Vrăjitor.",
+    "text3": "Nu există reguli specifice, dar vă rugăm să încercați să fiți constructivi, pozitivi și respectuoși! Poveștile pot fi serioase, amuzante, ciudate sau un nonsens total. Este la latitudinea voastră! ;)",
+    "havefun": "Distrează-te!"
+  },
+  "loginmodal": {
+    "title": "Autentifică-te cu SteemConnect",
+    "text": "Pentru a participa îți trebuie un cont STEEM. Vei fi redirecționat către SteemConnect pentru a te autentifica pe blockchain-ul STEEM. SteemConnect este cea mai sigură cale pentru a te autentifica pe blockchain-ul STEEM și este dezvoltat și întreținut de Steemit, Inc. și Busy.org.",
+    "button": "Autentifică-te cu SteemConnect"
+  },
+  "signupmodal": {
+    "title": "Creează-ți un cont Steem",
+    "text": "Pentru a participa îți trebuie un cont STEEM. Steem este o platformă de tip blockchain care răsplătește creatorii de conținut cu o crypto-monedă numită STEEM. Odată ce contul tău Steem a fost verificat și activat, îl poți folosi pentru a te autentifica.<br><br>Aici sunt mult mai multe aplicații interesante și site-uri pe care le poți accesa cu acest cont. Cel mai probabil îți va trebui unul mai târziu sau mai devreme, deci nu ezita... este gratis!<br><br><a href=\"https://steem.io/\" target=\"_blank\">Află mai multe despre Steem!</a>",
+    "note": "<b>NOTĂ IMPORTANTĂ:</b><br><br>Din cauza naturii decentralizate a platformei Steem, nu există o autoritate centrală pe care o poți întreba să îți recupereze contul în caz că îți pierzi accesul la acesta.<br><br>Alege-ți o <b>parolă sigură</b> și fi sigur că o <b>ții sigură</b>. Ideal ar fi să o scrii pe o foaie de hârtie și să o depozitezi într-un loc sigur.<br><br><b>Ai toată responsabilitatea pentru securitatea contului tău și pentru recompensele pe care le câștigi.</b>",
+    "redirect": "Vei fi redirecționat către procesul de creeare a unui cont pe steemit.com.",
+    "button": "Creează-ți un cont Steem"
+  },
+  "walletmodal": {
+    "title": "Portofelul tău",
+    "text": "Aici vei fi capabil în curând să îți accesezi și administrezi fondurile STEEM. Între timp, îți poți accesa portofelul aici:",
+    "yourbalance": "Balanța contului tău"
+  },
+  "langmodal": {
+    "title": "Povești Magice din toată lumea",
+    "text": "Mai multe povești în curând!"
+  }
+}
