@@ -281,7 +281,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user', 'pot', 'currentCommands', 'allStoryPosts', 'delegators', 'curators', 'showUsernames']),
+    ...mapGetters('steemconnect', ['user']),
+    ...mapGetters(['pot', 'currentCommands', 'allStoryPosts', 'delegators', 'curators', 'showUsernames']),
     isDelegator () {
       return this.delegators.findIndex(delegator => {
         return delegator.delegator === this.user.account.name
@@ -595,7 +596,7 @@ export default {
   },
   async mounted () {
     // login
-    this.$store.dispatch('login')
+    this.$store.dispatch('steemconnect/login')
 
     // fetch data
     this.$store.dispatch('fetchPot')

@@ -47,11 +47,12 @@
       }
     },
     computed: {
-      ...mapGetters(['user', 'stories'])
+      ...mapGetters('steemconnect', ['user']),
+      ...mapGetters(['stories'])
     },
     async mounted () {
       // login
-      this.$store.dispatch('login')
+      this.$store.dispatch('steemconnect/login')
 
       // fetch data
       this.$store.dispatch('fetchStories')

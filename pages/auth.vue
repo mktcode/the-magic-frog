@@ -31,7 +31,7 @@
       let accessToken = this.$route.query['access_token']
       if (accessToken) {
         localStorage.setItem('access_token', accessToken)
-        await this.$store.dispatch('login')
+        await this.$store.dispatch('steemconnect/login')
         this.$router.push('/')
       }
     }

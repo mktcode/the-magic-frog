@@ -48,18 +48,18 @@
       }
     },
     computed: {
-      ...mapGetters(['user'])
+      ...mapGetters('steemconnect', ['user'])
     },
     methods: {
       logoutAndGoHome() {
         // redirect user to homepage after logout
-        this.$store.dispatch('logout')
+        this.$store.dispatch('steemconnect/logout')
         this.$router.push({ name: 'index' });
       }
     },
     async mounted () {
       // login
-      this.$store.dispatch('login')
+      this.$store.dispatch('steemconnect/login')
     }
   }
 </script>

@@ -78,11 +78,12 @@
       }
     },
     computed: {
-      ...mapGetters(['user', 'contributors', 'delegators', 'curators', 'rsharesToSBDFactor'])
+      ...mapGetters('steemconnect', ['user']),
+      ...mapGetters(['contributors', 'delegators', 'curators', 'rsharesToSBDFactor'])
     },
     async mounted () {
       // login
-      this.$store.dispatch('login')
+      this.$store.dispatch('steemconnect/login')
 
       // fetch data
       this.$store.dispatch('fetchContributors')
