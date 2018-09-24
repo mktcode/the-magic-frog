@@ -55,7 +55,7 @@
     },
     computed:{
       transferUrl: function(){
-        return 'https://v2.steemconnect.com/sign/transfer?to=' + this.receiver + '&amount=' + this.amount + '%20' + this.currency + '&memo=' + this.memo;
+        return 'https://steemconnect.com/sign/transfer?to=' + this.receiver + '&amount=' + this.amount + '%20' + this.currency + '&memo=' + this.memo;
       },
     }
   };
