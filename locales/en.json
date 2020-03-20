@@ -45,8 +45,8 @@
     "generatemore": "Mine gold for the pot!",
     "undogenerate": "You already mined gold today.",
     "itsfree": "Yes, it's totally free to participate and you even get something for it! Isn't that great? And yes, we're talking about money. You might wonder who pays for this. Well, this website is indeed very magical. It's not only about the \"magical\" stories but also about the magic of technology, the magic of the <b>Blockchain</b> and digital currencies.",
-    "thiswebsite": "This website issues a cryptocurrency called <b>STEEM</b> based on a decentralized community voting process. You can use this currency to give your own votes more weight or sell it for actual money. In a nutshell, STEEM enables you to earn, sell and buy <b>influence</b> in a global, decentralized content network.",
-    "theinfluence": "The influence of <b>The Magic Frog</b> and the whole STEEM community is used to reward the people that take part in this collaborative storytelling project. The content of the story however is based purely on vote counts and not the influence of the individual.",
+    "thiswebsite": "This website issues a cryptocurrency called <b>HIVE</b> based on a decentralized community voting process. You can use this currency to give your own votes more weight or sell it for actual money. In a nutshell, HIVE enables you to earn, sell and buy <b>influence</b> in a global, decentralized content network.",
+    "theinfluence": "The influence of <b>The Magic Frog</b> and the whole HIVE community is used to reward the people that take part in this collaborative storytelling project. The content of the story however is based purely on vote counts and not the influence of the individual.",
     "read": "Read the current story",
     "readmore": "Read more...",
     "tobe": "To be continued...",
@@ -96,11 +96,11 @@
     },
     "startingsoon": {
       "title": "The first story will start soon!",
-      "text": "Follow the <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a> to stay up to date!"
+      "text": "Follow the <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a> to stay up to date!"
     },
     "newstory": {
       "title": "How will the next story begin?",
-      "text": "Every ending is also a new beginning! A new story will start 24 hours after the last one ended. It will start with just <i>Once upon a time...</i>, and you can decide how our new adventure begins. To not miss this chance follow <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a>!"
+      "text": "Every ending is also a new beginning! A new story will start 24 hours after the last one ended. It will start with just <i>Once upon a time...</i>, and you can decide how our new adventure begins. To not miss this chance follow <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a>!"
     }
   },
   "archive": {
@@ -142,7 +142,7 @@
   "thismodal": {
     "title": "What is this?",
     "text1": "On this website you can take part in a collaborative story. Everyone can submit the next little piece of the story and the community decides every day, through voting, which part gets appended. You can therefore submit something everyday. If your submission makes it into the story, you have a chance to win the story pot. The more you can contribute to the story, the higher your chances are.",
-    "text2": "Utilizing the <a href=\"https://steem.io\" target=\"_blank\"><b>STEEM blockchain</b></a>, this website generates <b>Cryptocurrency</b>, everytime the story proceeds. Those coins are collected in the story pot and released everytime a story ends. It's also up to you, when this will happen. After the first 10 days of each story, you will be able to suggest to end the story. If the community agrees, a new story will start the next day and the current pot will be raffled among all contributors.<br><br>Even if you don't make it into the story, you will earn a tiny little bit of STEEM cryptocurrency, everytime you submit something, no matter if the community decides to append it or not.<br><br>The first story is about the Magic Frog and his Master Wizard.",
+    "text2": "Utilizing the <a href=\"https://hive.io\" target=\"_blank\"><b>HIVE blockchain</b></a>, this website generates <b>Cryptocurrency</b>, everytime the story proceeds. Those coins are collected in the story pot and released everytime a story ends. It's also up to you, when this will happen. After the first 10 days of each story, you will be able to suggest to end the story. If the community agrees, a new story will start the next day and the current pot will be raffled among all contributors.<br><br>Even if you don't make it into the story, you will earn a tiny little bit of HIVE cryptocurrency, everytime you submit something, no matter if the community decides to append it or not.<br><br>The first story is about the Magic Frog and his Master Wizard.",
     "text3": "There are no specific rules but please try to be constructive, positive and respectful! The stories can be serious, funny, weird or total nonsense. That's up to you! ;)",
     "havefun": "Have Fun!"
   },
@@ -151,16 +151,16 @@
     "adjuststrength": "Adjust the strength of your like."
   },
   "loginmodal": {
-    "title": "Login with SteemConnect",
-    "text": "In order to participate you need a Steem account. You will be redirected to SteemConnect to authenticate to the Steem blockchain. SteemConnect the most secure way to connect to the STEEM blockchain and is developed and maintained by Steemit, Inc. and Busy.org.",
-    "button": "Login with SteemConnect"
+    "title": "Login with HiveSigner",
+    "text": "In order to participate you need a Hive account. You will be redirected to HiveSigner to authenticate to the Hive blockchain. HiveSigner the most secure way to connect to the HIVE blockchain and is developed and maintained by Hiveit, Inc. and Busy.org.",
+    "button": "Login with HiveSigner"
   },
   "signupmodal": {
-    "title": "Create a Steem account",
-    "text": "In order to participate you need a Steem account. Steem is a blockchain platform that rewards content creators with the cryptocurrency STEEM. Once your Steem account has been verified and enabled, you can use it to log in.<br><br>There are a lot more interesting apps and websites you can access with this account. You'll probably need one sooner or later anyway, so don't hesitate... it's free!<br><br><a href=\"https://steem.io/\" target=\"_blank\">Learn more about Steem!</a>",
-    "note": "<b>IMPORTANT NOTE:</b><br><br>Due to the decentralized nature of the Steem platform, there is no central authority you can ask to recover your account in case you lose access to it.<br><br>Choose a <b>secure password</b> and make sure you <b>keep it safe</b>. Ideally you simply write it down on a piece of paper and store in a safe place.<br><br><b>You have full responsibility for the security of your account and the rewards you earn.</b>",
-    "redirect": "You will be redirected to the sign-up process of steemit.com.",
-    "button": "Create a Steem account"
+    "title": "Create a Hive account",
+    "text": "In order to participate you need a Hive account. Hive is a blockchain platform that rewards content creators with the cryptocurrency HIVE. Once your Hive account has been verified and enabled, you can use it to log in.<br><br>There are a lot more interesting apps and websites you can access with this account. You'll probably need one sooner or later anyway, so don't hesitate... it's free!<br><br><a href=\"https://hive.io/\" target=\"_blank\">Learn more about Hive!</a>",
+    "note": "<b>IMPORTANT NOTE:</b><br><br>Due to the decentralized nature of the Hive platform, there is no central authority you can ask to recover your account in case you lose access to it.<br><br>Choose a <b>secure password</b> and make sure you <b>keep it safe</b>. Ideally you simply write it down on a piece of paper and store in a safe place.<br><br><b>You have full responsibility for the security of your account and the rewards you earn.</b>",
+    "redirect": "You will be redirected to the sign-up process of hive.io.",
+    "button": "Create a Hive account"
   },
   "langmodal": {
     "title": "Magic Stories from all over the World",
@@ -168,7 +168,7 @@
   },
   "transfermodal": {
     "title": "Transfer",
-    "info": "Keep in mind that transactions, including all details, such as amount and memo, will be publicly stored on the Steem blockchain!",
+    "info": "Keep in mind that transactions, including all details, such as amount and memo, will be publicly stored on the Hive blockchain!",
     "labels": {
       "recipient": "Recipient:",
       "amount": "Amount:",
@@ -177,14 +177,14 @@
     },
     "descriptions": {
       "recipient": "Enter a username to which you want to transfer funds.",
-      "amount": "You have {steem} and {sbd}."
+      "amount": "You have {hive} and {hbd}."
     },
     "placeholders": {
       "recipient": "Username",
       "amount": "0.001",
       "memo": "Sent via the-magic-frog.com!"
     },
-    "submit": "Proceed with SteemConnect"
+    "submit": "Proceed with HiveSigner"
   },
   "cookie": {
     "message": "The frog gave you a magic cookie to make you feel good! (And to keep you logged in...)",

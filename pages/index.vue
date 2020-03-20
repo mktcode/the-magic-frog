@@ -37,23 +37,23 @@
             <b-collapse id="rewardsInfo" class="border-box mx-auto mt-3" style="max-width: 400px;">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-transparent" style="font-size: 1.2rem">
-                  {{ $t('index.rewards.luckystoryteller') }}: <b>{{ pot.winner.toFixed(2) }} SBD</b>
+                  {{ $t('index.rewards.luckystoryteller') }}: <b>{{ pot.winner.toFixed(2) }} HBD</b>
                 </li>
                 <li class="list-group-item">
-                  {{ $t('index.rewards.otherstorytellers') }}: <b>{{ (pot.others / latestStoryPostMeta.commands.length).toFixed(2) }} SBD</b><br>
+                  {{ $t('index.rewards.otherstorytellers') }}: <b>{{ (pot.others / latestStoryPostMeta.commands.length).toFixed(2) }} HBD</b><br>
                   <small class="text-muted">({{ $t('index.rewards.otherstorytellersinfo') }})</small>
                 </li>
                 <li class="list-group-item">
-                  {{ $t('index.rewards.curators') }}: <b>{{ (pot.curators).toFixed(2) }} SBD</b><br>
+                  {{ $t('index.rewards.curators') }}: <b>{{ (pot.curators).toFixed(2) }} HBD</b><br>
                   <small class="text-muted">({{ $t('index.rewards.curatorsinfo') }})</small>
                 </li>
                 <li class="list-group-item">
-                  {{ $t('index.rewards.delegators') }}: <b>{{ (pot.delegators).toFixed(2) }} SBD</b><br>
+                  {{ $t('index.rewards.delegators') }}: <b>{{ (pot.delegators).toFixed(2) }} HBD</b><br>
                   <small class="text-muted">({{ $t('index.rewards.delegatorsinfo') }})</small>
                 </li>
                 <li class="list-group-item bg-transparent" v-if="user">
                   {{ $t('index.rewards.youare') }}: <b>{{ youAre }}</b><br>
-                  {{ $t('index.rewards.estimatedreward') }}: <b>{{ estimatedUserReward }} SBD</b>
+                  {{ $t('index.rewards.estimatedreward') }}: <b>{{ estimatedUserReward }} HBD</b>
                 </li>
               </ul>
             </b-collapse>
@@ -408,7 +408,7 @@ export default {
             type: this.endStory ? 'end' : 'append',
             appendText: this.commandInput.trim(),
             comment: this.commentInput.trim(),
-            image: this.image || '', // don't set to null, would be removed if edited via steemit.com
+            image: this.image || '', // don't set to null, would be removed if edited via hive.io
             author: this.user.name
           };
 
@@ -487,7 +487,7 @@ export default {
           type: 'append',
           appendText: this.commandInput.trim(),
           comment: this.commentInput.trim(),
-          image: this.image || '', // don't set to null, would be removed if edited via steemit.com
+          image: this.image || '', // don't set to null, would be removed if edited via hive.io
           author: 'the-fly-swarm'
         };
 

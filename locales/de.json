@@ -45,8 +45,8 @@
     "generatemore": "Gold für den Topf schürfen!",
     "undogenerate": "Du hast heute schon Gold geschürft!",
     "itsfree": "Ja, es ist komplett kostenlos und du bekommst sogar etwas dafür! Ist das nicht toll? Und ja, wir reden hier über Geld. Du fragst dich wer das bezahlt? Nun, diese Website ist in der Tat sehr magisch. Allerdings nicht nur was die \"magischen\" Geschichten betrifft sondern auch die Technologie dahinter, die <b>Blockchain</b> und digitale Währungen.",
-    "thiswebsite": "Diese Website schüttet eine Kryptowährung namens <b>STEEM</b> aus, basierend auf einem dezentralen Abstimmungsverfahren. Du kannst diese Währung nutzen, um deiner eigenen Stimme mehr Gewicht zu verleihen oder sie für echtes Geld verkaufen. Kurz gesagt, STEEM erlaubt es dir <b>Einfluss</b> in einem globalen, dezentralen Content-Netzwerk zu verdienen und zu kaufen oder verkaufen.",
-    "theinfluence": "Der Einfluss des <b>Zauberfrosches</b> und der gesamten STEEM Community wird genutzt, um alle Teilnehmer an diesem kollaborativen Geschichten-Projekt für ihre Kreativität zu entlohnen. Der Inhalt der Geschichten hängt allerdings nicht vom Einfluss einzelner ab, sondern basiert rein auf Abstimmung.",
+    "thiswebsite": "Diese Website schüttet eine Kryptowährung namens <b>HIVE</b> aus, basierend auf einem dezentralen Abstimmungsverfahren. Du kannst diese Währung nutzen, um deiner eigenen Stimme mehr Gewicht zu verleihen oder sie für echtes Geld verkaufen. Kurz gesagt, HIVE erlaubt es dir <b>Einfluss</b> in einem globalen, dezentralen Content-Netzwerk zu verdienen und zu kaufen oder verkaufen.",
+    "theinfluence": "Der Einfluss des <b>Zauberfrosches</b> und der gesamten HIVE Community wird genutzt, um alle Teilnehmer an diesem kollaborativen Geschichten-Projekt für ihre Kreativität zu entlohnen. Der Inhalt der Geschichten hängt allerdings nicht vom Einfluss einzelner ab, sondern basiert rein auf Abstimmung.",
     "read": "Lies die aktuelle Geschichte",
     "tobe": "Fortsetzung folgt...",
     "readmore": "Weiterlesen...",
@@ -96,11 +96,11 @@
     },
     "startingsoon": {
       "title": "Die erste Geschichte startet bald!",
-      "text": "Folge dem <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a> um auf dem Laufenden zu bleiben!"
+      "text": "Folge dem <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a> um auf dem Laufenden zu bleiben!"
     },
     "newstory": {
       "title": "Wie wird die nächste Geschichte beginnen?",
-      "text": "Jedes Ende ist immer auch ein neuer Anfang! 24 Stunden nach dem Ende der letzten Geschichte, beginnt eine neue. Es wird einfach losgehen mit den Worten <i>Es war einmal...</i>, und du kannst mitbestimmen, wie unser neues Abenteuer beginnt. Um diese Chance nicht zu verpassen, folge <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a>!"
+      "text": "Jedes Ende ist immer auch ein neuer Anfang! 24 Stunden nach dem Ende der letzten Geschichte, beginnt eine neue. Es wird einfach losgehen mit den Worten <i>Es war einmal...</i>, und du kannst mitbestimmen, wie unser neues Abenteuer beginnt. Um diese Chance nicht zu verpassen, folge <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a>!"
     }
   },
   "archive": {
@@ -142,7 +142,7 @@
   "thismodal": {
     "title": "Was ist das?",
     "text1": "Auf dieser Website kannst du Teil einer gemeinschaftlich erzählten Geschichte werden. Jeden Tag kannst du vorschlagen, wie die Geschichte weitergehen soll und die Community entscheidet per Abstimmung, was tatsächlich als nächstes passiert. Wenn dein Vorschlag es in die Geschichte schafft, hast du eine Chance den <b>Topf voll Gold</b> zu gewinnen. Je öfter du etwas zur Geschichte beiträgst, desto höher sind deine Chancen.",
-    "text2": "Diese Website nutzt die <a href=\"https://steem.io\" target=\"_blank\"><b>STEEM blockchain</b></a>, um <b>Kryptowährung</b> zu generieren, immer wenn die Geschichte voran geht. Das passiert jeden Tag um 12:30 Uhr. Dieses Geld wird gesammelt und jedes mal an die Teilnehmer ausgeschüttet, wenn eine Geschichte ended. Wann genau das passiert, hängt von der Community ab. Nach den ersten 10 Tagen einer Geschichte, kann dafür abgestimmt werden, die Geschichte zu beenden. Dann wird eine Hälfte des Preisgeldes an einen glücklichen Gewinner verlost, während die andere Hälfte unter allen anderen Teilnehmern aufgeteilt wird. Dann startet eine neue Geschichte.<br><br>Sogar wenn deine Vorschläge es nicht in die Geschichte schaffen, wirst du alleine durch deine Teilnahme bereits ein bisschen STEEM Kryptowährung bekommen.",
+    "text2": "Diese Website nutzt die <a href=\"https://hive.io\" target=\"_blank\"><b>HIVE blockchain</b></a>, um <b>Kryptowährung</b> zu generieren, immer wenn die Geschichte voran geht. Das passiert jeden Tag um 12:30 Uhr. Dieses Geld wird gesammelt und jedes mal an die Teilnehmer ausgeschüttet, wenn eine Geschichte ended. Wann genau das passiert, hängt von der Community ab. Nach den ersten 10 Tagen einer Geschichte, kann dafür abgestimmt werden, die Geschichte zu beenden. Dann wird eine Hälfte des Preisgeldes an einen glücklichen Gewinner verlost, während die andere Hälfte unter allen anderen Teilnehmern aufgeteilt wird. Dann startet eine neue Geschichte.<br><br>Sogar wenn deine Vorschläge es nicht in die Geschichte schaffen, wirst du alleine durch deine Teilnahme bereits ein bisschen HIVE Kryptowährung bekommen.",
     "text3": "<b>Es gibt keine bestimmten Regeln aber bitte bleibt immer konstruktiv, positiv und respektvoll! Die Geschichten können ernsthaft sein, witzig oder total bescheuerter Blödsinn. Das liegt an euch! ;)</b>",
     "havefun": "Viel Spaß!"
   },
@@ -151,16 +151,16 @@
     "adjuststrength": "Passe die Stärke deines Votes an."
   },
   "loginmodal": {
-    "title": "Einloggen mit SteemConnect",
-    "text": "Um teilzunehmen brauchst du einen STEEM Account. Um dich damit einzuloggen wirst du zu <b>SteemConnect</b> weitergeleitet. SteemConnect ist die sicherste Methode sich mit der STEEM Blockchain zu verbinden und wird von Steemit, Inc. and Busy.org entwickelt und betrieben.",
-    "button": "Weiter zu SteemConnect"
+    "title": "Einloggen mit HiveSigner",
+    "text": "Um teilzunehmen brauchst du einen HIVE Account. Um dich damit einzuloggen wirst du zu <b>HiveSigner</b> weitergeleitet. HiveSigner ist die sicherste Methode sich mit der HIVE Blockchain zu verbinden und wird von Hiveit, Inc. and Busy.org entwickelt und betrieben.",
+    "button": "Weiter zu HiveSigner"
   },
   "signupmodal": {
-    "title": "Erstelle deinen Steem Account",
-    "text": "Um teilzunehmen brauchst du einen Steem Account. Steem ist eine Blockchain-Plattform, die Content-Ersteller mit der Kryptowährung STEEM belohnt. Sobald dein Account freigeschaltet wurde, kannst du dich damit hier einloggen.<br><br>Außerdem gibt es eine Menge mehr Apps und Websites auf die du mit deinem Steem Account Zugriff hast. Früher oder später wirst du daher wohl ohnehin einen brauchen! Es ist umsonst, also los!<br><br><a href=\"https://steem.io/\" target=\"_blank\">Lerne mehr über Steem!</a>",
-    "note": "<b>WICHTIGER HINWEIS:</b><br><br>Du bist die einzige Person auf dieser Welt, die Zugang zu deinem Account hat. Dadurch sind Fremdzugriffe auf dein Konto ausgeschlossen. Andererseits bedeutet dies, dass es keine Möglichkeit gibt den Zugang zu deinem Konto wiederherzustellen, solltest du ihn einmal verlieren. <b>D.h. dass nichteinmal der magische Zauberfrosch (Betreiber der Website) dein Passwort speichert oder dies zurücksetzen kann!</b><br><br>Wähle ein <b>sicheres Passwort</b> und stelle sicher, dass du es gut aufbewahrst. Idealerweise schreibst du es dir einfach auf und verwahrst es an einem sicheren Ort. Behandle deinen Steem Account genauso wie deinen normales Bankkonto.<br><br><b>Du hast die volle Verantwortung für die Sicherheit des Geldes, dass du hier verdienst!</b>",
-    "redirect": "Du wirst nun zum Registrierungsprozess von Steemit.com weitergeleitet.",
-    "button": "Erstelle deinen Steem Account"
+    "title": "Erstelle deinen Hive Account",
+    "text": "Um teilzunehmen brauchst du einen Hive Account. Hive ist eine Blockchain-Plattform, die Content-Ersteller mit der Kryptowährung HIVE belohnt. Sobald dein Account freigeschaltet wurde, kannst du dich damit hier einloggen.<br><br>Außerdem gibt es eine Menge mehr Apps und Websites auf die du mit deinem Hive Account Zugriff hast. Früher oder später wirst du daher wohl ohnehin einen brauchen! Es ist umsonst, also los!<br><br><a href=\"https://hive.io/\" target=\"_blank\">Lerne mehr über Hive!</a>",
+    "note": "<b>WICHTIGER HINWEIS:</b><br><br>Du bist die einzige Person auf dieser Welt, die Zugang zu deinem Account hat. Dadurch sind Fremdzugriffe auf dein Konto ausgeschlossen. Andererseits bedeutet dies, dass es keine Möglichkeit gibt den Zugang zu deinem Konto wiederherzustellen, solltest du ihn einmal verlieren. <b>D.h. dass nichteinmal der magische Zauberfrosch (Betreiber der Website) dein Passwort speichert oder dies zurücksetzen kann!</b><br><br>Wähle ein <b>sicheres Passwort</b> und stelle sicher, dass du es gut aufbewahrst. Idealerweise schreibst du es dir einfach auf und verwahrst es an einem sicheren Ort. Behandle deinen Hive Account genauso wie deinen normales Bankkonto.<br><br><b>Du hast die volle Verantwortung für die Sicherheit des Geldes, dass du hier verdienst!</b>",
+    "redirect": "Du wirst nun zum Registrierungsprozess von Hiveit.com weitergeleitet.",
+    "button": "Erstelle deinen Hive Account"
   },
   "langmodal": {
     "title": "Magische Geschichten aus aller Welt",
@@ -168,7 +168,7 @@
   },
   "transfermodal": {
     "title": "Geld schicken",
-    "info": "Bitte denke daran, dass alle Transaktionen, mit allen Details, wie Betrag und Memo, dauerhaft und öffentlich auf der Steem Blockchain gespeichert werden!",
+    "info": "Bitte denke daran, dass alle Transaktionen, mit allen Details, wie Betrag und Memo, dauerhaft und öffentlich auf der Hive Blockchain gespeichert werden!",
     "labels": {
       "recipient": "Empfänger:",
       "amount": "Betrag:",
@@ -177,14 +177,14 @@
     },
     "descriptions": {
       "recipient": "Gib den Benutzernamen an, dem du etwas schicken möchtest.",
-      "amount": "Du hast {steem} und {sbd}."
+      "amount": "Du hast {hive} und {hbd}."
     },
     "placeholders": {
       "recipient": "Benutzername",
       "amount": "0.001",
       "memo": "Gesendet über the-magic-frog.com!"
     },
-    "submit": "Fortfahren mit SteemConnect"
+    "submit": "Fortfahren mit HiveSigner"
   },
   "cookie": {
     "message": "Der Frosch hat dir einen magischen Cookie gegeben, damit du dich besser fühlst! (Und damit du angemeldet bleibst...)",

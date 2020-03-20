@@ -81,25 +81,25 @@ export default {
       });
     });
   },
-  fetchRsharesToSBDFactor({ commit }) {
+  fetchRsharesToHBDFactor({ commit }) {
     return new Promise((resolve, reject) => {
       // get reward fund for posts
       steem.api.getRewardFund('post', (err, fund) => {
         if (err) reject(err);
         else {
-          const rewardBalance = parseFloat(fund.reward_balance.replace(' STEEM', ''));
+          const rewardBalance = parseFloat(fund.reward_balance.replace(' HIVE', ''));
           const recentClaims = parseInt(fund.recent_claims, 10);
 
-          // get SBD price factor
+          // get HBD price factor
           steem.api.getCurrentMedianHistoryPrice((errs, price) => {
             if (errs) reject(errs);
             else {
-              const SBDPrice = parseFloat(price.base.replace(' SBD', ''));
-              const rsharesToSBDFactor = rewardBalance / recentClaims * SBDPrice;
+              const HBDPrice = parseFloat(price.base.replace(' HBD', ''));
+              const rsharesToHBDFactor = rewardBalance / recentClaims * HBDPrice;
 
-              // final rshares to SBD factor
-              commit('setRsharesToSBDFactor', rsharesToSBDFactor);
-              resolve(rsharesToSBDFactor);
+              // final rshares to HBD factor
+              commit('setRsharesToHBDFactor', rsharesToHBDFactor);
+              resolve(rsharesToHBDFactor);
             }
           });
         }

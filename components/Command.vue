@@ -1,8 +1,8 @@
 <template>
   <div class="comment text-center">
     <!-- User/Submission/Comment -->
-    <div class="comment-profile-image" :style="{ backgroundImage: 'url(https://steemitimages.com/u/' + command.author + '/avatar/small)' }"></div>
-    <div class="comment-username"><a :href="'https://steemit.com/@' + command.author" target="_blank">{{ command.author }}</a> {{ $t('command.wrote') }}</div>
+    <div class="comment-profile-image" :style="{ backgroundImage: 'url(https://images.hive.blog/u/' + command.author + '/avatar/small)' }"></div>
+    <div class="comment-username"><a :href="'https://hive.blog/@' + command.author" target="_blank">{{ command.author }}</a> {{ $t('command.wrote') }}</div>
     <div class="comment-command" v-html="appendHtml" v-if="meta.appendText"></div>
     <div v-if="meta.image" class="text-center my-3">
       <img :src="meta.image" alt="" class="img-fluid" />
@@ -128,7 +128,7 @@
             type: this.endStory ? 'end' : 'append',
             appendText: this.commandInput.trim(),
             comment: this.commentInput.trim(),
-            image: this.image || '', // don't set to null, would be removed if edited via steemit.com
+            image: this.image || '', // don't set to null, would be removed if edited via hive.io
             author: this.user.name
           };
 

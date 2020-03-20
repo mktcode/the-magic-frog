@@ -5,7 +5,7 @@
       <img :src="part.image" alt="" class="img-fluid" style="max-width: 100%; width: 800px;" />
     </div>
     <h3 v-if="part.type === 'end'">{{ $t('index.form.theend') }}</h3>
-    <sup class="text-muted" v-if="showUsernames">{{ $t('footer.by') }} <a :href="'https://steemit.com/@' + part.author" target="_blank">@{{ part.author }}</a></sup>
+    <sup class="text-muted" v-if="showUsernames">{{ $t('footer.by') }} <a :href="'https://hive.blog/@' + part.author" target="_blank">@{{ part.author }}</a></sup>
   </div>
 </template>
 

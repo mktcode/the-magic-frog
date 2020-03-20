@@ -20,8 +20,8 @@ export default {
   curators(state) {
     return state.curators;
   },
-  rsharesToSBDFactor(state) {
-    return state.rsharesToSBDFactor;
+  rsharesToHBDFactor(state) {
+    return state.rsharesToHBDFactor;
   },
   showUsernames(state) {
     return state.showUsernames;

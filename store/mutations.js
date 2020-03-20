@@ -20,8 +20,8 @@ export default {
   setCurators(state, curators) {
     state.curators = curators;
   },
-  setRsharesToSBDFactor(state, rsharesToSBDFactor) {
-    state.rsharesToSBDFactor = rsharesToSBDFactor;
+  setRsharesToHBDFactor(state, rsharesToHBDFactor) {
+    state.rsharesToHBDFactor = rsharesToHBDFactor;
   },
   setShowUsernames(state, show) {
     state.showUsernames = show;

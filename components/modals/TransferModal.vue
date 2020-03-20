@@ -14,7 +14,7 @@
 
         <b-row>
           <b-col sm="7">
-            <b-form-group id="amount" :label="$t('transfermodal.labels.amount')" label-for="amount" :description="$t('transfermodal.descriptions.amount', {steem: user.account.balance, sbd: user.account.sbd_balance})">
+            <b-form-group id="amount" :label="$t('transfermodal.labels.amount')" label-for="amount" :description="$t('transfermodal.descriptions.amount', {steem: user.account.balance, hbd: user.account.hbd_balance})">
               <b-form-input id="amount" type="number" v-model="amount" required :placeholder="$t('transfermodal.placeholders.amount')"></b-form-input>
             </b-form-group>
           </b-col>
@@ -45,17 +45,17 @@
       return {
         receiver: '',
         amount: 0.001,
-        currency: 'SBD',
+        currency: 'HBD',
         memo: this.$t('transfermodal.placeholders.memo'),
         options: [
-          { text: 'STEEM', value: 'STEEM' },
-          { text: 'SBD', value: 'SBD' }
+          { text: 'HIVE', value: 'HIVE' },
+          { text: 'HBD', value: 'HBD' }
         ]
       }
     },
     computed:{
       transferUrl: function(){
-        return 'https://steemconnect.com/sign/transfer?to=' + this.receiver + '&amount=' + this.amount + '%20' + this.currency + '&memo=' + this.memo;
+        return 'https://hivesigner.com/sign/transfer?to=' + this.receiver + '&amount=' + this.amount + '%20' + this.currency + '&memo=' + this.memo;
       },
     }
   };

@@ -2,8 +2,8 @@
   <b-col sm="12" md="4" class="mb-4 d-flex align-items-center justify-content-end flex-column">
     <div class="flex-column">
       <h2>#{{ index + 1 }}</h2>
-      <div class="delegator-profile-image" :style="{ backgroundImage: 'url(https://steemitimages.com/u/' + delegator.delegator + '/avatar/large)', width: imageSize + 'px', height: imageSize + 'px' }"></div>
-      <h3><a :href="'https://steemit.com/@' + delegator.delegator" target="_blank">@{{ delegator.delegator }}</a></h3>
+      <div class="delegator-profile-image" :style="{ backgroundImage: 'url(https://images.hive.blog/u/' + delegator.delegator + '/avatar/large)', width: imageSize + 'px', height: imageSize + 'px' }"></div>
+      <h3><a :href="'https://hive.blog/@' + delegator.delegator" target="_blank">@{{ delegator.delegator }}</a></h3>
       <h5>{{ $t('halloffame.delegated') }}: {{ delegator.sp.toFixed(0) }} SP</h5>
     </div>
   </b-col>

@@ -19,7 +19,7 @@
       <h2 class="mt-5 pt-5">{{ $t('halloffame.curators') }}</h2>
       <div v-if="curators.length">
         <b-row v-if="curators.length">
-          <Curator v-for="(curator, index) in curators" :key="index" :index="index" :curator="curator" :rsharesToSBDFactor="rsharesToSBDFactor" />
+          <Curator v-for="(curator, index) in curators" :key="index" :index="index" :curator="curator" :rsharesToHBDFactor="rsharesToHBDFactor" />
         </b-row>
       </div>
       <div class="upload-spinner" v-else>
@@ -79,7 +79,7 @@
     },
     computed: {
       ...mapGetters('steemconnect', ['user']),
-      ...mapGetters(['contributors', 'delegators', 'curators', 'rsharesToSBDFactor'])
+      ...mapGetters(['contributors', 'delegators', 'curators', 'rsharesToHBDFactor'])
     },
     async mounted () {
       // login
@@ -89,7 +89,7 @@
       this.$store.dispatch('fetchContributors')
       this.$store.dispatch('fetchDelegators')
       this.$store.dispatch('fetchCurators')
-      this.$store.dispatch('fetchRsharesToSBDFactor')
+      this.$store.dispatch('fetchRsharesToHBDFactor')
     },
   }
 </script>

@@ -7,7 +7,7 @@ import actions from './actions';
 
 const createStore = () => new Vuex.Store({
   state: {
-    pot: { // current pot value (SBD balance of frog account)
+    pot: { // current pot value (HBD balance of frog account)
       total: 0,
       delegators: 0, // total * 0.25
       curators: 0, // total * 0.25
@@ -20,7 +20,7 @@ const createStore = () => new Vuex.Store({
     contributors: [], // everyone who contributed to a story (in current language)
     delegators: [], // with amount of delegation
     curators: [], // with overall rshares contributed to the project
-    rsharesToSBDFactor: null, // multiply rshares by this factor to get SBD value
+    rsharesToHBDFactor: null, // multiply rshares by this factor to get HBD value
     showUsernames: true, // whether to show usernames in the story
   },
   getters,

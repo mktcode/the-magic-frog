@@ -45,8 +45,8 @@
     "generatemore": "Connectez-vous pour en générer plus!",
     "undogenerate": "Vous avez déjà extrait l'or aujourd'hui.",
     "itsfree": "Oui, c'est totalement gratuit et vous obtenez même quelque chose pour ça! N'est-ce pas génial? Et oui, nous parlons d'argent. Vous pourriez vous demander qui paie pour cela. Eh bien, ce site est en effet très magique. Il ne s'agit pas seulement des histoires «magiques», mais aussi de la magie de la technologie, de la magie de <b>la Blockchain</b> et des monnaies numériques.",
-    "thiswebsite": "Ce site Web émet une crypto-monnaie appelée <b>STEEM</b> basé sur un processus de vote communautaire décentralisé. Vous pouvez utiliser cette devise pour donner plus de poids à vos propres votes ou les vendre pour de l'argent courante. En un mot, STEEM vous permet de gagner, vendre et acheter <b>de l'influence</b> dans un réseau mondial de contenu décentralisé.",
-    "theinfluence": "L'influence de <b>La grenouille magique</b> et de toute la communauté STEEM est utilisée pour récompenser les personnes qui participent à ce projet de narration collaborative. Le contenu de l'histoire est cependant basé uniquement sur le nombre de votes et non sur l'influence de l'individu.",
+    "thiswebsite": "Ce site Web émet une crypto-monnaie appelée <b>HIVE</b> basé sur un processus de vote communautaire décentralisé. Vous pouvez utiliser cette devise pour donner plus de poids à vos propres votes ou les vendre pour de l'argent courante. En un mot, HIVE vous permet de gagner, vendre et acheter <b>de l'influence</b> dans un réseau mondial de contenu décentralisé.",
+    "theinfluence": "L'influence de <b>La grenouille magique</b> et de toute la communauté HIVE est utilisée pour récompenser les personnes qui participent à ce projet de narration collaborative. Le contenu de l'histoire est cependant basé uniquement sur le nombre de votes et non sur l'influence de l'individu.",
     "read": "Lisez l'histoire actuelle",
     "tobe": "À suivre...",
     "readmore": "Lire la suite...",
@@ -96,11 +96,11 @@
     },
     "startingsoon": {
       "title": "La première histoire va commencer bientôt!",
-      "text": "Suivez la <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a> magique pour rester à jour avec ces aventures!"
+      "text": "Suivez la <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a> magique pour rester à jour avec ces aventures!"
     },
     "newstory": {
       "title": "Comment la prochaine histoire va-t-elle commencer?",
-      "text": "Pour chaque fin, il y a toujours un nouveau départ! Une nouvelle histoire commencera 24 heures après la fin de la dernière. Cela commencera par <i>Il était une fois…</ i>, et vous pourez décider comment notre nouvelle aventure commencera. Pour ne pas rater cette chance, suivez la <a href=\"https://steemit.com/@{account}\" target=\"blank\">@{account}</a> magique!"
+      "text": "Pour chaque fin, il y a toujours un nouveau départ! Une nouvelle histoire commencera 24 heures après la fin de la dernière. Cela commencera par <i>Il était une fois…</ i>, et vous pourez décider comment notre nouvelle aventure commencera. Pour ne pas rater cette chance, suivez la <a href=\"https://hive.blog/@{account}\" target=\"blank\">@{account}</a> magique!"
     }
   },
   "archive": {
@@ -142,7 +142,7 @@
   "thismodal": {
     "title": "Qu'est-ce que c'est?",
     "text1": "Sur ce site, vous pouvez participer à une histoire collaborative. Tout le monde peut soumettre le prochain petit morceau de l'histoire et la communauté décide tous les jours, en votant, quelle partie est annexée. Vous pouvez donc soumettre quelque chose tous les jours. Si votre soumission entre dans l'histoire, vous avez une chance de gagner le pot de l'histoire. Plus vous contribuer à l'histoire, plus vos chances sont élevées.",
-    "text2": "Utilisant la <a href=\"https://steem.io\" target=\"_blank\"><b>blockchain STEEM</b> </a>, ce site génère de la <b>Crypto-monnaie</b>, chaque fois que l'histoire se déroule. Ces pièces sont collectées dans le pot de l'histoire et libérées chaque fois qu'une histoire se termine. C'est aussi à vous de décider quand cela arrivera. Après les 10 premiers jours de chaque histoire, vous pourrez suggérer de terminer l'histoire. Si la communauté est d'accord, une nouvelle histoire commencera le jour suivant et le pot actuel sera tiré au sort parmi tous les contributeurs. <br><br> Même si votre soumission ne rentre pas dans l'histoire, vous gagnerez un petit peu de Crypto-monnaie STEEM, chaque fois que vous soumettez quelque chose, peu importe si la communauté décide de l'ajouter ou non. <br><br>La première histoire concerne la Grenouille Magique et son Maître Magicien.",
+    "text2": "Utilisant la <a href=\"https://hive.io\" target=\"_blank\"><b>blockchain HIVE</b> </a>, ce site génère de la <b>Crypto-monnaie</b>, chaque fois que l'histoire se déroule. Ces pièces sont collectées dans le pot de l'histoire et libérées chaque fois qu'une histoire se termine. C'est aussi à vous de décider quand cela arrivera. Après les 10 premiers jours de chaque histoire, vous pourrez suggérer de terminer l'histoire. Si la communauté est d'accord, une nouvelle histoire commencera le jour suivant et le pot actuel sera tiré au sort parmi tous les contributeurs. <br><br> Même si votre soumission ne rentre pas dans l'histoire, vous gagnerez un petit peu de Crypto-monnaie HIVE, chaque fois que vous soumettez quelque chose, peu importe si la communauté décide de l'ajouter ou non. <br><br>La première histoire concerne la Grenouille Magique et son Maître Magicien.",
     "text3": "Il n'y a pas de règles spécifiques mais essayez d'être constructif, positif et respectueux! Les histoires peuvent être sérieuses, drôles, étranges ou totalement absurdes. Ça dépend de toi! ;)",
     "havefun": "Amusez-vous!"
   },
@@ -151,16 +151,16 @@
     "adjuststrength": "Ajustez la force de votre vote."
   },
   "loginmodal": {
-    "title": "Connexion avec SteemConnect",
-    "text": "Pour participer, vous avez besoin d'un compte Steem. Vous serez redirigé vers SteemConnect pour vous authentifier auprès de la blockchain Steem. SteemConnect est le moyen le plus sûr de se connecter à la blockchain STEEM et est développé et maintenu par Steemit, Inc. et Busy.org.",
-    "button": "Connexion avec SteemConnect"
+    "title": "Connexion avec HiveSigner",
+    "text": "Pour participer, vous avez besoin d'un compte Hive. Vous serez redirigé vers HiveSigner pour vous authentifier auprès de la blockchain Hive. HiveSigner est le moyen le plus sûr de se connecter à la blockchain HIVE et est développé et maintenu par Hiveit, Inc. et Busy.org.",
+    "button": "Connexion avec HiveSigner"
   },
   "signupmodal": {
-    "title": "Créer un compte Steem",
-    "text": "Pour participer, vous avez besoin d'un compte Steem. Steem est une plateforme blockchain qui récompense les créateurs de contenu avec la crypto-monnaie STEEM. Une fois que votre compte Steem a été vérifié et activé, vous pouvez l'utiliser pour vous connecter.<br><br> Il y a beaucoup plus d'applications intéressantes et de sites Web auxquels vous pouvez accéder avec ce compte. Vous en aurez probablement besoin tôt ou tard, alors n'hésitez pas... c'est gratuit!<br><br><a href=\"https://steem.io/\" target=\"_blank\">En savoir plus sur Steem!</a>",
-    "note": "<b>REMARQUE IMPORTANTE:</b><br><br>En raison de la nature décentralisée de la plate-forme Steem, aucune autorité centrale ne peut vous demander de récupérer votre compte si vous n'y avez plus accès.<br><br>Choisissez un <b>mot de passe sécurisé</b> et assurez-vous <b> de le garder en sécurité</b>. Idéalement, il vous suffit de l'écrire sur un morceau de papier et de le conserver dans un endroit sûr. <br><br><b> Vous êtes entièrement responsable de la sécurité de votre compte et des récompenses que vous gagnez. </b>",
-    "redirect": "Vous serez redirigé vers le processus d'inscription de steemit.com.",
-    "button": "Créer un compte Steem"
+    "title": "Créer un compte Hive",
+    "text": "Pour participer, vous avez besoin d'un compte Hive. Hive est une plateforme blockchain qui récompense les créateurs de contenu avec la crypto-monnaie HIVE. Une fois que votre compte Hive a été vérifié et activé, vous pouvez l'utiliser pour vous connecter.<br><br> Il y a beaucoup plus d'applications intéressantes et de sites Web auxquels vous pouvez accéder avec ce compte. Vous en aurez probablement besoin tôt ou tard, alors n'hésitez pas... c'est gratuit!<br><br><a href=\"https://hive.io/\" target=\"_blank\">En savoir plus sur Hive!</a>",
+    "note": "<b>REMARQUE IMPORTANTE:</b><br><br>En raison de la nature décentralisée de la plate-forme Hive, aucune autorité centrale ne peut vous demander de récupérer votre compte si vous n'y avez plus accès.<br><br>Choisissez un <b>mot de passe sécurisé</b> et assurez-vous <b> de le garder en sécurité</b>. Idéalement, il vous suffit de l'écrire sur un morceau de papier et de le conserver dans un endroit sûr. <br><br><b> Vous êtes entièrement responsable de la sécurité de votre compte et des récompenses que vous gagnez. </b>",
+    "redirect": "Vous serez redirigé vers le processus d'inscription de hive.io.",
+    "button": "Créer un compte Hive"
   },
   "langmodal": {
     "title": "Les histoires magiques de partout dans le monde",
@@ -168,7 +168,7 @@
   },
   "transfermodal": {
     "title": "Transfert",
-    "info": "Gardez à l'esprit que les transactions, y compris tous les détails, tels que le montant et le mémo, seront stockés publiquement sur la blockchain Steem!",
+    "info": "Gardez à l'esprit que les transactions, y compris tous les détails, tels que le montant et le mémo, seront stockés publiquement sur la blockchain Hive!",
     "labels": {
       "recipient": "Destinataire:",
       "amount": "Montant:",
@@ -177,14 +177,14 @@
     },
     "descriptions": {
       "recipient": "Entrez un nom d'utilisateur auquel vous souhaitez transférer des fonds.",
-      "amount": "Vous avez {steem} et {sbd}."
+      "amount": "Vous avez {hive} et {hbd}."
     },
     "placeholders": {
       "recipient": "nom d'utilisateur",
       "amount": "0.001",
       "memo": "Envoyé via fr.the-magic-frog.com!"
     },
-    "submit": "Continuez avec SteemConnect"
+    "submit": "Continuez avec HiveSigner"
   },
   "cookie": {
     "message": "La grenouille vous a donné un biscuit magique pour vous faire sentir bien! (Et pour vous garder connecté ...)",
