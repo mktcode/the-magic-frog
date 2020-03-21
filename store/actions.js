@@ -12,7 +12,7 @@ export default {
   },
   fetchPot({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/pot?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/pot?account=${Vue.prototype.$account}`).then((result) => {
         commit('setPot', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -22,7 +22,7 @@ export default {
   },
   fetchCurrentCommands({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/submissions?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/submissions?account=${Vue.prototype.$account}`).then((result) => {
         commit('setCurrentCommands', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -32,7 +32,7 @@ export default {
   },
   fetchStories({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/stories?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/stories?account=${Vue.prototype.$account}`).then((result) => {
         commit('setStories', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -42,7 +42,7 @@ export default {
   },
   fetchAllStoryPosts({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/storyposts?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/storyposts?account=${Vue.prototype.$account}`).then((result) => {
         commit('setAllStoryPosts', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -52,7 +52,7 @@ export default {
   },
   fetchContributors({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/contributors?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/contributors?account=${Vue.prototype.$account}`).then((result) => {
         commit('setContributors', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -62,7 +62,7 @@ export default {
   },
   fetchDelegators({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get(`https://api.the-magic-frog.com/delegators?account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/delegators?account=${Vue.prototype.$account}`).then((result) => {
         commit('setDelegators', result.data);
         resolve(result.data);
       }).catch((err) => {
@@ -73,7 +73,7 @@ export default {
   fetchCurators({ commit }) {
     return new Promise((resolve, reject) => {
       // Getting the top 12 curators of the frog account
-      axios.get(`https://api.the-magic-frog.com/curators?top=100&account=${Vue.prototype.$account}`).then((result) => {
+      axios.get(`${process.env.apiUrl}/curators?top=100&account=${Vue.prototype.$account}`).then((result) => {
         commit('setCurators', result.data);
         resolve(result.data);
       }).catch((err) => {
