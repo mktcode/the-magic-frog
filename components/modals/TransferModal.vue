@@ -14,7 +14,7 @@
 
         <b-row>
           <b-col sm="7">
-            <b-form-group id="amount" :label="$t('transfermodal.labels.amount')" label-for="amount" :description="$t('transfermodal.descriptions.amount', {steem: user.account.balance, hbd: user.account.hbd_balance})">
+            <b-form-group id="amount" :label="$t('transfermodal.labels.amount')" label-for="amount" :description="$t('transfermodal.descriptions.amount', {hive: user.account.balance, hbd: user.account.hbd_balance})">
               <b-form-input id="amount" type="number" v-model="amount" required :placeholder="$t('transfermodal.placeholders.amount')"></b-form-input>
             </b-form-group>
           </b-col>
