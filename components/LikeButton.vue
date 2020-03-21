@@ -78,7 +78,7 @@
 <script>
   // TODO: vote weight slider
 
-  import steem from 'steem'
+  import steem from 'steem-js-patched'
 
   export default {
     props: ['size', 'user', 'author', 'permlink', 'likeLabel', 'unlikeLabel', 'showLikes'],
@@ -100,7 +100,7 @@
       vote(weight) {
         this.$refs['voteControlModal-' + this.permlink].hide()
         this.loading = true;
-        this.$steemconnect.vote(this.user.name, this.author, this.permlink, weight * 100, (err) => {
+        this.$hivesigner.vote(this.user.name, this.author, this.permlink, weight * 100, (err) => {
           this.loading = false;
           if (err) {
             console.log(err);

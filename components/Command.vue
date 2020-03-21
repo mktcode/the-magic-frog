@@ -149,7 +149,7 @@
             }
 
             this.submitLoading = true;
-            this.$steemconnect.comment(
+            this.$hivesigner.comment(
               this.$account,
               this.command.parent_permlink,
               this.user.name,

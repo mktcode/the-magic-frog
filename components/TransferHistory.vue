@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import steem from 'steem'
+  import steem from 'steem-js-patched'
 
   import Transfer from '~/components/Transfer'
 

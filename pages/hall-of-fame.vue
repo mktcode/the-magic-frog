@@ -46,7 +46,7 @@
 
 <script>
   import axios from 'axios'
-  import steem from 'steem'
+  import steem from 'steem-js-patched'
 
   import NavbarLoggedIn from '~/components/NavbarLoggedIn'
   import NavbarLoggedOut from '~/components/NavbarLoggedOut'
@@ -78,12 +78,12 @@
       }
     },
     computed: {
-      ...mapGetters('steemconnect', ['user']),
+      ...mapGetters('hivesigner', ['user']),
       ...mapGetters(['contributors', 'delegators', 'curators', 'rsharesToHBDFactor'])
     },
     async mounted () {
       // login
-      this.$store.dispatch('steemconnect/login')
+      this.$store.dispatch('hivesigner/login')
 
       // fetch data
       this.$store.dispatch('fetchContributors')

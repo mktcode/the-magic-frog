@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import VueSteemConnect from 'vue-steemconnect';
+import VueHiveSigner from 'vue-hivesigner';
 
-Vue.use(VueSteemConnect, {
+Vue.use(VueHiveSigner, {
   app: 'themagicfrog.app',
   callbackURL: process.env.scRedirectUrl,
 });

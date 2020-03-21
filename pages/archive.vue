@@ -47,12 +47,12 @@
       }
     },
     computed: {
-      ...mapGetters('steemconnect', ['user']),
+      ...mapGetters('hivesigner', ['user']),
       ...mapGetters(['stories'])
     },
     async mounted () {
       // login
-      this.$store.dispatch('steemconnect/login')
+      this.$store.dispatch('hivesigner/login')
 
       // fetch data
       this.$store.dispatch('fetchStories')

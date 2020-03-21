@@ -231,7 +231,7 @@
 
 <script>
 import axios from 'axios'
-import steem from 'steem'
+import steem from 'steem-js-patched'
 import marked from 'marked'
 
 import { mapGetters } from 'vuex'
@@ -281,7 +281,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('steemconnect', ['user']),
+    ...mapGetters('hivesigner', ['user']),
     ...mapGetters(['pot', 'currentCommands', 'allStoryPosts', 'delegators', 'curators', 'showUsernames']),
     isDelegator () {
       return this.delegators.findIndex(delegator => {
@@ -433,7 +433,7 @@ export default {
 
             // broadcast
             this.submitLoading = true;
-            this.$steemconnect.comment(
+            this.$hivesigner.comment(
               this.$account,
               this.latestStoryPost.permlink,
               this.user.name,
@@ -596,7 +596,7 @@ export default {
   },
   async mounted () {
     // login
-    this.$store.dispatch('steemconnect/login')
+    this.$store.dispatch('hivesigner/login')
 
     // fetch data
     this.$store.dispatch('fetchPot')

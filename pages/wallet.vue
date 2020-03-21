@@ -48,18 +48,18 @@
       }
     },
     computed: {
-      ...mapGetters('steemconnect', ['user'])
+      ...mapGetters('hivesigner', ['user'])
     },
     methods: {
       logoutAndGoHome() {
         // redirect user to homepage after logout
-        this.$store.dispatch('steemconnect/logout')
+        this.$store.dispatch('hivesigner/logout')
         this.$router.push({ name: 'index' });
       }
     },
     async mounted () {
       // login
-      this.$store.dispatch('steemconnect/login')
+      this.$store.dispatch('hivesigner/login')
     }
   }
 </script>
