@@ -68,7 +68,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['steem', 'sc2-sdk', 'marked', 'axios', 'vue-i18n'],
+    vendor: ['steem-js-patched', 'marked', 'axios', 'vue-i18n'],
     /*
     ** You can extend webpack config here
     */

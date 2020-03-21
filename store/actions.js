@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import steem from 'steem';
+import steem from 'steem-js-patched';
 
 export default {
   updateData({ dispatch }) {

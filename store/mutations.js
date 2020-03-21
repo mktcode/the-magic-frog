@@ -1,5 +1,5 @@
 export default {
-  setPot (state, pot) {
+  setPot(state, pot) {
     state.pot = pot;
   },
   setCurrentCommands(state, currentCommands) {
@@ -25,5 +25,5 @@ export default {
   },
   setShowUsernames(state, show) {
     state.showUsernames = show;
-  }
+  },
 };

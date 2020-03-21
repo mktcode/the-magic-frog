@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 
 export default ({ app }) => {
   if (process.env.NODE_ENV !== 'production') return;

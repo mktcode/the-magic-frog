@@ -3,7 +3,7 @@ import VueI18n from 'vue-i18n';
 
 Vue.use(VueI18n);
 
-export default ({ app, store }, inject) => {
+export default ({ app }) => {
   let locale = process.env.locale;
   if (['de', 'fr', 'pt'].indexOf(locale) === -1) {
     locale = 'en';
