@@ -8,6 +8,7 @@ module.exports = {
   env: {
     guestAccountKey: process.env.GUEST_ACCOUNT_KEY || '',
     scRedirectUrl: process.env.SC_REDIRECT_URL || 'http://localhost:3000/auth',
+    apiUrl: process.env.API_URL || 'https://localhost:3333',
     locale: process.env.LOCALE || 'en',
   },
 
