@@ -5,5 +5,5 @@ inputs:
     description: The access token for the frosg's twitter account.
     required: true
 runs:
-  using: 'node12'
-  main: './dist/index.js'
+  using: node12
+  main: ./dist/index.js
