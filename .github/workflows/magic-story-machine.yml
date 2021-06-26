@@ -16,6 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/magic-story-machine.yml
+      - uses: ./.github/actions/magic-story-machine
         with:
           twitter-access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
