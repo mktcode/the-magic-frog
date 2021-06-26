@@ -1,0 +1,9 @@
+name: The Magic Story Machine
+description: Responsible for turning twitter comments into a story.
+inputs:
+  twitter-access-token:
+    description: The access token for the frosg's twitter account.
+    required: true
+runs:
+  using: 'node12'
+  main: 'magic-story-machine.js'

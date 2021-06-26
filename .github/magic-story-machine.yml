@@ -1,0 +1,13 @@
+name: The Magic Story Machine
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ${{ github.repository }}@${{ github.sha }}
+        with:
+          twitter-access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
