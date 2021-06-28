@@ -6,7 +6,7 @@
 
 const axios = __nccwpck_require__(6545)
 
-const getTweetReplies = (id, accessToken, replies, nextToken) => {
+const getTweetReplies = (id, bearerToken, replies, nextToken) => {
   const fields = 'author_id,public_metrics,in_reply_to_user_id'
   let url = `https://api.twitter.com/2/tweets/search/recent?tweet.fields=${fields}&query=conversation_id:${id} -is:retweet`
   if (nextToken) {
@@ -14,13 +14,13 @@ const getTweetReplies = (id, accessToken, replies, nextToken) => {
   }
   return axios.get(url, {
     headers: {
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `Bearer ${bearerToken}`
     }
   }).then((response) => {
     if (response.data.data && response.data.data.length) {
       replies.push(...response.data.data)
       if (response.data.meta.next_token) {
-        return getTweetReplies(id, accessToken, replies, response.data.meta.next_token)
+        return getTweetReplies(id, bearerToken, replies, response.data.meta.next_token)
       }
       return replies
     }
@@ -4118,8 +4118,8 @@ const state = __nccwpck_require__(8781)
 
 async function run() {
   try {
-    const twitterAccessToken = core.getInput('twitter-access-token')
-    const replies = getTweetReplies(state.currentTweetId, twitterAccessToken, [])
+    const twitterBearerToken = core.getInput('twitter-bearer-token')
+    const replies = await getTweetReplies(state.currentTweetId, twitterBearerToken, [])
     const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
     if (validReplies.length) {
       const topReply = validReplies.sort((a, b) => a.public_metrics.like_count > b.public_metrics.like_count).pop()
