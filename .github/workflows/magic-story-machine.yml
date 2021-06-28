@@ -11,4 +11,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/magic-story-machine
         with:
-          twitter-access-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
