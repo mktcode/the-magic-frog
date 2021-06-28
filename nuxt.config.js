@@ -9,6 +9,10 @@ export default {
     base: '/the-magic-frog/'
   },
 
+  env: {
+    API_URL: process.env.API_URL
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'The Magic Frog',
