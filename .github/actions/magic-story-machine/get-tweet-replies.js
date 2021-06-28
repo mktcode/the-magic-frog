@@ -11,7 +11,7 @@ const getTweetReplies = (id, accessToken, replies, nextToken) => {
       'Authorization': `Bearer ${accessToken}`
     }
   }).then((response) => {
-    if (response.data.data.length) {
+    if (response.data.data && response.data.data.length) {
       replies.push(...response.data.data)
       if (response.data.meta.next_token) {
         return getTweetReplies(id, accessToken, replies, response.data.meta.next_token)
