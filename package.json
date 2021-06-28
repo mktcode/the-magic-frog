@@ -27,7 +27,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.22.0",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.7.0",
+    "eslint-plugin-vue": "^7.12.1",
     "fibers": "^5.0.0",
     "jest": "^27.0.5",
     "push-dir": "^0.4.1",
