@@ -17,7 +17,7 @@ const getTweetReplies = (id, accessToken, replies, nextToken) => {
       'Authorization': `Bearer ${accessToken}`
     }
   }).then((response) => {
-    if (response.data.data.length) {
+    if (response.data.data && response.data.data.length) {
       replies.push(...response.data.data)
       if (response.data.meta.next_token) {
         return getTweetReplies(id, accessToken, replies, response.data.meta.next_token)
@@ -4119,7 +4119,7 @@ const state = __nccwpck_require__(8781)
 async function run() {
   try {
     const twitterAccessToken = core.getInput('twitter-access-token')
-    const replies = getTweetReplies(state.currentTweetId, twitterAccessToken)
+    const replies = getTweetReplies(state.currentTweetId, twitterAccessToken, [])
     const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
     if (validReplies.length) {
       const topReply = validReplies.sort((a, b) => a.public_metrics.like_count > b.public_metrics.like_count).pop()
