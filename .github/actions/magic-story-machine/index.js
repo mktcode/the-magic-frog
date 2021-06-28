@@ -5,7 +5,7 @@ const state = require('./../../../stories/state.json')
 async function run() {
   try {
     const twitterBearerToken = core.getInput('twitter-bearer-token')
-    const replies = getTweetReplies(state.currentTweetId, twitterBearerToken, [])
+    const replies = await getTweetReplies(state.currentTweetId, twitterBearerToken, [])
     const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
     if (validReplies.length) {
       const topReply = validReplies.sort((a, b) => a.public_metrics.like_count > b.public_metrics.like_count).pop()
