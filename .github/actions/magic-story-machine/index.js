@@ -8,7 +8,7 @@ async function run() {
     const replies = await getTweetReplies(state.currentTweetId, twitterBearerToken, [])
     const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
     if (validReplies.length) {
-      const topReply = validReplies.sort((a, b) => a.public_metrics.like_count > b.public_metrics.like_count).pop()
+      const topReply = validReplies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
       core.info(`Top Reply: ${topReply.text}`)
     }
   } catch (error) {
