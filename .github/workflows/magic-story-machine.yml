@@ -5,12 +5,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  top-reply:
+  tell-story:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/top-reply
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Top Reply
+        uses: ./.github/actions/top-reply
+        id: top-reply
         with:
           account-id: ${{ secrets.ACCOUNT_ID }}
-          tweet-id: 
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
+      
+      - name: Write Story
+        runs: |
+          if [ -z "${{ steps.top-reply.outputs.text }}" ]
+          then
+            echo "${{ steps.top-reply.outputs.author-id }}: ${{ steps.top-reply.outputs.text }}" >> stories/story-${{ steps.top-reply.outputs.story-number }}.md
+            if [ -z "${{ steps.top-reply.outputs.image }}" ]
+            then
+              echo "![Image of reply: ${{ steps.top-reply.outputs.reply-id }}](${{ steps.top-reply.outputs.image }})"
+            
+            git config --global user.name github-actions
+            git config --global user.email github-actions@github.com
+            git add .
+            git commit -m "Story ${{ steps.top-reply.outputs.story-number }} continues."
+            git push

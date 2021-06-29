@@ -1,6 +1,29 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 912:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const axios = __nccwpck_require__(6545)
+
+const getLatestStoryTweet = (accountId, bearerToken) => {
+  let url = `https://api.twitter.com/2/tweets/search/recent?query=(%23story OR %23Story) from:${accountId}`
+  return axios.get(url, {
+    headers: {
+      'Authorization': `Bearer ${bearerToken}`
+    }
+  }).then((response) => {
+    if (response.data && response.data.meta && response.data.meta.result_count) {
+      return response.data.data[0]
+    }
+    return null
+  })
+}
+
+module.exports = getLatestStoryTweet
+
+/***/ }),
+
 /***/ 8389:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -4129,29 +4152,43 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186)
+const getLatestStoryTweet = __nccwpck_require__(912)
 const getTweetReplies = __nccwpck_require__(8678)
 const getTweetImage = __nccwpck_require__(8389)
 
 async function run() {
   try {
     const accountId = core.getInput('account-id')
-    const tweetId = core.getInput('tweet-id')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
 
-    const replies = await getTweetReplies(tweetId, twitterBearerToken, []).filter(reply => reply.in_reply_to_user_id == accountId)
+    const latestStoryTweet = await getLatestStoryTweet(accountId, twitterBearerToken)
+    if (!latestStoryTweet) {
+      throw Error('No story tweet found!')
+    }
+    const foundNumber = latestStoryTweet.text.match(/#story (\d+)/)
+    if (!foundNumber) {
+      throw Error('No story number found!')
+    }
+    const storyNumber = foundNumber[0]
+
+    const replies = await getTweetReplies(latestStoryTweet.id, twitterBearerToken, []).filter(reply => reply.in_reply_to_user_id == accountId)
 
     if (replies.length) {
       const topReply = validReplies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       
+      core.info(`Latest Story Tweet:`)
+      core.info(`- ID: ${latestStoryTweet.id}`)
+      core.info(`- Story Number: ${storyNumber}`)
       core.info('Top Reply:')
-      core.info(`ID: ${topReply.id}`)
-      core.info(`Author: ${topReply.author_id}`)
-      core.info(`Text: ${topReply.text}`)
-      core.info(`Likes: ${topReply.public_metrics.like_count}`)
-      core.info(`Image: ${image}`)
+      core.info(`- ID: ${topReply.id}`)
+      core.info(`- Author: ${topReply.author_id}`)
+      core.info(`- Text: ${topReply.text}`)
+      core.info(`- Likes: ${topReply.public_metrics.like_count}`)
+      core.info(`- Image: ${image}`)
 
-      core.setOutput('id', topReply.id)
+      core.setOutput('story-number', storyNumber)
+      core.setOutput('reply-id', topReply.id)
       core.setOutput('author-id', topReply.author_id)
       core.setOutput('text', topReply.text)
       core.setOutput('image', image)

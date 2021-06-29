@@ -1,17 +1,16 @@
 name: Get Top Reply
-description: Fetches the reply with the most likes and its image.
+description: Fetches the reply with the most likes and its image, for the latest story tweet.
 inputs:
   account-id:
     description: The account of the mafic frog.
-    required: true
-  tweet-id:
-    description: The ID of the parent tweet.
     required: true
   twitter-bearer-token:
     description: The bearer token for the frosg's twitter account.
     required: true
 outputs:
-  id:
+  story-number:
+    description: The number of the current story.
+  reply-id:
     description: The ID of the top reply
   author-id:
     description: The author of the top reply
