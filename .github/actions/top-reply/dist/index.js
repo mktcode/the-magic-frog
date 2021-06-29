@@ -4171,7 +4171,7 @@ async function run() {
     }
     const storyNumber = foundNumber[0]
 
-    const replies = await getTweetReplies(latestStoryTweet.id, twitterBearerToken, []).filter(reply => reply.in_reply_to_user_id == accountId)
+    const replies = (await getTweetReplies(latestStoryTweet.id, twitterBearerToken, [])).filter(reply => reply.in_reply_to_user_id == accountId)
 
     if (replies.length) {
       const topReply = validReplies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
