@@ -1,14 +1,16 @@
 const core = require('@actions/core')
 const getTweetReplies = require('./get-tweet-replies')
 const getTweetImage = require('./get-tweet-image')
-const state = require('./../../../stories/state.json')
 
 async function run() {
   try {
+    const accountId = core.getInput('account-id')
+    const tweetId = core.getInput('tweet-id')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
-    const replies = await getTweetReplies(state.currentTweetId, twitterBearerToken, [])
-    const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
-    if (validReplies.length) {
+
+    const replies = await getTweetReplies(tweetId, twitterBearerToken, []).filter(reply => reply.in_reply_to_user_id == accountId)
+
+    if (replies.length) {
       const topReply = validReplies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       

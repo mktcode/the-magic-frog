@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "deploy": "push-dir --dir=dist --branch=gh-pages",
     "lint": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "build-magic-story-machine": "ncc build .github/actions/magic-story-machine/index.js -o .github/actions/magic-story-machine/dist"
+    "build-top-reply-machine": "ncc build .github/actions/top-reply/index.js -o .github/actions/top-reply/dist"
   },
   "dependencies": {
     "@actions/core": "^1.4.0",

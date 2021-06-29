@@ -1,6 +1,12 @@
-name: The Magic Story Machine
-description: Responsible for turning twitter comments into a story.
+name: Get Top Reply
+description: Fetches the reply with the most likes and its image.
 inputs:
+  account-id:
+    description: The account of the mafic frog.
+    required: true
+  tweet-id:
+    description: The ID of the parent tweet.
+    required: true
   twitter-bearer-token:
     description: The bearer token for the frosg's twitter account.
     required: true

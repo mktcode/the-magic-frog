@@ -1,7 +1,31 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8770:
+/***/ 8389:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const axios = __nccwpck_require__(6545)
+
+const getTweetImage = (id, bearerToken) => {
+  const fields = 'author_id'
+  let url = `https://api.twitter.com/2/tweets?ids=${id}&tweet.fields=${fields}&media.fields=url&expansions=attachments.media_keys`
+  return axios.get(url, {
+    headers: {
+      'Authorization': `Bearer ${bearerToken}`
+    }
+  }).then((response) => {
+    if (response.data && response.data.includes && response.data.includes.media) {
+      return response.data.includes.media[0].url
+    }
+    return null
+  })
+}
+
+module.exports = getTweetImage
+
+/***/ }),
+
+/***/ 8678:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const axios = __nccwpck_require__(6545)
@@ -3969,14 +3993,6 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.1","/home/mkt/Projects/mktco
 
 /***/ }),
 
-/***/ 8781:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"accountId":"1408717257505714179","currentTweetId":"1409114438297399300"}');
-
-/***/ }),
-
 /***/ 2357:
 /***/ ((module) => {
 
@@ -4113,17 +4129,32 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186)
-const getTweetReplies = __nccwpck_require__(8770)
-const state = __nccwpck_require__(8781)
+const getTweetReplies = __nccwpck_require__(8678)
+const getTweetImage = __nccwpck_require__(8389)
 
 async function run() {
   try {
+    const accountId = core.getInput('account-id')
+    const tweetId = core.getInput('tweet-id')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
-    const replies = await getTweetReplies(state.currentTweetId, twitterBearerToken, [])
-    const validReplies = replies.filter(reply => reply.in_reply_to_user_id == state.accountId)
-    if (validReplies.length) {
+
+    const replies = await getTweetReplies(tweetId, twitterBearerToken, []).filter(reply => reply.in_reply_to_user_id == accountId)
+
+    if (replies.length) {
       const topReply = validReplies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
-      core.info(`Top Reply: ${topReply.text}`)
+      const image = await getTweetImage(topReply.id, twitterBearerToken)
+      
+      core.info('Top Reply:')
+      core.info(`ID: ${topReply.id}`)
+      core.info(`Author: ${topReply.author_id}`)
+      core.info(`Text: ${topReply.text}`)
+      core.info(`Likes: ${topReply.public_metrics.like_count}`)
+      core.info(`Image: ${image}`)
+
+      core.setOutput('id', topReply.id)
+      core.setOutput('author-id', topReply.author_id)
+      core.setOutput('text', topReply.text)
+      core.setOutput('image', image)
     }
   } catch (error) {
     core.setFailed(error.message)
