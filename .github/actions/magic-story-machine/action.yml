@@ -4,6 +4,15 @@ inputs:
   twitter-bearer-token:
     description: The bearer token for the frosg's twitter account.
     required: true
+outputs:
+  id:
+    description: The ID of the top reply
+  author-id:
+    description: The author of the top reply
+  text:
+    description: The text of the top reply
+  image:
+    description: The image of the top reply
 runs:
   using: node12
   main: ./dist/index.js
