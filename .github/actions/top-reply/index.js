@@ -16,7 +16,7 @@ async function run() {
     if (!foundNumber) {
       throw Error('No story number found!')
     }
-    const storyNumber = foundNumber[0]
+    const storyNumber = foundNumber[1]
 
     const replies = (await getTweetReplies(latestStoryTweet.id, twitterBearerToken, [])).filter(reply => reply.in_reply_to_user_id == accountId)
 
