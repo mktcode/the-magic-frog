@@ -6,6 +6,7 @@ on:
 
 jobs:
   tell-story:
+    name: Tell Magical Story
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
