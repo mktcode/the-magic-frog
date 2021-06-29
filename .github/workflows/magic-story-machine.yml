@@ -28,9 +28,10 @@ jobs:
             if [ -z "${{ steps.top-reply.outputs.image }}" ]
             then
               echo "![Image of reply: ${{ steps.top-reply.outputs.reply-id }}](${{ steps.top-reply.outputs.image }})"
-            
+            fi
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
             git add .
             git commit -m "Story ${{ steps.top-reply.outputs.story-number }} continues."
             git push
+          fi
