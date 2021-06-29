@@ -5,10 +5,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  read:
+  top-reply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/magic-story-machine
+      - uses: ./.github/actions/top-reply
         with:
+          account-id: ${{ secrets.ACCOUNT_ID }}
+          tweet-id: 
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
