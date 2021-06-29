@@ -20,7 +20,7 @@ jobs:
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
       
       - name: Write Story
-        runs: |
+        run: |
           if [ -z "${{ steps.top-reply.outputs.text }}" ]
           then
             echo "${{ steps.top-reply.outputs.author-id }}: ${{ steps.top-reply.outputs.text }}" >> stories/story-${{ steps.top-reply.outputs.story-number }}.md
