@@ -4175,6 +4175,9 @@ async function run() {
 
     if (replies.length) {
       const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
+      // https://www.regextester.com/53716
+      const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/ig
+      const text = topReply.text.replace(urlRegex, '')
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       
       core.info(`Latest Story Tweet:`)
@@ -4183,14 +4186,14 @@ async function run() {
       core.info('Top Reply:')
       core.info(`- ID: ${topReply.id}`)
       core.info(`- Author: ${topReply.author_id}`)
-      core.info(`- Text: ${topReply.text}`)
+      core.info(`- Text: ${text}`)
       core.info(`- Likes: ${topReply.public_metrics.like_count}`)
       core.info(`- Image: ${image}`)
 
       core.setOutput('story-number', storyNumber)
       core.setOutput('reply-id', topReply.id)
       core.setOutput('author-id', topReply.author_id)
-      core.setOutput('text', topReply.text)
+      core.setOutput('text', text)
       core.setOutput('image', image)
     }
   } catch (error) {
