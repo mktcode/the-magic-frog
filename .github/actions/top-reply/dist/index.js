@@ -4165,7 +4165,7 @@ async function run() {
     if (!latestStoryTweet) {
       throw Error('No story tweet found!')
     }
-    const foundNumber = latestStoryTweet.text.match(/#story (\d+)/)
+    const foundNumber = latestStoryTweet.text.match(/#story (\d+)/i)
     if (!foundNumber) {
       throw Error('No story number found!')
     }
