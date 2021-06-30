@@ -31,7 +31,7 @@ async function run() {
 
 But what happens next? Read the full story at https://the-magic-frog.com and share your ideas below.`
     
-    if (theEnd) {
+    if (theEnd === 'true') {
       status = `Story ${storyNumber} ended! Thanks @${user.username} and everyone else.
 
 #Story ${Number(storyNumber) + 1} begins with:
@@ -40,6 +40,7 @@ Once upon a time...`
     }
 
     const tweet = await twitterClient.post("statuses/update", { status })
+    core.info(`Tweet ID: ${tweet.id}`)
     core.setOutput('tweet-id', tweet.id)
   } catch (error) {
     core.setFailed(error.message)
