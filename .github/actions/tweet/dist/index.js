@@ -6225,6 +6225,10 @@ async function run() {
     const lastAuthorId = core.getInput('last-author-id')
     const storyNumber = core.getInput('story-number')
     const theEnd = core.getInput('the-end')
+    const twitterConsumerKey = core.getInput('twitter-consumer-key')
+    const twitterConsumerSecret = core.getInput('twitter-consumer-secret')
+    const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
+    const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
     core.info(`Is this the end? ${theEnd}`)
 
@@ -6234,7 +6238,10 @@ async function run() {
     }
 
     const twitterClient = new Twitter({
-      bearer_token: twitterBearerToken
+      consumer_key: twitterConsumerKey,
+      consumer_secret: twitterConsumerSecret,
+      access_token_key: twitterAccessTokenKey,
+      access_token_secret: twitterAccessTokenSecret
     })
 
     let status = `#Story ${storyNumber} continues. @${user.username} helped me to remember. https://twitter.com/${user.username}/status/${lastReplyId}
@@ -6250,6 +6257,7 @@ Once upon a time...`
     }
 
     const tweet = await twitterClient.post("statuses/update", { status })
+    core.setOutput('tweet-id', tweet.id)
   } catch (error) {
     core.setFailed(error.message)
   }

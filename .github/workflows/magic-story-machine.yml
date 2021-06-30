@@ -43,4 +43,8 @@ jobs:
           last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
           story-number: ${{ steps.top-reply.outputs.story-number }}
           the-end: ${{ steps.top-reply.outputs.text == 'The End.' }}
+          twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          twitter-consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          twitter-access-token-key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
+          twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}

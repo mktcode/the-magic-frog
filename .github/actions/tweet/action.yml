@@ -13,8 +13,20 @@ inputs:
   the-end:
     description: Whether to start a new story or not.
     required: true
+  twitter-consumer-key:
+    description: The consumer key frog's twitter account.
+    required: true
+  twitter-consumer-secret:
+    description: The consumer secret for the frog's twitter account.
+    required: true
+  twitter-access-token-key:
+    description: The access token key for the frog's twitter account.
+    required: true
+  twitter-access-token-secret:
+    description: The access token secret for the frog's twitter account.
+    required: true
   twitter-bearer-token:
-    description: The bearer token for the frosg's twitter account.
+    description: The bearer token for the frog's twitter app.
     required: true
 outputs:
   tweet-id:
