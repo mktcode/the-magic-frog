@@ -1,0 +1,24 @@
+name: New Story Tweet
+description: Posts a new tweet that people can reply to, to continue the story.
+inputs:
+  last-author-id:
+    description: The ID of the last reply's author.
+    required: true
+  last-reply-id:
+    description: The tweet ID of the most recent text of the story.
+    required: true
+  story-number:
+    description: The number of the current story.
+    required: true
+  the-end:
+    description: Whether to start a new story or not.
+    required: true
+  twitter-bearer-token:
+    description: The bearer token for the frosg's twitter account.
+    required: true
+outputs:
+  tweet-id:
+    description: The ID of the new tweet.
+runs:
+  using: node12
+  main: ./dist/index.js
