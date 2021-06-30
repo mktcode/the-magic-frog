@@ -35,3 +35,12 @@ jobs:
             git commit -m "Story ${{ steps.top-reply.outputs.story-number }} continues."
             git push
           fi
+
+      - name: Tweet
+        uses: ./.github/actions/tweet
+        with:
+          last-author-id: ${{ steps.top-reply.outputs.author-id }}
+          last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
+          story-number: ${{ steps.top-reply.outputs.story-number }}
+          the-end: ${{ steps.top-reply.outputs.text == 'The End.' }}
+          twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
