@@ -4177,7 +4177,7 @@ async function run() {
       const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
       // https://www.regextester.com/53716
       const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/ig
-      const text = topReply.text.replace(urlRegex, '')
+      const text = topReply.text.replace(urlRegex, '').replace('@magicstoryfrog ', '')
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       
       core.info(`Latest Story Tweet:`)
