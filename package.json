@@ -19,7 +19,8 @@
     "bootstrap": "^5.0.2",
     "core-js": "^3.9.1",
     "jest": "^27.0.6",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "twitter-lite": "^1.1.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
