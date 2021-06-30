@@ -5,10 +5,6 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
-  router: {
-    base: '/the-magic-frog/'
-  },
-
   env: {
     API_URL: process.env.API_URL
   },
