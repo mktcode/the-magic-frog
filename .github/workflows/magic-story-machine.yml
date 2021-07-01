@@ -24,10 +24,10 @@ jobs:
         run: |
           if [[ ! -z "${{ steps.top-reply.outputs.text }}" ]]
           then
-            printf "${{ steps.top-reply.outputs.author-id }}: ${{ steps.top-reply.outputs.text }}\n\n" >> stories/story-${{ steps.top-reply.outputs.story-number }}.md
+            printf "${{ steps.top-reply.outputs.author-id }}: ${{ steps.top-reply.outputs.text }}\n\n" >> content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
             if [[ ! -z "${{ steps.top-reply.outputs.image }}" ]]
             then
-              printf "![Image of reply: ${{ steps.top-reply.outputs.reply-id }}](${{ steps.top-reply.outputs.image }})\n\n" >> stories/story-${{ steps.top-reply.outputs.story-number }}.md
+              printf "![Image of reply: ${{ steps.top-reply.outputs.reply-id }}](${{ steps.top-reply.outputs.image }})\n\n" >> content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
             fi
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
