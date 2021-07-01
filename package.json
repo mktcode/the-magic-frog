@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.4.0",
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/pwa": "^3.3.5",
     "bootstrap": "^5.0.2",
