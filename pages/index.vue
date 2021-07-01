@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column align-items-center p-5">
+  <div class="container d-flex flex-column align-items-center p-5">
     <h1>
       The Magic Frog
     </h1>
@@ -20,12 +20,12 @@
     <a name="story-start" />
     <div class="dropdown mt-5">
       <button id="story-select" class="btn px-4 mb-3 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="h2">{{ storyTitle(currentStory) }}</span>
+        <span class="h2">{{ stories[currentStory].title }}</span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
         <li v-for="(story, index) in stories" :key="story.slug">
           <a class="dropdown-item" href="#story-start" @click="currentStory = index">
-            {{ storyTitle(index) }}
+            {{ stories[index].title }}
           </a>
         </li>
       </ul>
@@ -34,6 +34,9 @@
       Once upon a time...
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
+    <button class="btn btn-sm btn-outline-primary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
+      {{ showUsernames ? 'hide usernames' : 'show usernames' }}
+    </button>
     <nuxt-content :document="stories[currentStory]" class="lead" />
     <img src="divider.png">
     <h2 class="mt-5">
@@ -51,9 +54,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   async asyncData ({ $content }) {
-    const stories = await $content('stories').sortBy('createdAt', 'desc').fetch()
+    const stories = await $content('stories').sortBy('number', 'desc').fetch()
     return { stories }
   },
   data () {
@@ -65,6 +70,9 @@ export default {
       currentStory: 0
     }
   },
+  computed: {
+    ...mapGetters(['showUsernames'])
+  },
   mounted () {
     this.accessToken = localStorage.getItem('twitter_access_token')
     this.screenName = localStorage.getItem('twitter_screen_name')
@@ -73,9 +81,6 @@ export default {
     }
   },
   methods: {
-    storyTitle (index) {
-      return this.stories[index].slug[0].toUpperCase() + this.stories[index].slug.substring(1).replace('-', ' ')
-    },
     prepareTwitterLogin () {
       this.$axios.get(process.env.API_URL + '/request').then((response) => {
         this.requestToken = response.data.request_token

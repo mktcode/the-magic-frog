@@ -21,18 +21,27 @@ jobs:
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
       
       - name: Write Story
+        env:
+          STORY_NUMBER: ${{ steps.top-reply.outputs.story-number }}
+          FILE: content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
+          TEXT: ${{ steps.top-reply.outputs.text }}
+          IMAGE: ${{ steps.top-reply.outputs.image }}
+          AUTHOR: ${{ steps.top-reply.outputs.author-id }}
         run: |
-          if [[ ! -z "${{ steps.top-reply.outputs.text }}" ]]
+          if [[ ! -z $TEXT ]]
           then
-            printf "${{ steps.top-reply.outputs.author-id }}: ${{ steps.top-reply.outputs.text }}\n\n" >> content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
-            if [[ ! -z "${{ steps.top-reply.outputs.image }}" ]]
+            if [ ! -f $FILE ]
             then
-              printf "![Image of reply: ${{ steps.top-reply.outputs.reply-id }}](${{ steps.top-reply.outputs.image }})\n\n" >> content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
+              printf "---\n" >> $FILE
+              printf "title: Story $STORY_NUMBER\n" >> $FILE
+              printf "number: $STORY_NUMBER\n" >> $FILE
+              printf "---\n\n" >> $FILE
             fi
+            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\">$TEXT</story-part>\n" >> $FILE
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
             git add .
-            git commit -m "Story ${{ steps.top-reply.outputs.story-number }} continues."
+            git commit -m "Story $STORY_NUMBER continues."
             git push
           fi
 
@@ -42,7 +51,7 @@ jobs:
           last-author-id: ${{ steps.top-reply.outputs.author-id }}
           last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
           story-number: ${{ steps.top-reply.outputs.story-number }}
-          the-end: ${{ steps.top-reply.outputs.text == 'The End.' }}
+          the-end: ${{ steps.top-reply.outputs.text == 'The End!' }}
           twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           twitter-consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           twitter-access-token-key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
