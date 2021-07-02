@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'my-2': showUSernames }">
+  <div :class="{ 'my-2': showUsernames }">
     <span v-if="showUsernames" class="fw-bold username">{{ username }}:</span>
     <slot />
     <div class="text-center">
