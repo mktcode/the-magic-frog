@@ -6257,8 +6257,8 @@ Once upon a time...`
     }
 
     const tweet = await twitterClient.post("statuses/update", { status })
-    core.info(`Tweet ID: ${tweet.id}`)
-    core.setOutput('tweet-id', tweet.id)
+    core.info(`Tweet ID: ${tweet.id_str}`)
+    core.setOutput('tweet-id', tweet.id_str)
   } catch (error) {
     core.setFailed(error.message)
   }
