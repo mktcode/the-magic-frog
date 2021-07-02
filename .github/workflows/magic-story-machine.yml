@@ -40,7 +40,7 @@ jobs:
           ENDED: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
           # Add new story part to end of file
-          printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>\n$TEXT\n</span></story-part>" >> $FILE
+          printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\">\n\n$TEXT\n\n</story-part>" >> $FILE
 
           # If new story part is "The End!" then update "ended" attribute in frontmatter header and prepare next story file.
           if $ENDED
