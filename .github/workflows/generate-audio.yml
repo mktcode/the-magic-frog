@@ -1,0 +1,46 @@
+name: Generate Audio
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-audio:
+    name: Generate Audio
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: repo
+      
+      # Set up Google Cloud for Text to Speech
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@0aa92bcd70fc0929f052b47276d5e61f793c384b
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+        
+      # Convert text configured in secrets to audio
+      - name: Convert Text To Audio
+        run: |
+          # Use Google text to speech
+          export AUDIO_FILE=repo/static/audio/audio-$(date +%s).mp3
+          curl -X POST \
+          -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
+          -H "Content-Type: application/json; charset=utf-8" \
+          -d '{"input":{"text":"${{ secrets.AUDIO_TO_GENERATE }}"},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"MALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $AUDIO_FILE
+      
+      # Update Repo
+      - name: Update Repo
+        run: |
+          cd repo
+          
+          # Commit and push new files
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add .
+          git commit -m "generated audio"
+          git push
+        
