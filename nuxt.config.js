@@ -16,7 +16,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Help the magic frog to remember all his interesting and fun stories and win the pot full of gold!' }
+      { hid: 'description', name: 'description', content: 'Help the magic frog to remember all his interesting and fun stories!' },
+      { property: 'og:title', content: 'The Magic Frog' },
+      { property: 'og:description', content: 'Help the magic frog to remember all his interesting and fun stories!' },
+      { property: 'og:image', content: 'https://the-magic-frog.com/cover.png' },
+      { property: 'og:url', content: 'https://the-magic-frog.com' },
+      { name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

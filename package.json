@@ -1,7 +1,7 @@
 {
   "name": "the-magic-frog",
   "version": "2.0.0",
-  "description": "Help the magic frog to remember all his interesting and fun stories and win the pot full of gold!",
+  "description": "Help the magic frog to remember all his interesting and fun stories!",
   "private": true,
   "scripts": {
     "dev": "nuxt",
