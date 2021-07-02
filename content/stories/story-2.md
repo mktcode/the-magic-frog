@@ -151,3 +151,7 @@ ended: true
 <story-part username="yuki-nee">To travel from world to world and learn their cultures and lifestyle, telling him that it would be a great help to his ascension. Roland agreed and starts his journey to another world. And that is how the first world adventurer was born.</story-part>
 
 <story-part username="vegaron">...and that's how an unlucky but just adventurer became a legend.</story-part>
+
+<story-part username="mkt"><span>
+# The End!
+</span></story-part>
