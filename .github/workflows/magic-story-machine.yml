@@ -55,7 +55,7 @@ jobs:
           if $ENDED
           then
             sed -i '0,/ended: false/s//ended: true/' $FILE
-            export NEXT_FILE=content/stories/story-$(( $STORY_NUMBER + 1 )).md
+            export NEXT_FILE=repo/content/stories/story-$(( $STORY_NUMBER + 1 )).md
             printf "%s\n" "---" >> $NEXT_FILE
             printf "%s\n" "title: Story $STORY_NUMBER" >> $NEXT_FILE
             printf "%s\n" "number: $STORY_NUMBER" >> $NEXT_FILE
@@ -64,13 +64,28 @@ jobs:
           fi
         
       - name: Convert Text To Audio
+        env:
+          STORY_NUMBER: ${{ steps.top-reply.outputs.story-number }}
+          ENDED: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
           # Use Google text to speech
+          export AUDIO_FILE=repo/static/audio/story-$STORY_NUMBER.mp3
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
           -d '{"input":{"text":"${{ steps.top-reply.outputs.text-clean }}"},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"MALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
-          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> repo/static/audio/story-${{ steps.top-reply.outputs.story-number }}.mp3
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $AUDIO_FILE
+
+          # Prepare next story audio file
+          if $ENDED
+          then
+            export NEXT_AUDIO_FILE=repo/static/audio/story-$(( $STORY_NUMBER + 1 )).md
+            curl -X POST \
+            -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{"input":{"text":"Once upon a time..."},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"MALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
+            https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $NEXT_AUDIO_FILE
+          fi
 
       # Publish a new tweet, where people can again share ideas.
       - name: New Tweet
