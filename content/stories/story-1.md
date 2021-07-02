@@ -1,6 +1,7 @@
 ---
 title: An Unexpected Party
 number: 1
+ended: true
 ---
 
 <story-part username="mkt">there was a wizard...</story-part>
@@ -68,5 +69,3 @@ number: 1
 <story-part username="enforcer48">The snakes had nervous looks in their eyes. The storks, still frozen in fear, decided that they should probably abort their plans about ruining the party.</story-part>
 
 <story-part username="hennifant">But then the bored, fat rhino in the corner began to fall asleep. It stumbled and tumbled until it could not stay on it's feet anymore and fell, totally squishing the wizard underneath it. He was dead immediately.</story-part>
-
-<story-part username="hennifant">The End!</story-part>

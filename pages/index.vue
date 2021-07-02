@@ -38,6 +38,16 @@
       {{ showUsernames ? 'hide usernames' : 'show usernames' }}
     </button>
     <nuxt-content :document="stories[currentStory]" class="lead" />
+    <h1 v-if="stories[currentStory].ended" class="mt-5">
+      The End!
+    </h1>
+    <div v-else class="my-5 text-center" style="max-width:800px">
+      <p class="lead mb-0">
+        The story will be continued in:
+      </p>
+      <h1>3 hours, 45 minutes</h1>
+      <Rules />
+    </div>
     <img src="divider.png">
     <h2 class="mt-5">
       A pot full of gold?

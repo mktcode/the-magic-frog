@@ -1,9 +1,10 @@
 ---
 title: Roland The Adventurer
 number: 2
+ended: false
 ---
 
-<story-part username="vegaron">there was an unlucky adventurer called Roland. One day Roland, along with a great number of adventurer was tasked by the Adventurer guild to explore a mysterious dungeon that had appeared out of nowhere.</story-part>
+<story-part username="vegaron">there was an unlucky adventurer called Roland. One day Roland, along with a great number of adventurers was tasked by the Adventurer guild to explore a mysterious dungeon that had appeared out of nowhere.</story-part>
 
 <story-part username="atra-aranea">There are rumors that all of the lately lost people of the village could be found inside. The Adventurer Guild promised to give the adventurer or adventurer group that managed to rescue the people a very special and precious treasure.</story-part>
 
@@ -150,5 +151,3 @@ number: 2
 <story-part username="yuki-nee">To travel from world to world and learn their cultures and lifestyle, telling him that it would be a great help to his ascension. Roland agreed and starts his journey to another world. And that is how the first world adventurer was born.</story-part>
 
 <story-part username="vegaron">...and that's how an unlucky but just adventurer became a legend.</story-part>
-
-<story-part username="vegaron">The End!</story-part>

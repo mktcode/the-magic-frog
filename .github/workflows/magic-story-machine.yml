@@ -27,6 +27,7 @@ jobs:
           TEXT: ${{ steps.top-reply.outputs.text }}
           IMAGE: ${{ steps.top-reply.outputs.image }}
           AUTHOR: ${{ steps.top-reply.outputs.author-id }}
+          END: ${{ steps.top-reply.outputs.text == 'The End!' }}
         run: |
           if [[ ! -z $TEXT ]]
           then
@@ -37,7 +38,7 @@ jobs:
               printf "number: $STORY_NUMBER\n" >> $FILE
               printf "---\n\n" >> $FILE
             fi
-            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\">$TEXT</story-part>\n" >> $FILE
+            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\" :end="$END">$TEXT</story-part>\n" >> $FILE
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
             git add .

@@ -6,7 +6,8 @@ export default {
   target: 'static',
 
   env: {
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    LATEST_TWEET: process.env.LATEST_TWEET
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
