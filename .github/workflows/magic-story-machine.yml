@@ -79,7 +79,7 @@ jobs:
           # Prepare next story audio file
           if $ENDED
           then
-            export NEXT_AUDIO_FILE=repo/static/audio/story-$(( $STORY_NUMBER + 1 )).md
+            export NEXT_AUDIO_FILE=repo/static/audio/story-$(( $STORY_NUMBER + 1 )).mp3
             curl -X POST \
             -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
             -H "Content-Type: application/json; charset=utf-8" \
