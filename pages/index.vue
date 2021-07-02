@@ -20,7 +20,7 @@
     <a name="story-start" />
     <div class="dropdown mt-5">
       <button id="story-select" class="btn px-4 mb-3 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="h2">{{ stories[currentStory].title }}</span>
+        <span class="h2">{{ stories[currentStory].title }} </span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
         <li v-for="(story, index) in stories" :key="story.slug">
@@ -34,15 +34,15 @@
       Once upon a time...
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
-    <button class="btn btn-sm btn-outline-secondary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
+    <button v-if="stories[currentStory].body.children.length" class="btn btn-sm btn-outline-secondary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
       {{ showUsernames ? 'hide usernames' : 'show usernames' }}
     </button>
     <nuxt-content :document="stories[currentStory]" class="lead" />
-    <img src="divider.png">
+    <img v-if="stories[currentStory].body.children.length" src="divider.png">
     <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
       I just need your help to remember what really happened!<br>
-      <a href="#story-start" class="btn btn-success rounded-pill mt-3" @click="currentStory = 0">
+      <a key="read-current" href="#story-start" class="btn btn-success rounded-pill mt-3" @click="currentStory = 0">
         Read the current story.
       </a>
     </div>
