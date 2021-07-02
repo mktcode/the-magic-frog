@@ -34,9 +34,17 @@
       Once upon a time...
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
-    <button v-if="stories[currentStory].body.children.length" class="btn btn-sm btn-outline-secondary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
-      {{ showUsernames ? 'hide usernames' : 'show usernames' }}
-    </button>
+    <div v-if="stories[currentStory].body.children.length" class="mb-5" style="margin-top: -30px; z-index: 1">
+      <button class="btn btn-sm btn-outline-secondary rounded-pill me-2" @click="$store.commit('showUsernames', !showUsernames)">
+        {{ showUsernames ? 'hide usernames' : 'show usernames' }}
+      </button>
+      <button v-if="narratorIsSpeaking" class="btn btn-sm btn-success rounded-pill" @click="narratorStop()">
+        <i class="fas fa-stop" />
+      </button>
+      <button v-else class="btn btn-sm btn-success rounded-pill" @click="narratorStart()">
+        <i class="fas fa-play" />
+      </button>
+    </div>
     <nuxt-content :document="stories[currentStory]" class="lead" />
     <img v-if="stories[currentStory].body.children.length" src="divider.png">
     <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
@@ -85,11 +93,18 @@ export default {
       screenName: null,
       requestToken: null,
       requestSecret: null,
-      latestTweet: process.env.LATEST_TWEET
+      latestTweet: process.env.LATEST_TWEET,
+      narrator: window.speechSynthesis,
+      narratorIsSpeaking: false
     }
   },
   computed: {
     ...mapGetters(['showUsernames', 'currentStory'])
+  },
+  watch: {
+    currentStory () {
+      this.narratorStop()
+    }
   },
   mounted () {
     this.accessToken = localStorage.getItem('twitter_access_token')
@@ -113,6 +128,42 @@ export default {
       localStorage.removeItem('twitter_screen_name')
       localStorage.removeItem('twitter_user_id')
       this.prepareTwitterLogin()
+    },
+    narratorStart () {
+      this.narratorIsSpeaking = true
+      let sentance = new SpeechSynthesisUtterance()
+      sentance.pitch = 2
+      sentance.rate = 0.8
+      sentance.lang = 'en-US'
+      sentance.text = 'Once upon a time...'
+      this.narrator.speak(sentance)
+      this.stories[this.currentStory].body.children.forEach((child) => {
+        sentance = new SpeechSynthesisUtterance()
+        sentance.pitch = 2
+        sentance.rate = 0.7
+        sentance.lang = 'en-US'
+        sentance.text = this.getNarratorText(child)
+        if (sentance.text) {
+          this.narrator.speak(sentance)
+        }
+      })
+    },
+    narratorStop () {
+      this.narratorIsSpeaking = false
+      this.narrator.cancel()
+    },
+    getNarratorText (node) {
+      if (node.children) {
+        let text = ''
+        node.children.forEach((child) => {
+          text += this.getNarratorText(child) + ' '
+        })
+        return text
+      } else if (node.type === 'text') {
+        return node.value.replace('\n', '')
+      } else {
+        return ''
+      }
     }
   }
 }
