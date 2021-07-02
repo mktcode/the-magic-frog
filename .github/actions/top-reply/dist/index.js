@@ -4200,9 +4200,10 @@ async function run() {
       const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
       // https://www.regextester.com/53716
       const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/ig
+      const htmlRegex = /<\s*\w+[^>]*>(.*?)<\s*\/\s*\w+>/ig
       const image = await getTweetImage(topReply.id, twitterBearerToken)
-      const text = topReply.text.replace(urlRegex, '').replace('@magicstoryfrog ', '')
-      const textClean = text.replace('#', '').replace("\n", ' ')
+      const text = topReply.text.replace(urlRegex, '').replace(htmlRegex, '$1').replace('@magicstoryfrog ', '')
+      const textClean = text.replace('#', '').replace("\n", '... ').replace('"', '').replace("'", '')
       if (!text) {
         throw Error('No text found!')
       }
