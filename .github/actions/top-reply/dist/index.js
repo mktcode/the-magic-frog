@@ -4203,7 +4203,7 @@ async function run() {
       const htmlRegex = /<\s*\w+[^>]*>(.*?)<\s*\/\s*\w+>/ig
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       const text = topReply.text.replace(urlRegex, '').replace(htmlRegex, '$1').replace('@magicstoryfrog ', '')
-      const textClean = text.replace('#', '').replace("\n", '... ').replace('"', '').replace("'", '')
+      const textClean = text.replace(/#/g, '').replace(/\n+/g, '... ').replace('"', '').replace("'", '')
       if (!text) {
         throw Error('No text found!')
       }
