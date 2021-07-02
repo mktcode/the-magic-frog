@@ -25,7 +25,7 @@ jobs:
       - name: Convert Text To Audio
         run: |
           # Use Google text to speech
-          export AUDIO_FILE=repo/static/audio/audio-$(date +%s).mp3
+          export AUDIO_FILE=repo/static/audio/audio-${{ secrets.AUDIO_TO_GENERATE_FILENAME }}.mp3
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
