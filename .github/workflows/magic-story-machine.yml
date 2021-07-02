@@ -50,7 +50,7 @@ jobs:
           fi
 
           # Add new story part to end of file
-          printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>$TEXT</span></story-part>" >> $FILE
+          printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>\n$TEXT\n</span></story-part>" >> $FILE
 
           # If new story part is "The End!" then update "ended" attribute in frontmatter header.
           if $ENDED
