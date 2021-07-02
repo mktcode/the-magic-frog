@@ -35,14 +35,18 @@
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
     <div v-if="stories[currentStory].body.children.length" class="mb-5" style="margin-top: -30px; z-index: 1">
-      <button class="btn btn-sm btn-outline-secondary rounded-pill me-2" @click="$store.commit('showUsernames', !showUsernames)">
-        {{ showUsernames ? 'hide usernames' : 'show usernames' }}
+      <button v-if="audioIsPlaying" class="btn btn-sm btn-success rounded-pill" @click="audioPause()">
+        <i class="fas fa-pause" />
       </button>
-      <button v-if="narratorIsSpeaking" class="btn btn-sm btn-success rounded-pill" @click="narratorStop()">
-        <i class="fas fa-stop" />
-      </button>
-      <button v-else class="btn btn-sm btn-success rounded-pill" @click="narratorStart()">
+      <button v-else class="btn btn-sm btn-success rounded-pill" @click="audioPlay()">
         <i class="fas fa-play" />
+      </button>
+      <audio ref="audio" :key="currentStory">
+        <source :src="`/audio/story-${stories[currentStory].number}.mp3`" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <button class="btn btn-sm btn-outline-secondary rounded-pill ms-2" @click="$store.commit('showUsernames', !showUsernames)">
+        {{ showUsernames ? 'hide usernames' : 'show usernames' }}
       </button>
     </div>
     <nuxt-content :document="stories[currentStory]" class="lead" />
@@ -94,8 +98,7 @@ export default {
       requestToken: null,
       requestSecret: null,
       latestTweet: process.env.LATEST_TWEET,
-      narrator: window.speechSynthesis,
-      narratorIsSpeaking: false
+      audioIsPlaying: false
     }
   },
   computed: {
@@ -103,7 +106,7 @@ export default {
   },
   watch: {
     currentStory () {
-      this.narratorStop()
+      this.audioPause()
     }
   },
   mounted () {
@@ -129,41 +132,13 @@ export default {
       localStorage.removeItem('twitter_user_id')
       this.prepareTwitterLogin()
     },
-    narratorStart () {
-      this.narratorIsSpeaking = true
-      let sentance = new SpeechSynthesisUtterance()
-      sentance.pitch = 2
-      sentance.rate = 0.8
-      sentance.lang = 'en-US'
-      sentance.text = 'Once upon a time...'
-      this.narrator.speak(sentance)
-      this.stories[this.currentStory].body.children.forEach((child) => {
-        sentance = new SpeechSynthesisUtterance()
-        sentance.pitch = 2
-        sentance.rate = 0.7
-        sentance.lang = 'en-US'
-        sentance.text = this.getNarratorText(child)
-        if (sentance.text) {
-          this.narrator.speak(sentance)
-        }
-      })
+    audioPlay () {
+      this.$refs.audio.play()
+      this.audioIsPlaying = true
     },
-    narratorStop () {
-      this.narratorIsSpeaking = false
-      this.narrator.cancel()
-    },
-    getNarratorText (node) {
-      if (node.children) {
-        let text = ''
-        node.children.forEach((child) => {
-          text += this.getNarratorText(child) + ' '
-        })
-        return text
-      } else if (node.type === 'text') {
-        return node.value.replace('\n', '')
-      } else {
-        return ''
-      }
+    audioPause () {
+      this.$refs.audio.pause()
+      this.audioIsPlaying = false
     }
   }
 }
