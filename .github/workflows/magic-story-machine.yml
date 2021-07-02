@@ -39,23 +39,19 @@ jobs:
           AUTHOR: ${{ steps.top-reply.outputs.author-id }}
           ENDED: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
-          # Create story file with frontmatter header, if file does not exist yet.
-          if [ ! -f $FILE ]
-          then
-            printf "%s\n" "---" >> $FILE
-            printf "%s\n" "title: Story $STORY_NUMBER" >> $FILE
-            printf "%s\n" "number: $STORY_NUMBER" >> $FILE
-            printf "%s\n" "ended: false" >> $FILE
-            printf "%s\n\n" "---" >> $FILE
-          fi
-
           # Add new story part to end of file
           printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>\n$TEXT\n</span></story-part>" >> $FILE
 
-          # If new story part is "The End!" then update "ended" attribute in frontmatter header.
+          # If new story part is "The End!" then update "ended" attribute in frontmatter header and prepare next story file.
           if $ENDED
           then
             sed -i '0,/ended: false/s//ended: true/' $FILE
+            export NEXT_FILE=content/stories/story-$(( $STORY_NUMBER + 1 )).md
+            printf "%s\n" "---" >> $NEXT_FILE
+            printf "%s\n" "title: Story $STORY_NUMBER" >> $NEXT_FILE
+            printf "%s\n" "number: $STORY_NUMBER" >> $NEXT_FILE
+            printf "%s\n" "ended: false" >> $NEXT_FILE
+            printf "%s\n\n" "---" >> $NEXT_FILE
           fi
 
           # Commit and push story file
