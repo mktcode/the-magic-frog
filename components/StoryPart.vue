@@ -20,10 +20,6 @@ export default {
     image: {
       type: String,
       default: null
-    },
-    end: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
