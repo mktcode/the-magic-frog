@@ -1,9 +1,9 @@
 <template>
   <div class="container d-flex flex-column align-items-center p-5">
-    <h1>
+    <h1 class="mb-4">
       The Magic Frog
     </h1>
-    <div class="text-center pb-5">
+    <!-- <div class="text-center pb-5">
       <a v-if="requestToken && requestSecret" :href="'https://api.twitter.com/oauth/authenticate?oauth_token=' + requestToken" class="mt-3 btn btn-outline-success rounded-pill">
         Enter
       </a>
@@ -15,7 +15,7 @@
           </button>
         </h4>
       </div>
-    </div>
+    </div> -->
     <img src="frog.png">
     <a name="story-start" />
     <div class="dropdown mt-5">
@@ -34,21 +34,29 @@
       Once upon a time...
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
-    <button class="btn btn-sm btn-outline-primary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
+    <button class="btn btn-sm btn-outline-secondary rounded-pill mb-5" style="margin-top: -30px; z-index: 1" @click="$store.commit('showUsernames', !showUsernames)">
       {{ showUsernames ? 'hide usernames' : 'show usernames' }}
     </button>
     <nuxt-content :document="stories[currentStory]" class="lead" />
-    <h1 v-if="stories[currentStory].ended" class="mt-5">
-      The End!
-    </h1>
-    <div v-else class="my-5 text-center" style="max-width:800px">
+    <img src="divider.png">
+    <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
+      This story is told but a new and exciting one has already begun.<br>
+      I just need your help to remember what really happened!<br>
+      <a href="#story-start" class="btn btn-success rounded-pill mt-3" @click="currentStory = 0">
+        Read the current story.
+      </a>
+    </div>
+    <div v-else class="my-5 text-center">
       <p class="lead mb-0">
         The story will be continued in:
       </p>
       <h1>3 hours, 45 minutes</h1>
-      <Rules />
+      <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
+        Share your idea and vote for others!
+      </a>
     </div>
-    <img src="divider.png">
+    <img src="divider.png" style="transform: scaleY(-1)">
+    <Rules />
     <h2 class="mt-5">
       A pot full of gold?
     </h2>
@@ -77,7 +85,8 @@ export default {
       screenName: null,
       requestToken: null,
       requestSecret: null,
-      currentStory: 0
+      currentStory: 0,
+      latestTweet: process.env.LATEST_TWEET
     }
   },
   computed: {
