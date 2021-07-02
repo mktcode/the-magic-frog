@@ -24,7 +24,7 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
         <li v-for="(story, index) in stories" :key="story.slug">
-          <a class="dropdown-item" href="#story-start" @click="currentStory = index">
+          <a class="dropdown-item" href="#story-start" @click="$store.commit('currentStory', index)">
             {{ stories[index].title }}
           </a>
         </li>
@@ -42,7 +42,7 @@
     <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
       I just need your help to remember what really happened!<br>
-      <a key="read-current" href="#story-start" class="btn btn-success rounded-pill mt-3" @click="currentStory = 0">
+      <a key="read-current" href="#story-start" class="btn btn-success rounded-pill mt-3" @click="$store.commit('currentStory', 0)">
         Read the current story.
       </a>
     </div>
@@ -85,12 +85,11 @@ export default {
       screenName: null,
       requestToken: null,
       requestSecret: null,
-      currentStory: 0,
       latestTweet: process.env.LATEST_TWEET
     }
   },
   computed: {
-    ...mapGetters(['showUsernames'])
+    ...mapGetters(['showUsernames', 'currentStory'])
   },
   mounted () {
     this.accessToken = localStorage.getItem('twitter_access_token')
