@@ -12,14 +12,15 @@ jobs:
     name: Tell Magical Story
     runs-on: ubuntu-latest
     steps:
+      # First prepare Node.js and checkout the repository. Using GITHUB_TOKEN to be able to push changes later.
       - name: Setup Node.js
         uses: actions/setup-node@v2
-
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Fetch info about the reply with the most likes, for the most recent story tweet.
       - name: Get Top Reply
         id: top-reply
         uses: ./.github/actions/top-reply
@@ -27,6 +28,7 @@ jobs:
           account-id: ${{ secrets.ACCOUNT_ID }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
       
+      # Update/create the markdown file for the story.
       - name: Write Story
         env:
           STORY_NUMBER: ${{ steps.top-reply.outputs.story-number }}
@@ -34,25 +36,35 @@ jobs:
           TEXT: ${{ steps.top-reply.outputs.text }}
           IMAGE: ${{ steps.top-reply.outputs.image }}
           AUTHOR: ${{ steps.top-reply.outputs.author-id }}
-          END: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
+          ENDED: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
-          if [[ ! -z $TEXT ]]
+          # Create story file with frontmatter header, if file does not exist yet.
+          if [ ! -f $FILE ]
           then
-            if [ ! -f $FILE ]
-            then
-              printf "---\n" >> $FILE
-              printf "title: Story $STORY_NUMBER\n" >> $FILE
-              printf "number: $STORY_NUMBER\n" >> $FILE
-              printf "---\n\n" >> $FILE
-            fi
-            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>$TEXT</span></story-part>\n" >> $FILE
-            git config --global user.name github-actions
-            git config --global user.email github-actions@github.com
-            git add .
-            git commit -m "Story $STORY_NUMBER continues."
-            git push
+            printf "%s\n" "---" >> $FILE
+            printf "%s\n" "title: Story $STORY_NUMBER" >> $FILE
+            printf "%s\n" "number: $STORY_NUMBER" >> $FILE
+            printf "%s\n" "ended: false" >> $FILE
+            printf "%s\n\n" "---" >> $FILE
           fi
 
+          # Add new story part to end of file
+          printf "%s\n" "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>$TEXT</span></story-part>" >> $FILE
+
+          # If new story part is "The End!" then update "ended" attribute in frontmatter header.
+          if $ENDED
+          then
+            sed -i '0,/ended: false/s//ended: true/' $FILE
+          fi
+
+          # Commit and push story file
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add .
+          git commit -m "Story $STORY_NUMBER continues."
+          git push
+
+      # Publish a new tweet, where people can again share ideas.
       - name: New Tweet
         id: new-tweet
         uses: ./.github/actions/tweet
@@ -67,10 +79,11 @@ jobs:
           twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
       
+      # Redeploy the GitHub Page with the ID of the new story tweet.
       - name: Update Website
         run: |
           export API_URL=https://api.the-magic-frog.com
-          export LATEST_TWEET=${{ steps.new-tweet.tweet-id }}
+          export LATEST_TWEET=${{ steps.new-tweet.outputs.tweet-id }}
           npm ci
           npm run generate
           npm run deploy
