@@ -36,7 +36,7 @@ jobs:
           FILE: content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
           TEXT: ${{ steps.top-reply.outputs.text }}
           IMAGE: ${{ steps.top-reply.outputs.image }}
-          AUTHOR: ${{ steps.top-reply.outputs.author-id }}
+          AUTHOR: ${{ steps.top-reply.outputs.username }}
           ENDED: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
           # Add new story part to end of file
@@ -66,7 +66,7 @@ jobs:
         id: new-tweet
         uses: ./.github/actions/tweet
         with:
-          last-author-id: ${{ steps.top-reply.outputs.author-id }}
+          last-username: ${{ steps.top-reply.outputs.username }}
           last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
           story-number: ${{ steps.top-reply.outputs.story-number }}
           the-end: ${{ steps.top-reply.outputs.text == env.END_TEXT }}

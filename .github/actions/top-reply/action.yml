@@ -12,7 +12,7 @@ outputs:
     description: The number of the current story.
   reply-id:
     description: The ID of the top reply
-  author-id:
+  username:
     description: The author of the top reply
   text:
     description: The text of the top reply

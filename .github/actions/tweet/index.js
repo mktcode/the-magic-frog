@@ -1,11 +1,10 @@
 const core = require('@actions/core')
 const Twitter = require('twitter-lite')
-const getUser = require('../get-user')
 
 async function run() {
   try {
     const lastReplyId = core.getInput('last-reply-id')
-    const lastAuthorId = core.getInput('last-author-id')
+    const lastUsername = core.getInput('last-username')
     const storyNumber = core.getInput('story-number')
     const theEnd = core.getInput('the-end')
     const twitterConsumerKey = core.getInput('twitter-consumer-key')
@@ -15,11 +14,6 @@ async function run() {
     const twitterBearerToken = core.getInput('twitter-bearer-token')
     core.info(`Is this the end? ${theEnd}`)
 
-    const user = await getUser(lastAuthorId, twitterBearerToken)
-    if (!user) {
-      throw Error('User not found.')
-    }
-
     const twitterClient = new Twitter({
       consumer_key: twitterConsumerKey,
       consumer_secret: twitterConsumerSecret,
@@ -27,12 +21,12 @@ async function run() {
       access_token_secret: twitterAccessTokenSecret
     })
 
-    let status = `#Story ${storyNumber} continues. @${user.username} helped me to remember. https://twitter.com/${user.username}/status/${lastReplyId}
+    let status = `#Story ${storyNumber} continues. @${lastUsername} helped me to remember. https://twitter.com/${lastUsername}/status/${lastReplyId}
 
 But what happens next? Read the full story at https://the-magic-frog.com and share your ideas below.`
     
     if (theEnd === 'true') {
-      status = `Story ${storyNumber} ended! Thanks @${user.username} and everyone else.
+      status = `Story ${storyNumber} ended! Thanks @${lastUsername} and everyone else.
 
 #Story ${Number(storyNumber) + 1} begins with:
 

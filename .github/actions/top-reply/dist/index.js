@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 912:
+/***/ 2370:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const axios = __nccwpck_require__(6545)
@@ -24,7 +24,7 @@ module.exports = getLatestStoryTweet
 
 /***/ }),
 
-/***/ 8389:
+/***/ 9807:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const axios = __nccwpck_require__(6545)
@@ -48,7 +48,7 @@ module.exports = getTweetImage
 
 /***/ }),
 
-/***/ 8678:
+/***/ 622:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const axios = __nccwpck_require__(6545)
@@ -76,6 +76,28 @@ const getTweetReplies = (id, bearerToken, replies, nextToken) => {
 }
 
 module.exports = getTweetReplies
+
+/***/ }),
+
+/***/ 8791:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const axios = __nccwpck_require__(6545)
+
+const getUser = (id, bearerToken) => {
+  return axios.get(`https://api.twitter.com/2/users/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${bearerToken}`
+    }
+  }).then((response) => {
+    if (response.data && response.data.data) {
+      return response.data.data
+    }
+    return null
+  })
+}
+
+module.exports = getUser
 
 /***/ }),
 
@@ -4152,9 +4174,10 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186)
-const getLatestStoryTweet = __nccwpck_require__(912)
-const getTweetReplies = __nccwpck_require__(8678)
-const getTweetImage = __nccwpck_require__(8389)
+const getLatestStoryTweet = __nccwpck_require__(2370)
+const getTweetReplies = __nccwpck_require__(622)
+const getTweetImage = __nccwpck_require__(9807)
+const getUser = __nccwpck_require__(8791)
 
 async function run() {
   try {
@@ -4182,20 +4205,24 @@ async function run() {
       if (!text) {
         throw Error('No text found!')
       }
+      const user = await getUser(topReply.author_id, twitterBearerToken)
+      if (!user) {
+        throw Error('User not found.')
+      }
       
       core.info(`Latest Story Tweet:`)
       core.info(`- ID: ${latestStoryTweet.id}`)
       core.info(`- Story Number: ${storyNumber}`)
       core.info('Top Reply:')
       core.info(`- ID: ${topReply.id}`)
-      core.info(`- Author: ${topReply.author_id}`)
+      core.info(`- Author: ${user.username}`)
       core.info(`- Text: ${text}`)
       core.info(`- Likes: ${topReply.public_metrics.like_count}`)
       core.info(`- Image: ${image}`)
 
       core.setOutput('story-number', storyNumber)
       core.setOutput('reply-id', topReply.id)
-      core.setOutput('author-id', topReply.author_id)
+      core.setOutput('username', user.username)
       core.setOutput('text', text)
       core.setOutput('image', image)
     }
