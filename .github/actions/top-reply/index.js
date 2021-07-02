@@ -27,6 +27,7 @@ async function run() {
       const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/ig
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       const text = topReply.text.replace(urlRegex, '').replace('@magicstoryfrog ', '')
+      const textClean = text.replace('#', '').replace("\n", ' ')
       if (!text) {
         throw Error('No text found!')
       }
@@ -42,6 +43,7 @@ async function run() {
       core.info(`- ID: ${topReply.id}`)
       core.info(`- Author: ${user.username}`)
       core.info(`- Text: ${text}`)
+      core.info(`- Clean Text: ${textClean}`)
       core.info(`- Likes: ${topReply.public_metrics.like_count}`)
       core.info(`- Image: ${image}`)
 
@@ -49,6 +51,7 @@ async function run() {
       core.setOutput('reply-id', topReply.id)
       core.setOutput('username', user.username)
       core.setOutput('text', text)
+      core.setOutput('text-clean', textClean)
       core.setOutput('image', image)
     }
   } catch (error) {

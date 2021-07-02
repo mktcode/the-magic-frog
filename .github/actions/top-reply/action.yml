@@ -16,6 +16,8 @@ outputs:
     description: The author of the top reply
   text:
     description: The text of the top reply
+  text-clean:
+    description: The text of the top reply, cleaned up for audio conversion
   image:
     description: The image of the top reply
 runs:
