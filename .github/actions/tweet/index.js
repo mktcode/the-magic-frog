@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 const Twitter = require('twitter-lite')
-const getUser = require('./get-user')
+const getUser = require('../get-user')
 
 async function run() {
   try {

@@ -1,5 +1,5 @@
-const getLatestStoryTweet = require('./get-latest-story-tweet')
-const getTweetReplies = require('./get-tweet-replies')
+const getLatestStoryTweet = require('../get-latest-story-tweet')
+const getTweetReplies = require('../get-tweet-replies')
 const accountId = '1408717257505714179'
 const bearerToken = process.env.TWITTER_BEARER_TOKEN
 

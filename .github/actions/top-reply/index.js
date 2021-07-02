@@ -1,7 +1,7 @@
 const core = require('@actions/core')
-const getLatestStoryTweet = require('./get-latest-story-tweet')
-const getTweetReplies = require('./get-tweet-replies')
-const getTweetImage = require('./get-tweet-image')
+const getLatestStoryTweet = require('../get-latest-story-tweet')
+const getTweetReplies = require('../get-tweet-replies')
+const getTweetImage = require('../get-tweet-image')
 
 async function run() {
   try {
