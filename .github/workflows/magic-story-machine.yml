@@ -4,18 +4,25 @@ on:
   #  - cron: 0 0 * * *
   workflow_dispatch:
 
+env:
+  END_TEXT: '# The End!'
+
 jobs:
   tell-story:
     name: Tell Magical Story
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get Top Reply
-        uses: ./.github/actions/top-reply
         id: top-reply
+        uses: ./.github/actions/top-reply
         with:
           account-id: ${{ secrets.ACCOUNT_ID }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
@@ -27,7 +34,7 @@ jobs:
           TEXT: ${{ steps.top-reply.outputs.text }}
           IMAGE: ${{ steps.top-reply.outputs.image }}
           AUTHOR: ${{ steps.top-reply.outputs.author-id }}
-          END: ${{ steps.top-reply.outputs.text == 'The End!' }}
+          END: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
         run: |
           if [[ ! -z $TEXT ]]
           then
@@ -38,7 +45,7 @@ jobs:
               printf "number: $STORY_NUMBER\n" >> $FILE
               printf "---\n\n" >> $FILE
             fi
-            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\" :end="$END">$TEXT</story-part>\n" >> $FILE
+            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\">$TEXT</story-part>\n" >> $FILE
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
             git add .
@@ -46,15 +53,25 @@ jobs:
             git push
           fi
 
-      - name: Tweet
+      - name: New Tweet
+        id: new-tweet
         uses: ./.github/actions/tweet
         with:
           last-author-id: ${{ steps.top-reply.outputs.author-id }}
           last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
           story-number: ${{ steps.top-reply.outputs.story-number }}
-          the-end: ${{ steps.top-reply.outputs.text == 'The End!' }}
+          the-end: ${{ steps.top-reply.outputs.text == env.END_TEXT }}
           twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           twitter-consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           twitter-access-token-key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
           twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
+      
+      - name: Update Website
+        run: |
+          export API_URL=https://api.the-magic-frog.com
+          export LATEST_TWEET=${{ steps.new-tweet.tweet-id }}
+          npm ci
+          npm run generate
+          npm run deploy
+        
