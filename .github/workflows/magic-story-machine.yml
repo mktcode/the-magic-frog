@@ -45,7 +45,7 @@ jobs:
               printf "number: $STORY_NUMBER\n" >> $FILE
               printf "---\n\n" >> $FILE
             fi
-            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\">$TEXT</story-part>\n" >> $FILE
+            printf "<story-part username=\"$AUTHOR\" image=\"$IMAGE\"><span>$TEXT</span></story-part>\n" >> $FILE
             git config --global user.name github-actions
             git config --global user.email github-actions@github.com
             git add .
