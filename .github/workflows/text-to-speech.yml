@@ -14,5 +14,23 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
       
-      - name: Use gcloud CLI
-        run: gcloud info
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Convert Text To Audio
+        run: |
+          # Use Google text to speech
+          curl -X POST \
+          -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
+          -H "Content-Type: application/json; charset=utf-8" \
+          -d '{"input":{"text":"Once upon a time."},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"FEMALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d > static/audio.mp3
+          
+          # Commit mp3 file to repository
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add .
+          git commit -m "Audio added"
+          git push
