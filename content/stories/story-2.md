@@ -1,7 +1,7 @@
 ---
 title: Roland The Adventurer
 number: 2
-ended: false
+ended: true
 ---
 
 <story-part username="vegaron">there was an unlucky adventurer called Roland. One day Roland, along with a great number of adventurers was tasked by the Adventurer guild to explore a mysterious dungeon that had appeared out of nowhere.</story-part>
