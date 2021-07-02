@@ -12,7 +12,8 @@ jobs:
     name: Tell Magical Story
     runs-on: ubuntu-latest
     steps:
-      # First prepare Node.js and checkout the repository. Using GITHUB_TOKEN to be able to push changes later.
+      # First prepare Node.js and checkout the repository, in order to use internal actions in .github/actions.
+      # Using GITHUB_TOKEN to be able to push changes and redeploy the GitHub Page later.
       - name: Setup Node.js
         uses: actions/setup-node@v2
       - name: Checkout Repository
