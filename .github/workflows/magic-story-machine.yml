@@ -73,7 +73,7 @@ jobs:
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
-          -d '{"input":{"text":"${{ steps.top-reply.outputs.text-clean }}"},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"MALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
+          -d '{"input":{"text":"${{ steps.top-reply.outputs.text-clean }}"},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
           https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $AUDIO_FILE
 
           # Prepare next story audio file
@@ -83,7 +83,7 @@ jobs:
             curl -X POST \
             -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d '{"input":{"text":"Once upon a time..."},"voice":{"languageCode":"en-gb","name":"en-GB-Standard-A","ssmlGender":"MALE"},"audioConfig":{"audioEncoding":"MP3"}}' \
+            -d '{"input":{"text":"Once upon a time..."},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
             https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $NEXT_AUDIO_FILE
           fi
 
