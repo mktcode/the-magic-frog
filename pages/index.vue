@@ -41,8 +41,8 @@
       <button v-else class="btn btn-sm btn-success rounded-pill" @click="audioPlay()">
         <i class="fas fa-play" />
       </button>
-      <audio ref="audio" :key="currentStory">
-        <source :src="`/audio/story-${stories[currentStory].number}.mp3`" type="audio/mpeg">
+      <audio ref="audio" :key="'story-' + currentStory">
+        <source :src="`/audio/story-${stories[currentStory].number}.mp3?${(new Date()).getTime()}`" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
       <button class="btn btn-sm btn-outline-secondary rounded-pill ms-2" @click="$store.commit('showUsernames', !showUsernames)">
