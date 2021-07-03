@@ -6,6 +6,8 @@ export default {
   target: 'static',
 
   env: {
+    LAST_WORKFLOW_RUN: process.env.LAST_WORKFLOW_RUN,
+    NEXT_UPDATE: process.env.NEXT_UPDATE,
     API_URL: process.env.API_URL,
     LATEST_TWEET: process.env.LATEST_TWEET
   },

@@ -59,10 +59,7 @@
       </a>
     </div>
     <div v-else class="my-5 text-center">
-      <p class="lead mb-0">
-        The story will be continued in:
-      </p>
-      <h1>3 hours, 45 minutes</h1>
+      <Countdown />
       <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
         Share your idea and vote for others!
       </a>

@@ -109,6 +109,8 @@ jobs:
           git push
 
           # Deploy GitHub Page
+          export LAST_WORKFLOW_RUN=$GITHUB_RUN_ID
+          export NEXT_UPDATE=$(date --date="tomorrow 12:00:00" +%s)
           export API_URL=https://api.the-magic-frog.com
           export LATEST_TWEET=${{ steps.new-tweet.outputs.tweet-id }}
           npm ci
