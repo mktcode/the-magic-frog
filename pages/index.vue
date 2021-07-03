@@ -84,9 +84,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  async asyncData ({ $content }) {
-    const stories = await $content('stories').sortBy('number', 'desc').fetch()
-    return { stories }
+  async asyncData ({ $content, store }) {
+    store.commit('stories', await $content('stories').sortBy('number', 'desc').fetch())
   },
   data () {
     return {
@@ -99,7 +98,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['showUsernames', 'currentStory'])
+    ...mapGetters(['showUsernames', 'currentStory', 'stories'])
   },
   watch: {
     currentStory () {
