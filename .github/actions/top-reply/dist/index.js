@@ -4204,8 +4204,8 @@ async function run() {
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       const text = topReply.text.replace(urlRegex, '').replace(htmlRegex, '$1').replace('@magicstoryfrog ', '')
       const textClean = text.replace(/#/g, '').replace(/\n+/g, '... ').replace('"', '').replace("'", '')
-      if (!text) {
-        throw Error('No text found!')
+      if (!text && !image) {
+        throw Error('No text or image found!')
       }
       const user = await getUser(topReply.author_id, twitterBearerToken)
       if (!user) {
@@ -4229,6 +4229,8 @@ async function run() {
       core.setOutput('text', text)
       core.setOutput('text-clean', textClean)
       core.setOutput('image', image)
+    } else {
+      throw Error('No replies found!')
     }
   } catch (error) {
     core.setFailed(error.message)
