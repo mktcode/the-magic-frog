@@ -133,12 +133,16 @@ export default {
       this.prepareTwitterLogin()
     },
     audioPlay () {
-      this.$refs.audio.play()
-      this.audioIsPlaying = true
+      if (this.$refs.audio) {
+        this.$refs.audio.play()
+        this.audioIsPlaying = true
+      }
     },
     audioPause () {
-      this.$refs.audio.pause()
-      this.audioIsPlaying = false
+      if (this.$refs.audio) {
+        this.$refs.audio.pause()
+        this.audioIsPlaying = false
+      }
     }
   }
 }
