@@ -1,7 +1,7 @@
 ---
 title: Story 3
 number: 3
-ended: false
+ended: true
 ---
 
 <story-part username="thecodelander" image="https://pbs.twimg.com/media/E5Yr8i8X0Ag6X-n.png">
@@ -13,3 +13,8 @@ ended: false
 
 
 
+<story-part username="thecodelander" image="">
+
+# The End!
+
+</story-part>
