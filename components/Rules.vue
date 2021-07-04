@@ -3,7 +3,7 @@
     <h3>How it works:</h3>
     The Magic Frog is a Twitter bot. Share your idea as a comment on the <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank">most recent tweet</a>. Every day at midnight (UTC) the comment with the most likes will be appended to the story and a new tweet will be posted. That means: Be early and be creative!<br>
     <br>
-    In your comment you can add text or an image or both. Links and HTML will be removed. Add whole sentences or build a ramp for others.
+    In your comment you can add text or an image or both. Links will be removed. Add whole sentences or build a ramp for others.
     <div class="border rounded-xl py-3 px-5 mt-2 mb-3 bg-white">
       They could hardly believe their eyes. In front of them stood a gigantic...
     </div>
