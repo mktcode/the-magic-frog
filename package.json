@@ -23,7 +23,8 @@
     "core-js": "^3.15.2",
     "jest": "^27.0.6",
     "nuxt": "^2.15.3",
-    "twitter-lite": "^1.1.0"
+    "twitter-lite": "^1.1.0",
+    "web3": "^1.4.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
