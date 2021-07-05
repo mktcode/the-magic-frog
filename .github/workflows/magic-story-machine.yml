@@ -72,7 +72,7 @@ jobs:
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
-          -d '{"input":{"text":"${{ steps.top-reply.outputs.text-clean }}"},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
+          -d '{"input":{"ssml":"<speak>${{ steps.top-reply.outputs.text-clean }}</speak>"},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
           https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> repo/static/audio/story-$STORY_NUMBER.mp3
 
           # Prepare next story audio file
