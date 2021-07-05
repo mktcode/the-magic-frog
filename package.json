@@ -38,5 +38,8 @@
     "push-dir": "^0.4.1",
     "sass": "^1.35.1",
     "sass-loader": "^10.2.0"
+  },
+  "crypto": {
+    "address": "0x9b22f623c5441465Da48aC5E89a5275Bbd2E55A8"
   }
 }
