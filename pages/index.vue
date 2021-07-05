@@ -113,6 +113,10 @@
     <p class="lead">
       Follow <a href="https://twitter.com/@magicstoryfrog" class="link-success">@magicstoryfrog</a> to find out.
     </p>
+    <small class="mt-5 text-muted text-center">
+      You found some inappropriate content on this website?<br>
+      <a href="https://twitter.com/intent/tweet?in_reply_to=1412070090271494147&text=Yes%20frog!%20I%20saw%20them%20crossing%20a%20line.%20They said..." target="__blank" class="link-success">Report it please.</a>
+    </small>
     <small class="mt-5 text-muted">
       Made with <span class="text-danger">❤️</span> by <a href="https://github.com/mktcode" class="link-success">me.</a>
     </small>
