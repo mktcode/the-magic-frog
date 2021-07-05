@@ -28,7 +28,7 @@ async function run() {
       const twitterUsernameRegex = /@[A-Za-z0-9_]{1,15}\s/gmi
       const text = topReply.text.replace(urlRegex, '').replace(twitterUsernameRegex, '')
       const headlineWithoutDotRegex = /^#\s{1}(.(?![\.!?]$))+$/gmi
-      const textClean = text.replace(headlineWithoutDotRegex, '$0.').replace(/"/g, '\"').replace(/'/g, '\'').replace(/\n/g, '<break time=\\\"750ms\\\"/>')
+      const textClean = text.replace(headlineWithoutDotRegex, '$1.').replace(/"/g, '\"').replace(/'/g, '\'').replace(/\n/g, '<break time=\\\"750ms\\\"/>')
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       if (!text && !image) {
         throw Error('No text or image found!')
