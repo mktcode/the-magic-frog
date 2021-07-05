@@ -27,7 +27,7 @@ async function run() {
       const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gmi
       const twitterUsernameRegex = /@[A-Za-z0-9_]{1,15}\s/gmi
       const text = topReply.text.replace(urlRegex, '').replace(twitterUsernameRegex, '')
-      const headlineWithoutDotRegex = /^#\s{1}(.(?![\.!?]$))+$/gmi
+      const headlineWithoutDotRegex = /^#\s{1}(.*(?![\.!?]$))+$/gmi
       const textClean = text.replace(headlineWithoutDotRegex, '$1.').replace(/"/g, '\"').replace(/'/g, '\'').replace(/\n/g, '<break time=\\\"750ms\\\"/>')
       const image = await getTweetImage(topReply.id, twitterBearerToken)
       if (!text && !image) {
