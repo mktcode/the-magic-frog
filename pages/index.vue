@@ -19,7 +19,7 @@
     <img src="frog.png">
     <a name="story-start" />
     <div class="dropdown mt-5">
-      <button id="story-select" class="btn px-4 mb-3 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button id="story-select" class="btn px-4 mb-2 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="h2">{{ stories[currentStory].title }} </span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
@@ -30,7 +30,46 @@
         </li>
       </ul>
     </div>
-    <h3 class="mb-0">
+    <div v-if="!stories[currentStory].ended">
+      <div class="text-center">
+        <a href="#story-start" class="text-link-success" @click="showSponsorForm = !showSponsorForm">
+          {{ showSponsorForm ? 'Hide Form' : 'Become a Sponsor!' }}
+        </a>
+      </div>
+      <div v-if="showSponsorForm" class="lead mb-0 mt-3 bg-light text-dark border p-4 rounded-xl" style="max-width: 800px">
+        <h3>Sponsoring:</h3>
+        You can become a story sponsor by sending ETH and a sponsor link. The link with the biggest sponsored amount will be at the top of the story and included in the audio version once the story ends. All other links will be displayed below the story.
+        <h5 class="mt-3">
+          <i>This story is sponsored by:</i>
+        </h5>
+        <input v-model="sponsorUrl" type="url" class="form-control form-control-lg rounded-pill" placeholder="https://">
+        <div class="d-flex align-items-center">
+          <input v-model="sponsorAmount" type="number" class="amount-input">
+          <span class="h3 mb-0 ml-3 fw-bold me-auto">ETH</span>
+          <button v-if="ethereumEnabled" class="btn btn-success rounded-pill" :disabled="sendingSponsorship || (sponsorEthAddress && !sponsorUrlValid) || !sponsorAmount" @click="sponsorStory">
+            <span v-if="sponsorEthAddress">
+              <i v-if="sendingSponsorship" class="fas fa-circle-notch fa-spin" />
+              {{ sendingSponsorship ? 'Waiting for confirmation...' : 'Send' }}
+            </span>
+            <span v-else>
+              Connect Wallet
+            </span>
+          </button>
+          <a v-else href="https://metamask.io/" target="__blank" class="btn btn-success rounded-pill">
+            Install a Wallet
+          </a>
+        </div>
+        <div v-if="showSponsorshipSuccessMessage" class="alert alert-success mt-2 mb-0 rounded-xl">
+          Thank you very much for your sponsorship! It might take up to one hour for your link to appear on the website.
+        </div>
+        <small class="d-block text-center text-muted mt-3">
+          Any amount, from almost nothing to an entire kindom worth of ETH, is possible.
+          Just be aware that the information is public and inappropriate links will be removed.
+          If you want to support the wizard himself, without appearing as a sponsor, go <a href="https://github.com/mktcode" target="__blank">here</a>.
+        </small>
+      </div>
+    </div>
+    <h3 class="mt-4 mb-0">
       Once upon a time...
     </h3>
     <img src="divider.png" style="transform: scaleY(-1)">
@@ -82,6 +121,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Web3 from 'web3'
 
 export default {
   async asyncData ({ $content, store }) {
@@ -94,11 +134,22 @@ export default {
       requestToken: null,
       requestSecret: null,
       latestTweet: process.env.LATEST_TWEET,
-      audioIsPlaying: false
+      audioIsPlaying: false,
+      showSponsorForm: false,
+      sponsorUrl: '',
+      sponsorAmount: 0,
+      sendingSponsorship: false,
+      sponsorEthAddress: null,
+      ethereumEnabled: window.ethereum,
+      showSponsorshipSuccessMessage: false
     }
   },
   computed: {
-    ...mapGetters(['showUsernames', 'currentStory', 'stories'])
+    ...mapGetters(['showUsernames', 'currentStory', 'stories']),
+    sponsorUrlValid () {
+      const urlRegex = /^(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])$/i
+      return urlRegex.test(this.sponsorUrl)
+    }
   },
   watch: {
     currentStory () {
@@ -138,6 +189,35 @@ export default {
       if (this.$refs.audio) {
         this.$refs.audio.pause()
         this.audioIsPlaying = false
+      }
+    },
+    sponsorStory () {
+      const web3 = new Web3(window.ethereum)
+      if (this.sponsorEthAddress) {
+        this.sendingSponsorship = true
+        this.showSponsorshipSuccessMessage = false
+        const data = `${this.stories[this.currentStory].number}:${this.sponsorUrl}`
+        const bytes = new Blob([data]).size
+        const extraGas = Math.ceil(bytes * 16 * 1.1) // * 1.1 as a little buffer
+        web3.eth.sendTransaction({
+          from: this.sponsorEthAddress,
+          to: process.env.ETH_ADDRESS,
+          value: web3.utils.toWei(this.sponsorAmount, 'ether'),
+          data: web3.utils.toHex(data),
+          gas: 21000 + extraGas
+        }).then((tx) => {
+          this.showSponsorshipSuccessMessage = true
+          this.sponsorAmount = 0
+          this.sponsorUrl = ''
+        }).finally(() => {
+          this.sendingSponsorship = false
+        })
+      } else {
+        web3.eth.requestAccounts((error, accounts) => {
+          if (!error) {
+            this.sponsorEthAddress = accounts[0]
+          }
+        })
       }
     }
   }

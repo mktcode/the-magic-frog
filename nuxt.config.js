@@ -1,3 +1,5 @@
+import pkg from './package'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -9,7 +11,8 @@ export default {
     LAST_WORKFLOW_RUN: process.env.LAST_WORKFLOW_RUN,
     NEXT_UPDATE: process.env.NEXT_UPDATE,
     API_URL: process.env.API_URL,
-    LATEST_TWEET: process.env.LATEST_TWEET
+    LATEST_TWEET: process.env.LATEST_TWEET,
+    ETH_ADDRESS: pkg.crypto.address
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
