@@ -17,34 +17,44 @@
       </div>
     </div> -->
     <img src="frog.png">
-    <a name="story-start" />
+    <p class="lead mt-3">
+      Welcome my friend! Come in. Don't be shy. This is a magical place where magical stories are told. Find out <a class="cursor-pointer" @click="scrollTo('how-it-works')">how it works</a> and join the party.
+    </p>
+    <a ref="story-start" />
     <div class="dropdown mt-5">
       <button id="story-select" class="btn px-4 mb-2 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="h2">{{ stories[currentStory].title }} </span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
         <li v-for="(story, index) in stories" :key="story.slug">
-          <a class="dropdown-item" href="#story-start" @click="$store.commit('currentStory', index)">
+          <a class="dropdown-item cursor-pointer" @click="$store.commit('currentStory', index); scrollTo('story-start')">
             {{ stories[index].title }}
           </a>
         </li>
       </ul>
     </div>
+    <div v-if="topSponsor" class="text-center mt-4 mb-2">
+      <h4>This story's top sponsor:</h4>
+      <Sponsor :sponsor="topSponsor" :position="0" />
+    </div>
     <div v-if="!stories[currentStory].ended">
       <div class="text-center">
-        <a href="#story-start" class="text-link-success" @click="showSponsorForm = !showSponsorForm">
-          {{ showSponsorForm ? 'Hide Form' : 'Become a Sponsor!' }}
+        <a class="cursor-pointer" @click="showSponsorForm = !showSponsorForm; scrollTo('story-start')">
+          {{ showSponsorForm ? 'Hide Form' : 'Become a Sponsor and fill the Pot!' }}
         </a>
       </div>
       <div v-if="showSponsorForm" class="lead mb-0 mt-3 bg-light text-dark border p-4 rounded-xl" style="max-width: 800px">
         <h3>Sponsoring:</h3>
-        You can become a story sponsor by sending ETH and a sponsor link. The link with the biggest sponsored amount will be at the top of the story and included in the audio version once the story ends. All other links will be displayed below the story.
-        <h5 class="mt-3">
+        You can become a story sponsor by sending ETH and a sponsor link.
+        The biggest sponsor will be displayed at the top of the story.
+        A full list of all sponsors is shown at the bottom.
+        <b><u>By sponsoring a story you fill up the pot, which gets raffled among all storytellers at the end.</u></b>
+        <h5 class="mt-4">
           <i>This story is sponsored by:</i>
         </h5>
         <input v-model="sponsorUrl" type="url" class="form-control form-control-lg rounded-pill" placeholder="https://">
-        <div class="d-flex align-items-center">
-          <input v-model="sponsorAmount" type="number" class="amount-input">
+        <div class="d-flex align-items-center mt-2">
+          <input v-model="sponsorAmount" type="number" class="amount-input form-control form-control-lg rounded-pill me-2 pt-0">
           <span class="h3 mb-0 ml-3 fw-bold me-auto">ETH</span>
           <button v-if="ethereumEnabled" class="btn btn-success rounded-pill" :disabled="sendingSponsorship || (sponsorEthAddress && !sponsorUrlValid) || !sponsorAmount" @click="sponsorStory">
             <span v-if="sponsorEthAddress">
@@ -62,16 +72,17 @@
         <div v-if="showSponsorshipSuccessMessage" class="alert alert-success mt-2 mb-0 rounded-xl">
           Thank you very much for your sponsorship! It might take up to one hour for your link to appear on the website.
         </div>
-        <small class="d-block text-center text-muted mt-3">
+        <small class="d-block text-center text-muted mt-4">
+          25% of the sponsored amount will be used to maintain and improve the project.
           Any amount, from almost nothing to an entire kindom worth of ETH, is possible.
-          Just be aware that the information is public and inappropriate links will be removed.
+          Just be aware that the information is public and inappropriate links will be removed without a refund.
           If you want to support the wizard himself, without appearing as a sponsor, go <a href="https://github.com/mktcode" target="__blank">here</a>.
         </small>
       </div>
     </div>
-    <h3 class="mt-4 mb-0">
+    <h2 class="mt-4 mb-0">
       Once upon a time...
-    </h3>
+    </h2>
     <img src="divider.png" style="transform: scaleY(-1)">
     <div v-if="stories[currentStory].body.children.length" class="mb-5" style="margin-top: -30px; z-index: 1">
       <button v-if="audioIsPlaying" class="btn btn-sm btn-success rounded-pill" @click="audioPause()">
@@ -93,7 +104,7 @@
     <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
       I just need your help to remember what really happened!<br>
-      <a key="read-current" href="#story-start" class="btn btn-success rounded-pill mt-3" @click="$store.commit('currentStory', 0)">
+      <a class="btn btn-success rounded-pill mt-3" @click="$store.commit('currentStory', 0); scrollTo('story-start')">
         Read the current story.
       </a>
     </div>
@@ -103,16 +114,36 @@
         Share your idea and vote for others!
       </a>
     </div>
+    <div v-if="currentStorySponsors.length" class="text-center">
+      <img src="divider.png">
+      <h4>Thanks to all Sponsors!</h4>
+      <Sponsor v-for="(sponsor, index) in currentStorySponsors" :key="index" :sponsor="sponsor" :position="index" />
+    </div>
     <img src="divider.png" style="transform: scaleY(-1)">
-    <Rules />
-    <h2 class="mt-5">
+    <h1 class="mt-5 mb-4">
       A pot full of gold?
-    </h2>
-    <img src="pot-of-gold.png" class="my-4">
-    <h3>What could that possibly mean?</h3>
+    </h1>
     <p class="lead">
-      Follow <a href="https://twitter.com/@magicstoryfrog" class="link-success">@magicstoryfrog</a> to find out.
+      Yes, the rumors are true. At the end of each story this pot will be raffled! Three storytellers will be chosen by fate and luck.
+      The more you have contributed to a story, the more likely fate will be on your side, unless... you are unlucky.
+      You also need to follow <a href="https://twitter.com/@magicstoryfrog" class="link-success">The Magic Frog</a> in order for fate to even care about you at all.
     </p>
+    <img src="pot-of-gold.png" class="my-4">
+    <div v-if="potAmount" class="text-center mb-4">
+      <h1><span class="text-muted">1.</span> {{ potAmountFirst }} <small class="text-muted">ETH</small></h1>
+      <h2><span class="text-muted">2.</span> {{ potAmountSecond }} <small class="text-muted">ETH</small></h2>
+      <h3><span class="text-muted">3.</span> {{ potAmountThird }} <small class="text-muted">ETH</small></h3>
+    </div>
+    <div v-else class="text-center">
+      <h3>
+        Empty... How unfortunate.
+      </h3>
+      <a class="cursor-pointer" @click="showSponsorForm = !showSponsorForm; scrollTo('story-start')">
+        Become a sponsor!
+      </a>
+    </div>
+    <a ref="how-it-works" />
+    <Rules />
     <small class="mt-5 text-muted text-center">
       You found some inappropriate content on this website?<br>
       <a href="https://twitter.com/intent/tweet?in_reply_to=1412070090271494147&text=Yes%20frog!%20I%20saw%20them%20crossing%20a%20line.%20They said..." target="__blank" class="link-success">Report it please.</a>
@@ -125,7 +156,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Web3 from 'web3'
+import Web3, { utils as ethUtils } from 'web3'
+
+import sponsors from '../content/sponsors'
 
 export default {
   async asyncData ({ $content, store }) {
@@ -153,6 +186,38 @@ export default {
     sponsorUrlValid () {
       const urlRegex = /^(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])$/i
       return urlRegex.test(this.sponsorUrl)
+    },
+    sponsors () {
+      return sponsors.map((list) => {
+        list.sponsors.sort((a, b) => BigInt(a.amount) < BigInt(b.amount))
+        return list
+      })
+    },
+    currentStorySponsors () {
+      const currentStorySponsors = sponsors.find(list => list.storyNumber === this.stories[this.currentStory].number)
+      if (currentStorySponsors && currentStorySponsors.sponsors) {
+        return currentStorySponsors.sponsors
+      }
+      return []
+    },
+    topSponsor () {
+      if (this.currentStorySponsors && this.currentStorySponsors.length) {
+        return this.currentStorySponsors[0]
+      }
+      return null
+    },
+    potAmount () {
+      const potAmount = this.currentStorySponsors.reduce((amount, sponsor) => (amount + BigInt(sponsor.amount)), BigInt(0))
+      return Number(ethUtils.fromWei(potAmount.toString(), 'ether')) * 0.75
+    },
+    potAmountFirst () {
+      return (this.potAmount / 2).toFixed(6).replace(/0+$/, '')
+    },
+    potAmountSecond () {
+      return (this.potAmount / 3).toFixed(6).replace(/0+$/, '')
+    },
+    potAmountThird () {
+      return (this.potAmount / 4).toFixed(6).replace(/0+$/, '')
     }
   },
   watch: {
@@ -168,6 +233,12 @@ export default {
     }
   },
   methods: {
+    scrollTo (refName) {
+      setTimeout(() => {
+        const element = this.$refs[refName]
+        element.scrollIntoView()
+      }, 100)
+    },
     prepareTwitterLogin () {
       this.$axios.get(process.env.API_URL + '/request').then((response) => {
         this.requestToken = response.data.request_token
@@ -206,8 +277,8 @@ export default {
         web3.eth.sendTransaction({
           from: this.sponsorEthAddress,
           to: process.env.ETH_ADDRESS,
-          value: web3.utils.toWei(this.sponsorAmount, 'ether'),
-          data: web3.utils.toHex(data),
+          value: ethUtils.toWei(this.sponsorAmount, 'ether'),
+          data: ethUtils.toHex(data),
           gas: 21000 + extraGas
         }).then((tx) => {
           this.showSponsorshipSuccessMessage = true
