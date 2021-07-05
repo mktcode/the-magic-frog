@@ -8,8 +8,3 @@ ended: false
 ...there was a very mighty and powerful (and most of the time naked) wizard. 
 
 </story-part>
-<story-part username="magicstoryfrog" image="">
-
-@thecodelander # Chapter 1: New Clothes<br><br>One day he decided to put on some clothes. The only problem was...
-
-</story-part>
