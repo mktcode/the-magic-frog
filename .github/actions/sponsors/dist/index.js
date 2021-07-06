@@ -122311,13 +122311,13 @@ const core = __nccwpck_require__(42186)
 const sponsors = __nccwpck_require__(57623)
 const getSponsorTransactions = __nccwpck_require__(39726)
 const { utils: web3utils } = __nccwpck_require__(98237)
-const fs = __nccwpck_require__(35747)
 
 async function run() {
   try {
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
     const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
+    core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(':')
@@ -122331,7 +122331,7 @@ async function run() {
         value: tx.value
       })
     })
-    fs.writeFileSync(__nccwpck_require__.ab + "sponsors.json", JSON.stringify(sponsors, null, 2))
+    core.setOutput('json', JSON.stringify(sponsors, null, 2))
   } catch (error) {
     core.setFailed(error.message)
   }

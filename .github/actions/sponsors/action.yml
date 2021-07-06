@@ -7,6 +7,9 @@ inputs:
   etherscan-api-key:
     description: Etherscan API key
     required: true
+output:
+  json:
+    description: The sponsors json file as a string
 runs:
   using: node12
   main: ./dist/index.js
