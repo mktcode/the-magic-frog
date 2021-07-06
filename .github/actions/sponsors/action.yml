@@ -1,0 +1,9 @@
+name: Sponsors
+description: Reads transactions to frog's address and adds sponsors.
+inputs:
+  etherscan-api-key:
+    description: To easily fetch transactions.
+    required: true
+runs:
+  using: node12
+  main: ./dist/index.js

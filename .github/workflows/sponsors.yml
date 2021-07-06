@@ -1,0 +1,41 @@
+name: Add New Sponsors
+on:
+  workflow_dispatch:
+
+jobs:
+  sponsors:
+    name: Add New Sponsors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Read from chain and add sponsors to JSON file
+        id: add
+        uses: ./github/actions/sponsors
+        with:
+          etherscan-api-key: ${{ secrets.ETHERSCAN_API_KEY }}
+      
+      - name: Update Repo and Website
+        run: |
+          if ! git diff-index --quiet HEAD --
+          then
+            # Commit and push new files
+            git config --global user.name github-actions
+            git config --global user.email github-actions@github.com
+            git add .
+            git commit -m "Updated sponsors."
+            git push
+
+            # Deploy GitHub Page
+            export LAST_WORKFLOW_RUN=$GITHUB_RUN_ID
+            export NEXT_UPDATE=$(date --date="tomorrow 12:00:00" +%s)
+            export API_URL=https://api.the-magic-frog.com
+            export LATEST_TWEET=${{ steps.new-tweet.outputs.tweet-id }}
+            npm ci
+            npm run generate
+            npm run deploy
+          fi
+        
