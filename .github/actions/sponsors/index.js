@@ -6,8 +6,9 @@ const fs = require('fs')
 
 async function run() {
   try {
+    const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
-    const sponsorTransactions = await getSponsorTransactions(etherscanApiKey)
+    const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(':')

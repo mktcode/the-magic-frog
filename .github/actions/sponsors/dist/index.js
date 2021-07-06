@@ -28324,7 +28324,7 @@ module.exports = { mask, unmask };
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
 } catch (e) {
   module.exports = __nccwpck_require__(57218);
 }
@@ -56284,7 +56284,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
 
 
 /***/ }),
@@ -78440,7 +78440,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -91990,7 +91990,7 @@ module.exports = isValidUTF8;
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
 } catch (e) {
   module.exports = __nccwpck_require__(92534);
 }
@@ -119641,8 +119641,9 @@ const fs = __nccwpck_require__(35747)
 
 async function run() {
   try {
+    const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
-    const sponsorTransactions = await getSponsorTransactions(etherscanApiKey)
+    const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(':')

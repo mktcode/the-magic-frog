@@ -16,6 +16,7 @@ jobs:
         id: add
         uses: ./github/actions/sponsors
         with:
+          etherscan-api-url: ${{ secrets.ETHERSCAN_API_URL }}
           etherscan-api-key: ${{ secrets.ETHERSCAN_API_KEY }}
       
       - name: Update Repo and Website
