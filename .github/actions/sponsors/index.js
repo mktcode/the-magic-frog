@@ -13,6 +13,9 @@ async function run() {
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(':')
+      if (!sponsors[Number(storyNumber) - 1]) {
+        sponsors[Number(storyNumber) - 1] = []
+      }
       sponsors[Number(storyNumber) - 1].push({
         blockNumber: tx.blockNumber,
         transactionHash: tx.transactionHash,

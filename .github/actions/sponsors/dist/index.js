@@ -30423,7 +30423,7 @@ module.exports = { mask, unmask };
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
 } catch (e) {
   module.exports = __nccwpck_require__(57218);
 }
@@ -94648,7 +94648,7 @@ module.exports = isValidUTF8;
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
 } catch (e) {
   module.exports = __nccwpck_require__(92534);
 }
@@ -122322,6 +122322,9 @@ async function run() {
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(':')
+      if (!sponsors[Number(storyNumber) - 1]) {
+        sponsors[Number(storyNumber) - 1] = []
+      }
       sponsors[Number(storyNumber) - 1].push({
         blockNumber: tx.blockNumber,
         transactionHash: tx.transactionHash,
