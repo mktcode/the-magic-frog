@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex flex-column align-items-center p-5">
+  <div class="container d-flex flex-column align-items-center p-3 p-sm-4 p-md-5">
     <h1 class="mb-4">
       The Magic Frog
     </h1>
@@ -17,8 +17,10 @@
       </div>
     </div> -->
     <img src="frog.png">
-    <p class="lead mt-3">
-      Welcome my friend! Come in. Don't be shy. This is a magical place where magical stories are told. Find out <a class="cursor-pointer" @click="scrollTo('how-it-works')">how it works</a> and join the party.
+    <p class="lead mt-3 text-center" style="max-width: 800px">
+      Welcome my friend! Come closer. Don't be shy. This is a magical place where magical stories are told.
+      Find out <a class="cursor-pointer" @click="scrollTo('how-it-works')">how it works</a> and join the party.
+      With a little luck, your creativity will even be rewarded.
     </p>
     <a ref="story-start" />
     <div class="dropdown mt-5">
@@ -80,11 +82,10 @@
         </small>
       </div>
     </div>
-    <h2 class="mt-4 mb-0">
+    <h2 class="mt-4 mb-3">
       Once upon a time...
     </h2>
-    <img src="divider.png" style="transform: scaleY(-1)">
-    <div v-if="stories[currentStory].body.children.length" class="mb-5" style="margin-top: -30px; z-index: 1">
+    <div v-if="stories[currentStory].body.children.length">
       <button v-if="audioIsPlaying" class="btn btn-sm btn-success rounded-pill" @click="audioPause()">
         <i class="fas fa-pause" />
       </button>
@@ -99,8 +100,9 @@
         {{ showUsernames ? 'hide usernames' : 'show usernames' }}
       </button>
     </div>
+    <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
     <nuxt-content :document="stories[currentStory]" class="lead" />
-    <img v-if="stories[currentStory].body.children.length" src="divider.png">
+    <img v-if="stories[currentStory].body.children.length" src="divider.png" class="mw-100">
     <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
       I just need your help to remember what really happened!<br>
@@ -115,11 +117,11 @@
       </a>
     </div>
     <div v-if="currentStorySponsors.length" class="text-center">
-      <img src="divider.png">
+      <img src="divider.png" class="mw-100">
       <h4>Thanks to all Sponsors!</h4>
       <Sponsor v-for="(sponsor, index) in currentStorySponsors" :key="index" :sponsor="sponsor" :position="index" />
     </div>
-    <img src="divider.png" style="transform: scaleY(-1)">
+    <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
     <h1 class="mt-5 mb-4">
       A pot full of gold?
     </h1>
