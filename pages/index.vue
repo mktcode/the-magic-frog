@@ -189,17 +189,11 @@ export default {
       const urlRegex = /^(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])$/i
       return urlRegex.test(this.sponsorUrl)
     },
-    sponsors () {
-      return sponsors.map((list) => {
-        list.sponsors.sort((a, b) => BigInt(a.amount) < BigInt(b.amount))
-        return list
-      })
-    },
     currentStorySponsors () {
-      const currentStorySponsors = sponsors.find(list => list.storyNumber === this.stories[this.currentStory].number)
-      if (currentStorySponsors && currentStorySponsors.sponsors) {
-        return currentStorySponsors.sponsors
+      if (sponsors[this.stories[this.currentStory].number - 1]) {
+        return sponsors[this.stories[this.currentStory].number - 1].sort((a, b) => BigInt(a.amount) < BigInt(b.amount))
       }
+
       return []
     },
     topSponsor () {
@@ -209,7 +203,7 @@ export default {
       return null
     },
     potAmount () {
-      const potAmount = this.currentStorySponsors.reduce((amount, sponsor) => (amount + BigInt(sponsor.amount)), BigInt(0))
+      const potAmount = this.currentStorySponsors.reduce((value, sponsor) => (value + BigInt(sponsor.value)), BigInt(0))
       return Number(ethUtils.fromWei(potAmount.toString(), 'ether')) * 0.75
     },
     potAmountFirst () {
