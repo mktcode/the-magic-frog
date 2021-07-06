@@ -1,6 +1,5 @@
 const core = require('@actions/core')
-const sponsorsFilePath = __dirname + '/../../../content/sponsors.json'
-const sponsors = require(sponsorsFilePath)
+const sponsors = require('../../../content/sponsors.json')
 const getSponsorTransactions = require('../get-sponsor-transactions')
 const { utils: web3utils } = require('web3')
 const fs = require('fs')
@@ -23,7 +22,7 @@ async function run() {
         value: tx.value
       })
     })
-    fs.writeFileSync(sponsorsFilePath, JSON.stringify(sponsors, null, 2))
+    fs.writeFileSync(__dirname + '/../../../content/sponsors.json', JSON.stringify(sponsors, null, 2))
   } catch (error) {
     core.setFailed(error.message)
   }
