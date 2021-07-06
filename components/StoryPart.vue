@@ -6,7 +6,7 @@
     </span>
     <slot />
     <div class="text-center">
-      <img v-if="image" :src="image" class="my-3" style="max-width: 800px; max-height: 800px">
+      <img v-if="image" :src="image" class="my-3 mw-100" style="max-height: 800px">
     </div>
   </div>
 </template>
