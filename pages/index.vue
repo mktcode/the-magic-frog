@@ -18,7 +18,7 @@
     </div> -->
     <img src="frog.png">
     <p class="lead mt-3 text-center" style="max-width: 800px">
-      Welcome my friend! Come closer. Don't be shy. This is a magical place where magical stories are told.
+      Welcome, my friend! Come closer. Don't be shy. This is a magical place where magical stories are told.
       Find out <a class="cursor-pointer" @click="scrollTo('how-it-works')">how it works</a> and join the party.
       With a little luck, your creativity will even be rewarded.
     </p>
