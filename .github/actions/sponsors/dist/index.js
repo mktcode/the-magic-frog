@@ -58942,7 +58942,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
 
 
 /***/ }),
@@ -81098,7 +81098,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -122310,7 +122310,6 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(42186)
 const sponsorsFilePath = '../../../content/sponsors.json'
 const sponsors = __nccwpck_require__(57623)
-console.log(sponsors)
 const getSponsorTransactions = __nccwpck_require__(39726)
 const { utils: web3utils } = __nccwpck_require__(98237)
 const fs = __nccwpck_require__(35747)
@@ -122333,7 +122332,7 @@ async function run() {
         value: tx.value
       })
     })
-    fs.writeFileSync(sponsorsFilePath, JSON.stringify(sponsors, null, 2))
+    fs.writeFileSync(__dirname + sponsorsFilePath, JSON.stringify(sponsors, null, 2))
   } catch (error) {
     core.setFailed(error.message)
   }
