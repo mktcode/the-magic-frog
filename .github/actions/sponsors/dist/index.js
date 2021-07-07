@@ -122331,6 +122331,7 @@ async function run() {
         value: tx.value
       })
     })
+    core.setOutput('changed', !!sponsorTransactions.length)
     core.setOutput('json', JSON.stringify(sponsors, null, 2))
   } catch (error) {
     core.setFailed(error.message)

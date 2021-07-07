@@ -10,6 +10,8 @@ inputs:
 output:
   json:
     description: The sponsors json file as a string
+  changed:
+    description: Indicates whether there are new sponsors or not.
 runs:
   using: node12
   main: ./dist/index.js

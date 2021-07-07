@@ -13,16 +13,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Fetch new sponsors
-        id: add-sponsors
+        id: fetch-sponsors
         uses: ./.github/actions/sponsors
         with:
           etherscan-api-url: ${{ secrets.ETHERSCAN_API_URL }}
           etherscan-api-key: ${{ secrets.ETHERSCAN_API_KEY }}
       
       - name: Write new sponsors to file
+        if: steps.fetch-sponsors.outputs.changed
         run: |
           cat <<EOT > ./content/sponsors.json
-          ${{ steps.add-sponsors.outputs.json }}
+          ${{ steps.fetch-sponsors.outputs.json }}
           EOT
       
       - name: Update Repo and Website
