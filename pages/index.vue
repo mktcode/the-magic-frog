@@ -194,13 +194,13 @@ export default {
       return Number(ethUtils.fromWei(potAmount.toString(), 'ether')) * 0.75
     },
     potAmountFirst () {
-      return (this.potAmount / 2).toFixed(6).replace(/0+$/, '')
+      return (this.potAmount * 0.5).toFixed(6).replace(/0+$/, '')
     },
     potAmountSecond () {
-      return (this.potAmount / 3).toFixed(6).replace(/0+$/, '')
+      return (this.potAmount * 0.3).toFixed(6).replace(/0+$/, '')
     },
     potAmountThird () {
-      return (this.potAmount / 4).toFixed(6).replace(/0+$/, '')
+      return (this.potAmount * 0.2).toFixed(6).replace(/0+$/, '')
     }
   },
   watch: {
