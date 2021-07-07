@@ -6,6 +6,7 @@ const Twitter = require('twitter-lite')
 
 async function run() {
   try {
+    const ethAddress = core.getInput('eth-address')
     const sponsorsFile = core.getInput('sponsors-file')
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
@@ -14,12 +15,13 @@ async function run() {
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
-    const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
+    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
+    const startBlock = getStartBlock(sponsors)
+    const sponsorTransactions = await getSponsorTransactions(startBlock, ethAddress, etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
 
     if (sponsorTransactions.length) {
       // update file
-      const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
       sponsorTransactions.forEach((tx) => {
         const input = web3utils.hexToUtf8(tx.input)
         const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
@@ -53,6 +55,18 @@ async function run() {
   } catch (error) {
     core.setFailed(error.message)
   }
+}
+
+const getStartBlock = (sponsors) => {
+  if (sponsors.length) {
+    const blockNumbers = sponsors[sponsors.length - 1].map((sponsor) => Number(sponsor.blockNumber))
+    if (blockNumbers.length) {
+      const highestBlockNumber = Math.max(...blockNumbers)
+      return highestBlockNumber + 1
+    }
+  }
+
+  return 0
 }
 
 run()

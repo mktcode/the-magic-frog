@@ -1,6 +1,9 @@
 name: Sponsors
 description: Reads transactions to frog's address and adds sponsors.
 inputs:
+  eth-address:
+    description: The address where sponsorships are received.
+    required: true
   sponsors-file:
     description: Path to sponsors JSON file
     required: true

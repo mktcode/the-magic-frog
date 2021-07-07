@@ -1,14 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 57623:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('[[],[],[{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"123450000000000000"},{"blockNumber":"25927317","url":"https://mktcode.github.io","value":"100000000000000000"},{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"123450000000000000"},{"blockNumber":"25927317","url":"https://mktcode.github.io","value":"100000000000000000"}]]');
-
-/***/ }),
-
 /***/ 91174:
 /***/ ((module) => {
 
@@ -269,33 +261,18 @@ module.exports = JSON.parse('{"name":"tangerineWhistle","comment":"Hardfork with
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const axios = __nccwpck_require__(96545)
-const cryptoConf = __nccwpck_require__(60306)/* .crypto */ .eL
-const sponsors = __nccwpck_require__(57623)
 const { utils: web3utils } = __nccwpck_require__(98237)
 const inputRegex = /^\d+:(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])$/i
 
-const getSponsorTransactions = (etherscanApiUrl, etherscanApiKey) => {
-  const startBlock = getStartBlock()
+const getSponsorTransactions = (startBlock, ethAddress, etherscanApiUrl, etherscanApiKey) => {
   return axios.get(
-    `${etherscanApiUrl}?module=account&action=txlist&address=${cryptoConf.address}&startblock=${startBlock}&sort=asc&apikey=${etherscanApiKey}`
+    `${etherscanApiUrl}?module=account&action=txlist&address=${ethAddress}&startblock=${startBlock}&sort=asc&apikey=${etherscanApiKey}`
   ).then((response) => {
     return response.data.result.filter((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
-      return tx.to.toLowerCase() === cryptoConf.address.toLowerCase() && inputRegex.test(input)
+      return tx.to.toLowerCase() === ethAddress.toLowerCase() && inputRegex.test(input)
     })
   })
-}
-
-const getStartBlock = () => {
-  if (sponsors.length) {
-    const blockNumbers = sponsors[sponsors.length - 1].map((sponsor) => Number(sponsor.blockNumber))
-    if (blockNumbers.length) {
-      const highestBlockNumber = Math.max(...blockNumbers)
-      return highestBlockNumber + 1
-    }
-  }
-
-  return 0
 }
 
 module.exports = getSponsorTransactions
@@ -30423,7 +30400,7 @@ module.exports = { mask, unmask };
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
 } catch (e) {
   module.exports = __nccwpck_require__(57218);
 }
@@ -58971,7 +58948,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
 
 
 /***/ }),
@@ -83168,7 +83145,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -96736,7 +96713,7 @@ module.exports = isValidUTF8;
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
 } catch (e) {
   module.exports = __nccwpck_require__(92534);
 }
@@ -124176,14 +124153,6 @@ module.exports = {"version":"1.0.34"};
 
 /***/ }),
 
-/***/ 60306:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('{"eL":{"address":"0x9b22f623c5441465Da48aC5E89a5275Bbd2E55A8"}}');
-
-/***/ }),
-
 /***/ 42357:
 /***/ ((module) => {
 
@@ -124411,6 +124380,7 @@ const Twitter = __nccwpck_require__(92714)
 
 async function run() {
   try {
+    const ethAddress = core.getInput('eth-address')
     const sponsorsFile = core.getInput('sponsors-file')
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
@@ -124419,12 +124389,13 @@ async function run() {
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
-    const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
+    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
+    const startBlock = getStartBlock(sponsors)
+    const sponsorTransactions = await getSponsorTransactions(startBlock, ethAddress, etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
 
     if (sponsorTransactions.length) {
       // update file
-      const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
       sponsorTransactions.forEach((tx) => {
         const input = web3utils.hexToUtf8(tx.input)
         const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
@@ -124458,6 +124429,18 @@ async function run() {
   } catch (error) {
     core.setFailed(error.message)
   }
+}
+
+const getStartBlock = (sponsors) => {
+  if (sponsors.length) {
+    const blockNumbers = sponsors[sponsors.length - 1].map((sponsor) => Number(sponsor.blockNumber))
+    if (blockNumbers.length) {
+      const highestBlockNumber = Math.max(...blockNumbers)
+      return highestBlockNumber + 1
+    }
+  }
+
+  return 0
 }
 
 run()
