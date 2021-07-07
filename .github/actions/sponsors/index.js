@@ -11,7 +11,7 @@ async function run() {
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
-      const [ storyNumber, sponsorLink ] = input.split(':')
+      const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
       if (!sponsors[Number(storyNumber) - 1]) {
         sponsors[Number(storyNumber) - 1] = []
       }
