@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('[[{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"100000000000000000"}],[{"blockNumber":"25927317","url":"https://markus-kottlaender.de","value":"100000000000000000"}]]');
+module.exports = [[],[]];
 
 /***/ }),
 
@@ -30423,7 +30423,7 @@ module.exports = { mask, unmask };
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
 } catch (e) {
   module.exports = __nccwpck_require__(57218);
 }
@@ -94648,7 +94648,7 @@ module.exports = isValidUTF8;
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
 } catch (e) {
   module.exports = __nccwpck_require__(92534);
 }
@@ -122308,16 +122308,20 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(42186)
-const sponsors = __nccwpck_require__(57623)
 const getSponsorTransactions = __nccwpck_require__(39726)
 const { utils: web3utils } = __nccwpck_require__(98237)
+const fs = __nccwpck_require__(35747)
 
 async function run() {
   try {
+    const sponsorsFile = core.getInput('sponsors-file')
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
+    
     const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
+
+    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
     sponsorTransactions.forEach((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
       const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
@@ -122331,8 +122335,7 @@ async function run() {
         value: tx.value
       })
     })
-    core.setOutput('changed', !!sponsorTransactions.length)
-    core.setOutput('json', JSON.stringify(sponsors, null, 2))
+    fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
   } catch (error) {
     core.setFailed(error.message)
   }

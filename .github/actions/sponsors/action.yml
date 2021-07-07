@@ -1,17 +1,15 @@
 name: Sponsors
 description: Reads transactions to frog's address and adds sponsors.
 inputs:
+  sponsors-file:
+    description: Path to sponsors JSON file
+      required: true
   etherscan-api-url:
     description: Etherscan API url
     required: true
   etherscan-api-key:
     description: Etherscan API key
     required: true
-output:
-  json:
-    description: The sponsors json file as a string
-  changed:
-    description: Indicates whether there are new sponsors or not.
 runs:
   using: node12
   main: ./dist/index.js
