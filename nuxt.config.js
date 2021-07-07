@@ -8,9 +8,9 @@ export default {
   target: 'static',
 
   env: {
-    LAST_WORKFLOW_RUN: process.env.LAST_WORKFLOW_RUN,
-    NEXT_UPDATE: process.env.NEXT_UPDATE,
-    LATEST_TWEET: process.env.LATEST_TWEET,
+    LAST_WORKFLOW_RUN: '1002640128',
+    NEXT_UPDATE: '1625738400',
+    LATEST_TWEET: '1412195673248874499',
     ETH_ADDRESS: pkg.crypto.address
   },
 
