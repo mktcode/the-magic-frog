@@ -105,7 +105,7 @@
     </div>
     <div v-if="currentStorySponsors.length" class="text-center">
       <img src="divider.png" class="mw-100">
-      <h4>Thanks to all Sponsors!</h4>
+      <h4>Thanks to the Sponsors!</h4>
       <Sponsor v-for="(sponsor, index) in currentStorySponsors" :key="index" :sponsor="sponsor" :position="index" />
     </div>
     <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
