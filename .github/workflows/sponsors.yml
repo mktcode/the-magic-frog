@@ -30,8 +30,9 @@ jobs:
           twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       
       - name: Update Repo and Website
-        if: steps.sponsors.outputs.changed
+        if: ${{ steps.sponsors.outputs.changed }}
         run: |
+          echo ${{ steps.sponsors.outputs.changed }}
           # Commit and push new files
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
