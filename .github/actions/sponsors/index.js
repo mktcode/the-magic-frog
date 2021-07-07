@@ -2,6 +2,7 @@ const core = require('@actions/core')
 const getSponsorTransactions = require('../get-sponsor-transactions')
 const { utils: web3utils } = require('web3')
 const fs = require('fs')
+const Twitter = require('twitter-lite')
 
 async function run() {
   try {
