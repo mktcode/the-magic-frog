@@ -208,13 +208,6 @@ export default {
       this.audioPause()
     }
   },
-  mounted () {
-    this.accessToken = localStorage.getItem('twitter_access_token')
-    this.screenName = localStorage.getItem('twitter_screen_name')
-    if (!this.accessToken) {
-      this.prepareTwitterLogin()
-    }
-  },
   methods: {
     scrollTo (refName) {
       setTimeout(() => {
