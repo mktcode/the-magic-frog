@@ -2713,7 +2713,6 @@ async function run() {
     const twitterConsumerSecret = core.getInput('twitter-consumer-secret')
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
-    const twitterBearerToken = core.getInput('twitter-bearer-token')
     core.info(`Is this the end? ${theEnd}`)
 
     const twitterClient = new Twitter({

@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = [[],[]];
+module.exports = JSON.parse('[[{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"100000000000000000"}],[{"blockNumber":"25927317","url":"https://markus-kottlaender.de","value":"100000000000000000"}]]');
 
 /***/ }),
 
