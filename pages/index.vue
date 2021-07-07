@@ -178,7 +178,7 @@ export default {
     },
     currentStorySponsors () {
       if (sponsors[this.stories[this.currentStory].number - 1]) {
-        return sponsors[this.stories[this.currentStory].number - 1].sort((a, b) => BigInt(a.amount) < BigInt(b.amount))
+        return sponsors[this.stories[this.currentStory].number - 1].sort((a, b) => BigInt(a.value) < BigInt(b.value))
       }
 
       return []
