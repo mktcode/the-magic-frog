@@ -58948,7 +58948,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
 
 
 /***/ }),
@@ -83145,7 +83145,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -124420,7 +124420,7 @@ async function run() {
       })
       const totalEth = sponsors[sponsors.length - 1].reduce((total, sponsor) => total + BigInt(sponsor.value), BigInt('0'))
       const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win. https://the-magic-frog.com/pot-of-gold.png`
-      const tweet = await twitterClient.post('statuses/update', { status })
+      const tweet = await twitterClient.post('statuses/update', { status, media_ids: '1412776562190073856' })
       core.info(`Tweet ID: ${tweet.id_str}`)
       core.setOutput('changed', true)
     } else {
