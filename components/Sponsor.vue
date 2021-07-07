@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     amount () {
-      return utils.fromWei(this.sponsor.amount, 'ether')
+      return utils.fromWei(this.sponsor.value, 'ether')
     },
     sizeClass () {
       let sizeClass = ''
