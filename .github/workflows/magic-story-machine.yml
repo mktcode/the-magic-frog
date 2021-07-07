@@ -35,7 +35,7 @@ jobs:
         id: top-reply
         uses: ./repo/.github/actions/top-reply
         with:
-          account-id: ${{ secrets.ACCOUNT_ID }}
+          twitter-account-id: ${{ secrets.TWITTER_ACCOUNT_ID }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
       
       # Update/create the markdown file for the story.

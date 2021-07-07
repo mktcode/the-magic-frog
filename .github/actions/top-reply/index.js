@@ -6,10 +6,10 @@ const getUser = require('../get-user')
 
 async function run() {
   try {
-    const accountId = core.getInput('account-id')
+    const twitterAccountId = core.getInput('twitter-account-id')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
 
-    const latestStoryTweet = await getLatestStoryTweet(accountId, twitterBearerToken)
+    const latestStoryTweet = await getLatestStoryTweet(twitterAccountId, twitterBearerToken)
     if (!latestStoryTweet) {
       throw Error('No story tweet found!')
     }
@@ -19,7 +19,7 @@ async function run() {
     }
     const storyNumber = foundNumber[1]
 
-    const replies = (await getTweetReplies(latestStoryTweet.id, twitterBearerToken, [])).filter(reply => reply.in_reply_to_user_id == accountId)
+    const replies = (await getTweetReplies(latestStoryTweet.id, twitterBearerToken, [])).filter(reply => reply.in_reply_to_user_id == twitterAccountId)
 
     if (replies.length) {
       const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
