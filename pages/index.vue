@@ -3,19 +3,6 @@
     <h1 class="mb-4">
       The Magic Frog
     </h1>
-    <!-- <div class="text-center pb-5">
-      <a v-if="requestToken && requestSecret" :href="'https://api.twitter.com/oauth/authenticate?oauth_token=' + requestToken" class="mt-3 btn btn-outline-success rounded-pill">
-        Enter
-      </a>
-      <div v-if="accessToken && screenName">
-        <h4>
-          Welcome <a :href="'https://twitter.com/@' + screenName" class="link-success">@{{ screenName }}</a>!
-          <button class="btn btn-sm btn-outline-success rounded-pill" @click="twitterLogout">
-            Leave
-          </button>
-        </h4>
-      </div>
-    </div> -->
     <img src="frog.png">
     <p class="lead mt-3 text-center" style="max-width: 800px">
       Welcome, my friend! Come closer. Don't be shy. This is a magical place where magical stories are told.
@@ -234,21 +221,6 @@ export default {
         const element = this.$refs[refName]
         element.scrollIntoView()
       }, 100)
-    },
-    prepareTwitterLogin () {
-      this.$axios.get(process.env.API_URL + '/request').then((response) => {
-        this.requestToken = response.data.request_token
-        this.requestSecret = response.data.request_secret
-      })
-    },
-    twitterLogout () {
-      this.accessToken = null
-      this.screenName = null
-      localStorage.removeItem('twitter_access_token')
-      localStorage.removeItem('twitter_access_token_secret')
-      localStorage.removeItem('twitter_screen_name')
-      localStorage.removeItem('twitter_user_id')
-      this.prepareTwitterLogin()
     },
     audioPlay () {
       if (this.$refs.audio) {
