@@ -18,6 +18,7 @@ jobs:
       
       - name: Update sponsors and tweet
         uses: ./.github/actions/sponsors
+        id: sponsors
         with:
           sponsors-file: ./content/sponsors.json
           etherscan-api-url: ${{ secrets.ETHERSCAN_API_URL }}
@@ -28,19 +29,17 @@ jobs:
           twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       
       - name: Update Repo and Website
+        if: steps.sponsors.outputs.changed
         run: |
-          if ! git diff-index --quiet HEAD --
-          then
-            # Commit and push new files
-            git config --global user.name github-actions
-            git config --global user.email github-actions@github.com
-            git add .
-            git commit -m "Updated sponsors."
-            git push
+          # Commit and push new files
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add .
+          git commit -m "Updated sponsors."
+          git push
 
-            # Deploy GitHub Page
-            npm ci
-            npm run generate
-            npm run deploy
-          fi
+          # Deploy GitHub Page
+          npm ci
+          npm run generate
+          npm run deploy
         

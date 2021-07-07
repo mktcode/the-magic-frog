@@ -44,6 +44,9 @@ async function run() {
       const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
       const tweet = await twitterClient.post('statuses/update', { status })
       core.info(`Tweet ID: ${tweet.id_str}`)
+      core.setOutput('changed', true)
+    } else {
+      core.setOutput('changed', false)
     }
   } catch (error) {
     core.setFailed(error.message)

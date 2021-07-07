@@ -22,6 +22,9 @@ inputs:
   twitter-access-token-secret:
     description: The access token secret for the frog's twitter account.
     required: true
+outputs:
+  changed:
+    description: Whether new sponsors have been added.
 runs:
   using: node12
   main: ./dist/index.js

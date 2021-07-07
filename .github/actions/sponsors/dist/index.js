@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('[[],[],[{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"123450000000000000"},{"blockNumber":"25927317","url":"https://mktcode.github.io","value":"100000000000000000"}]]');
+module.exports = [[],[],[]];
 
 /***/ }),
 
@@ -58942,7 +58942,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
 
 
 /***/ }),
@@ -81098,7 +81098,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -122353,6 +122353,9 @@ async function run() {
       const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
       const tweet = await twitterClient.post('statuses/update', { status })
       core.info(`Tweet ID: ${tweet.id_str}`)
+      core.setOutput('changed', true)
+    } else {
+      core.setOutput('changed', false)
     }
   } catch (error) {
     core.setFailed(error.message)
