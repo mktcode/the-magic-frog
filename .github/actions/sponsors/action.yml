@@ -10,6 +10,18 @@ inputs:
   etherscan-api-key:
     description: Etherscan API key
     required: true
+  twitter-consumer-key:
+    description: The consumer key frog's twitter account.
+    required: true
+  twitter-consumer-secret:
+    description: The consumer secret for the frog's twitter account.
+    required: true
+  twitter-access-token-key:
+    description: The access token key for the frog's twitter account.
+    required: true
+  twitter-access-token-secret:
+    description: The access token secret for the frog's twitter account.
+    required: true
 runs:
   using: node12
   main: ./dist/index.js
