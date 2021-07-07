@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = [[],[],[]];
+module.exports = JSON.parse('[[],[],[{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"123450000000000000"},{"blockNumber":"25927317","url":"https://mktcode.github.io","value":"100000000000000000"},{"blockNumber":"25927274","url":"https://markus-kottlaender.de","value":"123450000000000000"},{"blockNumber":"25927317","url":"https://mktcode.github.io","value":"100000000000000000"}]]');
 
 /***/ }),
 
@@ -30423,7 +30423,7 @@ module.exports = { mask, unmask };
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
 } catch (e) {
   module.exports = __nccwpck_require__(57218);
 }
@@ -58971,7 +58971,7 @@ module.exports = isURL;
 /***/ 29575:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node"))
+module.exports = __nccwpck_require__(61137)(require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node"))
 
 
 /***/ }),
@@ -83168,7 +83168,7 @@ module.exports = safer
 /***/ 16157:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc.node")
+const addon = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.glibc1.node")
 module.exports = __nccwpck_require__(90863)(new addon.Secp256k1())
 
 
@@ -96736,7 +96736,7 @@ module.exports = isValidUTF8;
 
 
 try {
-  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi1.node");
+  module.exports = require(__nccwpck_require__.ab + "prebuilds/linux-x64/node.napi.node");
 } catch (e) {
   module.exports = __nccwpck_require__(92534);
 }
@@ -124422,24 +124422,25 @@ async function run() {
     const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
 
-    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
-    sponsorTransactions.forEach((tx) => {
-      const input = web3utils.hexToUtf8(tx.input)
-      const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
-      if (!sponsors[Number(storyNumber) - 1]) {
-        sponsors[Number(storyNumber) - 1] = []
-      }
-      sponsors[Number(storyNumber) - 1].push({
-        blockNumber: tx.blockNumber,
-        transactionHash: tx.transactionHash,
-        url: sponsorLink,
-        value: tx.value
-      })
-    })
-    fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
-
-    // tweet
     if (sponsorTransactions.length) {
+      // update file
+      const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
+      sponsorTransactions.forEach((tx) => {
+        const input = web3utils.hexToUtf8(tx.input)
+        const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
+        if (!sponsors[Number(storyNumber) - 1]) {
+          sponsors[Number(storyNumber) - 1] = []
+        }
+        sponsors[Number(storyNumber) - 1].push({
+          blockNumber: tx.blockNumber,
+          transactionHash: tx.transactionHash,
+          url: sponsorLink,
+          value: tx.value
+        })
+      })
+      fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
+
+      // tweet
       const twitterClient = new Twitter({
         consumer_key: twitterConsumerKey,
         consumer_secret: twitterConsumerSecret,
@@ -124447,7 +124448,7 @@ async function run() {
         access_token_secret: twitterAccessTokenSecret
       })
       const totalEth = sponsors[sponsors.length - 1].reduce((total, sponsor) => total + BigInt(sponsor.value), BigInt('0'))
-      const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
+      const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win. https://the-magic-frog.com/pot-of-gold.png`
       const tweet = await twitterClient.post('statuses/update', { status })
       core.info(`Tweet ID: ${tweet.id_str}`)
       core.setOutput('changed', true)

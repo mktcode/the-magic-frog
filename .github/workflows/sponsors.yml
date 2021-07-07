@@ -3,7 +3,7 @@ on:
   schedule:
     # Run once per hours at minute 42.
     # Advice from GitHub: Don't always use times that everybody uses (like 0 * * * *) if not necessary.
-    - cron: 42 * * * *
+    # - cron: 42 * * * *
   workflow_dispatch:
 
 jobs:

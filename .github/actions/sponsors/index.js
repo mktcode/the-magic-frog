@@ -17,24 +17,25 @@ async function run() {
     const sponsorTransactions = await getSponsorTransactions(etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
 
-    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
-    sponsorTransactions.forEach((tx) => {
-      const input = web3utils.hexToUtf8(tx.input)
-      const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
-      if (!sponsors[Number(storyNumber) - 1]) {
-        sponsors[Number(storyNumber) - 1] = []
-      }
-      sponsors[Number(storyNumber) - 1].push({
-        blockNumber: tx.blockNumber,
-        transactionHash: tx.transactionHash,
-        url: sponsorLink,
-        value: tx.value
-      })
-    })
-    fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
-
-    // tweet
     if (sponsorTransactions.length) {
+      // update file
+      const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
+      sponsorTransactions.forEach((tx) => {
+        const input = web3utils.hexToUtf8(tx.input)
+        const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
+        if (!sponsors[Number(storyNumber) - 1]) {
+          sponsors[Number(storyNumber) - 1] = []
+        }
+        sponsors[Number(storyNumber) - 1].push({
+          blockNumber: tx.blockNumber,
+          transactionHash: tx.transactionHash,
+          url: sponsorLink,
+          value: tx.value
+        })
+      })
+      fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
+
+      // tweet
       const twitterClient = new Twitter({
         consumer_key: twitterConsumerKey,
         consumer_secret: twitterConsumerSecret,
@@ -42,7 +43,7 @@ async function run() {
         access_token_secret: twitterAccessTokenSecret
       })
       const totalEth = sponsors[sponsors.length - 1].reduce((total, sponsor) => total + BigInt(sponsor.value), BigInt('0'))
-      const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
+      const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win. https://the-magic-frog.com/pot-of-gold.png`
       const tweet = await twitterClient.post('statuses/update', { status })
       core.info(`Tweet ID: ${tweet.id_str}`)
       core.setOutput('changed', true)
