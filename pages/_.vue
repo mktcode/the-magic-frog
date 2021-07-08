@@ -22,7 +22,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="topSponsor" class="text-center mt-4 mb-2">
+    <div v-if="topSponsor" class="text-center mt-4 mb-2 px-4 py-3 border rounded-pill">
       <h4>This story's top sponsor:</h4>
       <Sponsor :sponsor="topSponsor" :position="0" />
     </div>
@@ -35,7 +35,7 @@
       <div v-if="showSponsorForm" class="lead mb-0 mt-3 bg-light text-dark border p-4 rounded-xl" style="max-width: 800px">
         <h3>Sponsoring:</h3>
         You can become a story sponsor by sending ETH and a sponsor link.
-        The biggest sponsor will be displayed at the top of the story.
+        The top sponsor will be displayed at the top of the story.
         A full list of all sponsors is shown at the bottom.
         <b><u>By sponsoring a story you fill up the pot, which gets raffled among all storytellers at the end.</u></b>
         <h5 class="mt-4">
