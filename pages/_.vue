@@ -130,7 +130,7 @@
     <p class="lead">
       Yes, the rumors are true. At the end of each story this pot will be raffled! Three storytellers will be chosen by fate and luck.
       The more you have contributed to a story, the more likely fate will be on your side, unless... you are unlucky.
-      You also need to follow <a href="https://twitter.com/@magicstoryfrog" class="link-success">The Magic Frog</a> in order for fate to even care about you at all.
+      You also need to follow <a href="https://twitter.com/@magicstoryfrog">The Magic Frog</a> in order for fate to even care about you at all.
     </p>
     <img src="pot-of-gold.png" class="my-4">
     <div v-if="potAmount" class="text-center mb-4">
@@ -150,10 +150,14 @@
     <Rules />
     <small class="mt-5 text-muted text-center">
       You found some inappropriate content on this website?<br>
-      <a href="https://twitter.com/intent/tweet?in_reply_to=1412070090271494147&text=Yes%20frog!%20I%20saw%20them%20crossing%20a%20line.%20They said..." target="__blank" class="link-success">Report it please.</a>
+      <a href="https://twitter.com/intent/tweet?in_reply_to=1412070090271494147&text=Yes%20frog!%20I%20saw%20them%20crossing%20a%20line.%20They said..." target="__blank">Report it please.</a>
+    </small>
+    <small class="mt-5 text-muted text-center">
+      Interested in how this was built?<br>
+      <a href="https://markus-kottlaender.medium.com/" target="__blank">Read about it here.</a>
     </small>
     <small class="mt-5 text-muted">
-      Made with <span class="text-danger">❤️</span> by <a href="https://github.com/mktcode" class="link-success">me.</a>
+      Made with <span class="text-danger">❤️</span> by <a href="https://github.com/mktcode">me.</a>
     </small>
   </div>
 </template>

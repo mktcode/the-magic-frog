@@ -1,7 +1,7 @@
 <template>
   <div class="lead mb-0 mt-5 bg-light text-dark border p-4 rounded-xl" style="max-width: 800px">
     <h3>How it works:</h3>
-    The Magic Frog is a Twitter bot. Share your idea as a comment on the <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank">most recent tweet</a>. (Make sure to actually reply to that tweet and not some other reply.) Every day at midnight (UTC) the comment with the most likes will be appended to the story and a new tweet will be posted. That means: Be early and be creative!<br>
+    The Magic Frog is a Twitter bot. Share your idea as a comment on the <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank">most recent tweet</a>. (Make sure to actually reply to that tweet and not some other reply.) Every day at 12:00 (UTC) the comment with the most likes will be appended to the story and a new tweet will be posted. That means: Be early and be creative!<br>
     <br>
     In your comment you can add text or an image or both. Links will be removed. Add whole sentences or build a ramp for others.
     <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
