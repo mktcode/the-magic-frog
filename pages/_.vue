@@ -12,12 +12,12 @@
     <a ref="story-start" />
     <div class="dropdown mt-5">
       <button id="story-select" class="btn px-4 mb-2 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="h2">{{ stories[currentStory].title }} </span>
+        <span class="h2">{{ currentStory.title }} </span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="story-select">
-        <li v-for="(story, index) in stories" :key="story.slug">
-          <a class="dropdown-item cursor-pointer" @click="$store.commit('currentStory', index); scrollTo('story-start')">
-            {{ stories[index].title }}
+        <li v-for="story in stories" :key="story.slug">
+          <a class="dropdown-item cursor-pointer" @click="scrollTo('story-start', $router.push(story.slug))">
+            {{ story.title }}
           </a>
         </li>
       </ul>
@@ -26,7 +26,7 @@
       <h4>This story's top sponsor:</h4>
       <Sponsor :sponsor="topSponsor" :position="0" />
     </div>
-    <div v-if="!stories[currentStory].ended">
+    <div v-if="!currentStory.ended">
       <div class="text-center">
         <a class="cursor-pointer" @click="showSponsorForm = !showSponsorForm; scrollTo('story-start')">
           {{ showSponsorForm ? 'Hide Form' : 'Become a Sponsor and fill the Pot!' }}
@@ -72,15 +72,15 @@
     <h2 class="mt-4 mb-3">
       Once upon a time...
     </h2>
-    <div v-if="stories[currentStory].body.children.length">
+    <div v-if="currentStory.body.children.length">
       <button v-if="audioIsPlaying" class="btn btn-sm btn-success rounded-pill" @click="audioPause()">
         <i class="fas fa-pause" />
       </button>
       <button v-else class="btn btn-sm btn-success rounded-pill" @click="audioPlay()">
         <i class="fas fa-play" />
       </button>
-      <audio ref="audio" :key="'story-' + currentStory">
-        <source :src="`/audio/story-${stories[currentStory].number}.mp3?${(new Date()).getTime()}`" type="audio/mpeg">
+      <audio ref="audio" :key="'story-' + currentStory.slug">
+        <source :src="`/audio/story-${currentStory.number}.mp3?${(new Date()).getTime()}`" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
       <button class="btn btn-sm btn-outline-secondary rounded-pill ms-2" @click="$store.commit('showUsernames', !showUsernames)">
@@ -88,12 +88,12 @@
       </button>
     </div>
     <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
-    <nuxt-content :document="stories[currentStory]" class="lead" />
-    <img v-if="stories[currentStory].body.children.length" src="divider.png" class="mw-100">
-    <div v-if="stories[currentStory].ended" class="lead mt-3 text-center">
+    <nuxt-content :document="currentStory" class="lead" />
+    <img v-if="currentStory.body.children.length" src="divider.png" class="mw-100">
+    <div v-if="currentStory.ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
       I just need your help to remember what really happened!<br>
-      <a class="btn btn-success rounded-pill mt-3" @click="$store.commit('currentStory', 0); scrollTo('story-start')">
+      <a class="btn btn-success rounded-pill mt-3" @click="scrollTo('story-start', () => $router.push('/'));">
         Read the current story.
       </a>
     </div>
@@ -150,8 +150,21 @@ import Web3, { utils as ethUtils } from 'web3'
 import sponsors from '../content/sponsors'
 
 export default {
-  async asyncData ({ $content, store }) {
-    store.commit('stories', await $content('stories').sortBy('number', 'desc').fetch())
+  scrollToTop: false,
+  async asyncData ({ $content, store, params, redirect }) {
+    const stories = await $content('stories').sortBy('number', 'desc').fetch()
+    store.commit('stories', stories)
+
+    if (params.pathMatch) {
+      const [story] = await $content('stories').where({ slug: params.pathMatch }).limit(1).fetch()
+      if (story) {
+        store.commit('currentStory', story)
+      } else {
+        redirect('/')
+      }
+    } else {
+      store.commit('currentStory', stories[0])
+    }
   },
   data () {
     return {
@@ -177,8 +190,8 @@ export default {
       return urlRegex.test(this.sponsorUrl)
     },
     currentStorySponsors () {
-      if (sponsors[this.stories[this.currentStory].number - 1]) {
-        return sponsors[this.stories[this.currentStory].number - 1].sort((a, b) => BigInt(a.value) < BigInt(b.value))
+      if (sponsors[this.currentStory.number - 1]) {
+        return sponsors[this.currentStory.number - 1].sort((a, b) => BigInt(a.value) < BigInt(b.value))
       }
 
       return []
@@ -203,17 +216,15 @@ export default {
       return (this.potAmount * 0.2).toFixed(6).replace(/0+$/, '')
     }
   },
-  watch: {
-    currentStory () {
-      this.audioPause()
-    }
-  },
   methods: {
-    scrollTo (refName) {
-      setTimeout(() => {
-        const element = this.$refs[refName]
-        element.scrollIntoView()
-      }, 100)
+    scrollTo (refName, next) {
+      const element = this.$refs[refName]
+      element.scrollIntoView()
+      if (next) {
+        setTimeout(() => {
+          next()
+        }, 100)
+      }
     },
     audioPlay () {
       if (this.$refs.audio) {
@@ -232,7 +243,7 @@ export default {
       if (this.sponsorEthAddress) {
         this.sendingSponsorship = true
         this.showSponsorshipSuccessMessage = false
-        const data = `${this.stories[this.currentStory].number}:${this.sponsorUrl}`
+        const data = `${this.currentStory.number}:${this.sponsorUrl}`
         const bytes = new Blob([data]).size
         const extraGas = Math.ceil(bytes * 16 * 1.1) // * 1.1 as a little buffer
         web3.eth.sendTransaction({

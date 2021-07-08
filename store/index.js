@@ -1,7 +1,7 @@
 export const state = () => ({
   showUsernames: true,
   stories: [],
-  currentStory: 0
+  currentStory: null
 })
 
 export const getters = {
@@ -23,7 +23,7 @@ export const mutations = {
   stories (state, stories) {
     state.stories = stories
   },
-  currentStory (state, number) {
-    state.currentStory = number
+  currentStory (state, story) {
+    state.currentStory = story
   }
 }
