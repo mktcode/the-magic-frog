@@ -83,9 +83,21 @@
         <source :src="`/audio/story-${currentStory.number}.mp3?${(new Date()).getTime()}`" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
-      <button class="btn btn-sm btn-outline-secondary rounded-pill ms-2" @click="$store.commit('showUsernames', !showUsernames)">
+      <button class="btn btn-sm btn-success rounded-pill mx-2" @click="$store.commit('showUsernames', !showUsernames)">
         {{ showUsernames ? 'hide usernames' : 'show usernames' }}
       </button>
+      <a :href="shareLink('whatsapp')" target="__blank" class="btn btn-sm btn-success rounded-pill">
+        <i class="fab fa-whatsapp" />
+      </a>
+      <a :href="shareLink('twitter')" target="__blank" class="btn btn-sm btn-success rounded-pill">
+        <i class="fab fa-twitter" />
+      </a>
+      <a :href="shareLink('facebook')" target="__blank" class="btn btn-sm btn-success rounded-pill">
+        <i class="fab fa-facebook" />
+      </a>
+      <a :href="shareLink('email')" class="btn btn-sm btn-success rounded-pill">
+        <i class="fas fa-envelope" />
+      </a>
     </div>
     <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
     <nuxt-content :document="currentStory" class="lead" />
@@ -213,6 +225,23 @@ export default {
     }
   },
   methods: {
+    shareLink (target) {
+      const storyUrl = encodeURIComponent('https://the-magic-frog.com/' + this.currentStory.slug)
+      const storyTitle = encodeURIComponent(this.currentStory.title)
+      const text = encodeURIComponent('Lol! You have to read this "magical" story, written by random people.')
+      if (target === 'twitter') {
+        return `https://twitter.com/intent/tweet?text=${text} ${storyTitle} ${storyUrl} ${encodeURIComponent('#funny #story #writing')}`
+      }
+      if (target === 'whatsapp') {
+        return `https://api.whatsapp.com/send?text=${text} ${storyTitle} ${storyUrl}`
+      }
+      if (target === 'facebook') {
+        return `https://www.facebook.com/sharer/sharer.php?u=${storyUrl}&title=${storyTitle}&description=${text}&hashtag=#funny`
+      }
+      if (target === 'email') {
+        return `mailto:?subject=The Magic Frog: ${storyTitle}&body=${text} ${storyUrl}`
+      }
+    },
     scrollTo (refName, next) {
       const element = this.$refs[refName]
       element.scrollIntoView()
