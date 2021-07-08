@@ -30,7 +30,7 @@ jobs:
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
           -d '{"input":{"ssml":"<speak>${{ secrets.AUDIO_TO_GENERATE }}</speak>"},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
-          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $AUDIO_FILE
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d > $AUDIO_FILE
       
       # Update Repo
       - name: Update Repo
