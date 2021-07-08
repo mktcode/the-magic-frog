@@ -1,5 +1,6 @@
 ---
 title: Roland The Adventurer
+slug: roland-the-adventurer
 number: 2
 ended: true
 ---

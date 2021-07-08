@@ -1,5 +1,6 @@
 ---
 title: An Unexpected Party
+slug: an-unexpected-party
 number: 1
 ended: true
 ---
