@@ -26,7 +26,9 @@
     <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
       <i># The End!</i>
     </div>
-    If such a comment already exists, you can add a like instead and if the community agrees, a new story will start the next day, with <i> Once upon a time...</i>
+    If such a comment already exists, you can add a like instead and if the community agrees, a new story will start the next day, with <i> Once upon a time...</i><br>
+    <br>
+    <b>Pro tip! Proper grammar and punctuation will result in a better audio version. Check it out <a href="https://cloud.google.com/text-to-speech#section-2" target="__blank">here</a> before submitting.</b>
   </div>
 </template>
 
