@@ -14,10 +14,13 @@
       <button id="story-select" class="btn px-4 mb-2 btn-lg btn-success rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="h2">{{ currentStory.title }} </span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="story-select">
-        <li v-for="story in stories" :key="story.slug">
+      <ul class="dropdown-menu rounded-xl overflow-hidden bg-primary" aria-labelledby="story-select">
+        <li v-for="(story, index) in stories" :key="story.slug">
           <a class="dropdown-item cursor-pointer" @click="scrollTo('story-start', $router.push(story.slug))">
             {{ story.title }}
+            <span v-if="index === 0">
+              (to be told)
+            </span>
           </a>
         </li>
       </ul>
