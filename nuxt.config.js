@@ -1,3 +1,4 @@
+import { $content } from '@nuxt/content'
 import pkg from './package'
 
 export default {
@@ -6,6 +7,15 @@ export default {
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+
+  generate: {
+    async routes () {
+      const stories = await $content('stories').only(['slug']).fetch()
+      return stories.map((story) => {
+        return '/' + story.slug
+      })
+    }
+  },
 
   env: {
     LAST_WORKFLOW_RUN: '1002640128',
