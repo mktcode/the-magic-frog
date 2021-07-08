@@ -19,7 +19,7 @@ ended: true
 
 <story-part-legacy username="mkt">But a certain thing about this invitation made the storks still skeptical. The invitation was...</story-part-legacy>
 
-<story-part-legacy username="buttpacker">...asking that all attendees show up in their birthday suits - but it wasn't like any of the animals wore clothes anyway!</story-part-legacy>
+<story-part-legacy username="buttpacker">...asking that all attendees show up in their birthday suits - but it wasn't like any of the other animals wore clothes anyway!</story-part-legacy>
 
 <story-part-legacy username="hennifant">Since the magician was known for his crude humor and his preference for nudism, the skepticism turned into pure joy at upcoming feasts.</story-part-legacy>
 
@@ -31,7 +31,7 @@ ended: true
 
 <story-part-legacy username="vegaron">Inside the wizard's lair there stands the wizard clothe just like the day he was born! Totally destroying the beauty of the decorations...</story-part-legacy>
 
-<story-part-legacy username="chrislyr">The animals have never seen such a sight before, some even wish they can unsee what they've just saw.</story-part-legacy>
+<story-part-legacy username="chrislyr">The animals have never seen such a sight before. They even wished they can unsee what they've just saw.</story-part-legacy>
 
 <story-part-legacy username="helo">So that they could see it again as if for the first time. Disco lights everywhere, blaring music and wonderful costumes, all birthday related of course. The party went on until...</story-part-legacy>
 
@@ -69,7 +69,7 @@ ended: true
 
 <story-part-legacy username="enforcer48">The snakes had nervous looks in their eyes. The storks, still frozen in fear, decided that they should probably abort their plans about ruining the party.</story-part-legacy>
 
-<story-part-legacy username="hennifant">But then the bored, fat rhino in the corner began to fall asleep. It stumbled and tumbled until it could not stay on it's feet anymore and fell, totally squishing the wizard underneath it. He was dead immediately.</story-part-legacy>
+<story-part-legacy username="hennifant">But then the bored, fat rhino in the corner began to fall asleep. It stumbled and tumbled until it could not stay on it's feet anymore and fell, totally squishing the wizard beneath it. He was dead immediately.</story-part-legacy>
 
 <story-part-legacy username="mkt"><span>
 # The End!
