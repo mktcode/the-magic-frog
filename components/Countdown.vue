@@ -8,11 +8,8 @@
     </div>
     <div v-else>
       <h1>Storytelling in progress.</h1>
-      <p v-if="refreshNote" class="lead mb-0">
+      <p class="lead mb-0">
         Please wait a moment and refresh the page.
-      </p>
-      <p v-else class="lead mb-0">
-        Please wait...
       </p>
     </div>
   </div>
@@ -23,8 +20,7 @@ export default {
   data () {
     return {
       secondsLeft: 86400,
-      countdown: '',
-      refreshNote: false
+      countdown: ''
     }
   },
   mounted () {
@@ -42,18 +38,6 @@ export default {
         if (minutes <= 1) {
           this.countdown = 'one moment...'
         }
-      }
-
-      // check workflows
-      if (!this.secondsLeft && !this.refreshNote) {
-        this.$axios.get('https://api.github.com/repos/mktcode/the-magic-frog/actions/runs')
-          .then((response) => {
-            const newWorkflow = response.data.workflow_runs.find(run => run.name === 'The Magic Story Machine' && run.id > Number(process.env.LAST_WORKFLOW_RUN) && run.status === 'completed')
-            if (newWorkflow) {
-              window.location.reload()
-            }
-          })
-          .catch(() => (this.refreshNote = true))
       }
     }
   }
