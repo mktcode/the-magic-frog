@@ -11,9 +11,9 @@ export default {
   generate: {
     async routes () {
       const stories = await $content('stories').only(['slug']).fetch()
-      return stories.map((story) => {
+      return ['/', ...stories.map((story) => {
         return '/' + story.slug
-      })
+      })]
     }
   },
 
