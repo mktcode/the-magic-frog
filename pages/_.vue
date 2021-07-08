@@ -167,7 +167,7 @@ export default {
     const stories = await $content('stories').sortBy('number', 'desc').fetch()
     store.commit('stories', stories)
 
-    if (params.pathMatch) {
+    if (params.pathMatch.replace(/\/$/, '')) {
       const [story] = await $content('stories').where({ slug: params.pathMatch }).limit(1).fetch()
       if (story) {
         store.commit('currentStory', story)
