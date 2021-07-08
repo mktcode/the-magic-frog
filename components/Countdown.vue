@@ -4,7 +4,10 @@
       <p class="lead mb-0">
         The story will be continued in:
       </p>
-      <h1>{{ countdown }}</h1>
+      <h2>{{ countdown }}</h2>
+      <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
+        Share your idea and vote for others!
+      </a>
     </div>
     <div v-else>
       <h1>Storytelling in progress.</h1>

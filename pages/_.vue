@@ -97,11 +97,11 @@
         Read the current story.
       </a>
     </div>
-    <div v-else class="my-5 text-center">
+    <div v-else class="mb-5 mt-4 text-center">
+      <h1 class="mb-5">
+        To be continued!
+      </h1>
       <Countdown />
-      <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
-        Share your idea and vote for others!
-      </a>
     </div>
     <div v-if="currentStorySponsors.length" class="text-center">
       <img src="divider.png" class="mw-100">
