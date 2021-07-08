@@ -168,10 +168,6 @@ export default {
   },
   data () {
     return {
-      accessToken: null,
-      screenName: null,
-      requestToken: null,
-      requestSecret: null,
       latestTweet: process.env.LATEST_TWEET,
       audioIsPlaying: false,
       showSponsorForm: false,
