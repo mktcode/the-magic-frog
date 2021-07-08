@@ -37,7 +37,7 @@
     "eslint-plugin-vue": "^7.13.0",
     "fibers": "^5.0.0",
     "push-dir": "^0.4.1",
-    "sass": "^1.35.1",
+    "sass": "^1.35.2",
     "sass-loader": "^10.2.0"
   },
   "crypto": {
