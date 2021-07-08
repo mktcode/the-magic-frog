@@ -103,7 +103,7 @@
       </a>
     </div>
     <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
-    <nuxt-content :document="currentStory" class="lead" />
+    <nuxt-content :document="currentStory" class="lead story" />
     <img v-if="currentStory.body.children.length" src="divider.png" class="mw-100">
     <div v-if="currentStory.ended" class="lead mt-3 text-center">
       This story is told but a new and exciting one has already begun.<br>
