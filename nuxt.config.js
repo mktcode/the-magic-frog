@@ -19,7 +19,7 @@ export default {
 
   env: {
     LAST_WORKFLOW_RUN: '1002640128',
-    NEXT_UPDATE: '1625738400',
+    NEXT_UPDATE: '1625824800',
     LATEST_TWEET: '1412195673248874499',
     ETH_ADDRESS: pkg.crypto.address
   },
