@@ -57,7 +57,7 @@ jobs:
             sed -i '0,/ended: false/s//ended: true/' $FILE
             export NEXT_FILE=repo/content/stories/story-$(( $STORY_NUMBER + 1 )).md
             printf "%s\n" "---" >> $NEXT_FILE
-            printf "%s\n" "title: Story $(( $STORY_NUMBER + 1 ))" >> $NEXT_FILE
+            printf "%s\n" "title: Untitled Story" >> $NEXT_FILE
             printf "%s\n" "number: $(( $STORY_NUMBER + 1 ))" >> $NEXT_FILE
             printf "%s\n" "ended: false" >> $NEXT_FILE
             printf "%s\n\n" "---" >> $NEXT_FILE

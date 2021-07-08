@@ -1,5 +1,5 @@
 ---
-title: Story 3
+title: Untitled Story
 number: 3
 ended: false
 ---
