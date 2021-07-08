@@ -187,7 +187,6 @@ export default {
   },
   data () {
     return {
-      latestTweet: process.env.LATEST_TWEET,
       audioIsPlaying: false,
       showSponsorForm: false,
       sponsorUrl: '',

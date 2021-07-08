@@ -22,6 +22,7 @@
 export default {
   data () {
     return {
+      latestTweet: process.env.LATEST_TWEET,
       secondsLeft: 86400,
       countdown: ''
     }
