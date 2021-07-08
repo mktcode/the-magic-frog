@@ -102,7 +102,6 @@ jobs:
 
           # Replace and commit env vars in nuxt.config.js
           # (so that other workflows can redeploy the page without setting env vars)
-          sed -i -E "s/LAST_WORKFLOW_RUN: '[0-9]+'/LAST_WORKFLOW_RUN: '$GITHUB_RUN_ID'/" nuxt.config.js
           sed -i -E "s/NEXT_UPDATE: '[0-9]+'/NEXT_UPDATE: '$(date --date="tomorrow 12:00:00" +%s)'/" nuxt.config.js
           sed -i -E "s/LATEST_TWEET: '[0-9]+'/LATEST_TWEET: '${{ steps.new-tweet.outputs.tweet-id }}'/" nuxt.config.js
           
