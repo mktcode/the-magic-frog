@@ -5,7 +5,7 @@
         The story will be continued in:
       </p>
       <h2>{{ countdown }}</h2>
-      <a :href="'https://twitter.com/magicstoryfrog/status/' + latestTweet" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
+      <a :href="`https://twitter.com/intent/tweet?in_reply_to=${latestTweet}&text=And then the magic frog came and saved the day.`" target="__blank" class="btn btn-lg btn-success rounded-pill mt-3">
         Share your idea and vote for others!
       </a>
     </div>
