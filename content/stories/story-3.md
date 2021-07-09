@@ -1,7 +1,7 @@
 ---
-title: Untitled Story
+title: Gilbert of Esteragon
 number: 3
-ended: false
+ended: true
 ---
 
 <story-part-legacy username="mkt">there was a wizard,...</story-part-legacy>
