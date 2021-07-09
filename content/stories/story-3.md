@@ -117,4 +117,8 @@ ended: true
 
 <story-part-legacy username="hennifant">The events of that night have only been passed down in the form of rumours, and the wild shrieks and devastation remain eternally without explanation. None of those responsible was ever seen again, alive or dead.</story-part-legacy>
 
-<story-part-legacy username="mkt">The End!</story-part-legacy>
+<story-part-legacy username="mkt">
+
+# The End!
+
+</story-part-legacy>
