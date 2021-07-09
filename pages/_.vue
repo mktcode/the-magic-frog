@@ -223,6 +223,11 @@ export default {
       showSponsorshipSuccessMessage: false
     }
   },
+  head () {
+    return {
+      title: 'The Magic Frog - ' + this.currentStory.title
+    }
+  },
   computed: {
     ...mapGetters(['showUsernames', 'currentStory', 'stories']),
     sponsorUrlValid () {
