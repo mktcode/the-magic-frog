@@ -47,8 +47,8 @@
           </h5>
           <input v-model="sponsorUrl" type="url" class="form-control form-control-lg rounded-pill" placeholder="https://">
           <div class="d-flex align-items-center mt-2">
-            <input v-model="sponsorAmount" type="number" class="amount-input form-control form-control-lg rounded-pill me-2 pt-0">
-            <span class="h3 mb-0 ml-3 fw-bold me-auto">ETH</span>
+            <input v-model="sponsorAmount" type="number" class="amount-input form-control form-control-lg rounded-pill me-2">
+            <span class="h4 mb-0 fw-bold me-auto">ETH</span>
             <button v-if="ethereumEnabled" class="btn btn-success rounded-pill" :disabled="sendingSponsorship || (sponsorEthAddress && !sponsorUrlValid) || Number(sponsorAmount) < minimumSponsorAmount" @click="sponsorStory">
               <span v-if="sponsorEthAddress">
                 <i v-if="sendingSponsorship" class="fas fa-circle-notch fa-spin" />
