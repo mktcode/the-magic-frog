@@ -1,5 +1,6 @@
 ---
 title: Gilbert of Esteragon
+slug: gilbert-of-esteragon
 number: 3
 ended: true
 ---
