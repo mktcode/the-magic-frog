@@ -49,7 +49,7 @@
           <div class="d-flex align-items-center mt-2">
             <input v-model="sponsorAmount" type="number" class="amount-input form-control form-control-lg rounded-pill me-2 pt-0">
             <span class="h3 mb-0 ml-3 fw-bold me-auto">ETH</span>
-            <button v-if="ethereumEnabled" class="btn btn-success rounded-pill" :disabled="sendingSponsorship || (sponsorEthAddress && !sponsorUrlValid) || !sponsorAmount" @click="sponsorStory">
+            <button v-if="ethereumEnabled" class="btn btn-success rounded-pill" :disabled="sendingSponsorship || (sponsorEthAddress && !sponsorUrlValid) || Number(sponsorAmount) < minimumSponsorAmount" @click="sponsorStory">
               <span v-if="sponsorEthAddress">
                 <i v-if="sendingSponsorship" class="fas fa-circle-notch fa-spin" />
                 {{ sendingSponsorship ? 'Waiting for confirmation...' : 'Send' }}
@@ -67,9 +67,8 @@
           </div>
           <small class="d-block text-center text-muted mt-4">
             25% of the sponsored amount will be used to maintain and improve the project.
-            Any amount, from almost nothing to an entire kindom worth of ETH, is possible.
-            Just be aware that the information is public and inappropriate links will be removed without a refund.
-            If you want to support the wizard himself, without appearing as a sponsor, go <a href="https://github.com/mktcode" target="__blank">here</a>.
+            The current <u>minimum amount is 0.01</u> ETH and subject to adjustments. Inappropriate links will be removed without a refund.
+            If you want to support me personally, without appearing as a sponsor, go <a href="https://github.com/mktcode" target="__blank">here</a>.
           </small>
         </div>
       </div>
@@ -220,7 +219,8 @@ export default {
       sendingSponsorship: false,
       sponsorEthAddress: null,
       ethereumEnabled: window.ethereum,
-      showSponsorshipSuccessMessage: false
+      showSponsorshipSuccessMessage: false,
+      minimumSponsorAmount: 0.01
     }
   },
   head () {
@@ -303,24 +303,26 @@ export default {
     sponsorStory () {
       const web3 = new Web3(window.ethereum)
       if (this.sponsorEthAddress) {
-        this.sendingSponsorship = true
-        this.showSponsorshipSuccessMessage = false
-        const data = `${this.currentStory.number}:${this.sponsorUrl}`
-        const bytes = new Blob([data]).size
-        const extraGas = Math.ceil(bytes * 16 * 1.1) // * 1.1 as a little buffer
-        web3.eth.sendTransaction({
-          from: this.sponsorEthAddress,
-          to: process.env.ETH_ADDRESS,
-          value: ethUtils.toWei(this.sponsorAmount, 'ether'),
-          data: ethUtils.toHex(data),
-          gas: 21000 + extraGas
-        }).then((tx) => {
-          this.showSponsorshipSuccessMessage = true
-          this.sponsorAmount = 0
-          this.sponsorUrl = ''
-        }).finally(() => {
-          this.sendingSponsorship = false
-        })
+        if (Number(this.sponsorAmount) < this.minimumSponsorAmount) {
+          this.sendingSponsorship = true
+          this.showSponsorshipSuccessMessage = false
+          const data = `${this.currentStory.number}:${this.sponsorUrl}`
+          const bytes = new Blob([data]).size
+          const extraGas = Math.ceil(bytes * 16 * 1.1) // * 1.1 as a little buffer
+          web3.eth.sendTransaction({
+            from: this.sponsorEthAddress,
+            to: process.env.ETH_ADDRESS,
+            value: ethUtils.toWei(this.sponsorAmount, 'ether'),
+            data: ethUtils.toHex(data),
+            gas: 21000 + extraGas
+          }).then((tx) => {
+            this.showSponsorshipSuccessMessage = true
+            this.sponsorAmount = 0
+            this.sponsorUrl = ''
+          }).finally(() => {
+            this.sendingSponsorship = false
+          })
+        }
       } else {
         web3.eth.requestAccounts((error, accounts) => {
           if (!error) {
