@@ -35,7 +35,7 @@ ended: true
 
 <story-part-legacy username="rapier-e01">He felt the creature coming closer and its breath brushed against his head. There was a crashing and cracking sound in the undergrowth and the creature jerked its head up. Snarling, it looked into the forest. A familiar snort and clap made the mage flinch.</story-part-legacy>
 
-<story-part-legacy username="hennifant" image="https://user-images.githubusercontent.com/6792578/125064565-10c34d00-e0b1-11eb-8dbc-7779b9426221.png"></story-part-legacy>
+<story-part-legacy username="hennifant" image="https://user-images.githubusercontent.com/6792578/125078524-cb0f8000-e0c2-11eb-8c15-130aa6b2ec2b.png"></story-part-legacy>
 
 <story-part-legacy username="atra-aranea">Both beings hissed at each other. Neither of them noticed the snake-like creature in the background. Strangely, it seemed to have human features. When both looked up from their argument, the wizard had disappeared from the nest.</story-part-legacy>
 
