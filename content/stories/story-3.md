@@ -8,7 +8,15 @@ ended: false
 
 <story-part-legacy username="atra-aranea">who wanted to travel the wide world to make new contacts and gather knowledge. Soon he had visited many places, in each of which he was warmly welcomed. However, he was often warned about his next destination: he should be careful...</story-part-legacy>
 
-<story-part-legacy username="holger.random">The way is dangerous and the destination not worth the journey. Until this moment, however, the warning was always unfounded. The wizard was walking along a forest path whistling loudly when he heard a strange noise....</story-part-legacy>
+<story-part-legacy username="holger.random">The way is dangerous and the destination not worth the journey. Until this moment, however, the warning was always unfounded.</story-part-legacy>
+
+<story-part-legacy username="mkt">
+
+# Chapter 1: Irritation in the Wilderness
+
+</story-part-legacy>
+
+<story-part-legacy username="holger.random">The wizard was walking along a forest path whistling loudly when he heard a strange noise....</story-part-legacy>
 
 <story-part-legacy username="mkt">A rhythmic clapping, like when you slap two well-seasoned sides of beef against each other, over and over again. And a rather agonised grumbling and groaning. When he tried to catch a glimpse of what was happening through the undergrowth...</story-part-legacy>
 
@@ -49,6 +57,12 @@ ended: false
 <story-part-legacy username="rapier-e01">There it was, the wand he thought he had lost, in all its glory. The black wood polished and the green crystal on the tip sparkled brilliantly in the sunlight. Only there was one small problem. It was no bigger than a chopstick.</story-part-legacy>
 
 <story-part-legacy username="atra-aranea">"It's, um, kind of too small?" the wizard asked cautiously. "You stupid human. Take it and it'll be your size." the fairy explained annoyed. He then learned that he was to accompany the fairy to a certain town as a thank you for saving him.</story-part-legacy>
+
+<story-part-legacy username="mkt">
+
+# Chapter 2: The Smell of Trouble
+
+</story-part-legacy>
 
 <story-part-legacy username="atra-aranea">She had some important business to do there, but fairies were not very highly regarded there. Without a human companion, it was impossible for her to even pass through the city gates.</story-part-legacy>
 
