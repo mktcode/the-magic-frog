@@ -1,7 +1,7 @@
 <template>
   <div v-if="sponsor" class="my-2">
     <div :class="sizeClass + ' mb-0'">
-      <a :href="sponsor.url" target="__blank">{{ sponsor.url }}</a>
+      <a :href="sponsor.url" target="__blank">{{ displayUrl }}</a>
     </div>
     <span class="text-muted">with {{ amount }} ETH</span>
   </div>
@@ -32,6 +32,9 @@ export default {
       if (this.position === 2) { sizeClass = 'h5' }
       if (this.position === 3) { sizeClass = 'h6' }
       return sizeClass
+    },
+    displayUrl () {
+      return this.sponsor.url.replace(/https?:\/\//, '')
     }
   }
 }
