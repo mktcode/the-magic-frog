@@ -32,20 +32,6 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'The Magic Frog',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Help the magic frog to remember all his interesting and fun stories!' },
-      { property: 'og:title', content: 'The Magic Frog' },
-      { property: 'og:description', content: 'Help the magic frog to remember all his interesting and fun stories!' },
-      { property: 'og:image', content: 'https://the-magic-frog.com/cover.png' },
-      { property: 'og:url', content: 'https://the-magic-frog.com' },
-      { name: 'twitter:card', content: 'summary_large_image' }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
     script: [
       {
         src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
@@ -89,8 +75,21 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    icon: {
+      fileName: 'frog.png'
+    },
     manifest: {
+      name: 'The Magic Frog',
+      short_name: 'Magic Frog',
       lang: 'en'
+    },
+    meta: {
+      name: 'The Magic Frog',
+      ogHost: 'https://the-magic-frog.com',
+      ogImage: '/cover.png',
+      twitterCard: 'summary_large_image',
+      nativeUI: true,
+      theme_color: '#198754'
     }
   },
 
