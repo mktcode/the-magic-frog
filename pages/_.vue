@@ -4,7 +4,7 @@
       <h1 class="mb-4">
         The Magic Frog
       </h1>
-      <img src="frog.png">
+      <img src="/frog.png">
       <p class="lead mt-3 text-center" style="max-width: 800px">
         Welcome, my friend! Come closer. Don't be shy. This is a magical place where magical stories are told.
         Find out <a class="cursor-pointer" @click="scrollTo('how-it-works')">how it works</a> and join the party.
@@ -103,9 +103,9 @@
           <i class="fas fa-envelope" />
         </a>
       </div>
-      <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
+      <img src="/divider.png" class="mw-100" style="transform: scaleY(-1)">
       <nuxt-content :document="currentStory" class="lead story" />
-      <img v-if="currentStory.body.children.length" src="divider.png" class="mw-100">
+      <img v-if="currentStory.body.children.length" src="/divider.png" class="mw-100">
       <div v-if="currentStory.ended" class="lead mt-3 text-center">
         This story is told but a new and exciting one has already begun.<br>
         I just need your help to remember what really happened!<br>
@@ -120,11 +120,11 @@
         <Countdown />
       </div>
       <div v-if="currentStorySponsors.length" class="text-center">
-        <img src="divider.png" class="mw-100">
+        <img src="/divider.png" class="mw-100">
         <h4>Thanks to the Sponsors!</h4>
         <Sponsor v-for="(sponsor, index) in currentStorySponsors" :key="index" :sponsor="sponsor" :position="index" />
       </div>
-      <img src="divider.png" class="mw-100" style="transform: scaleY(-1)">
+      <img src="/divider.png" class="mw-100" style="transform: scaleY(-1)">
       <h1 class="mt-5 mb-4">
         A pot full of gold?
       </h1>
@@ -133,7 +133,7 @@
         The more you have contributed to a story, the more likely fate will be on your side, unless... you are unlucky.
         You also need to follow <a href="https://twitter.com/@magicstoryfrog">The Magic Frog</a> in order for fate to even care about you at all.
       </p>
-      <img src="pot-of-gold.png" class="my-4">
+      <img src="/pot-of-gold.png" class="my-4">
       <div v-if="potAmount" class="text-center mb-4">
         <h1><span class="text-muted">1.</span> {{ potAmountFirst }} <small class="text-muted">ETH</small></h1>
         <h2><span class="text-muted">2.</span> {{ potAmountSecond }} <small class="text-muted">ETH</small></h2>
