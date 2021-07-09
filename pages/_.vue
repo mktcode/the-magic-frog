@@ -17,7 +17,7 @@
         </button>
         <ul class="dropdown-menu rounded-xl overflow-hidden bg-primary" aria-labelledby="story-select">
           <li v-for="(story, index) in stories" :key="story.slug">
-            <a class="dropdown-item cursor-pointer" @click="scrollTo('story-start', $router.push(story.slug))">
+            <a class="dropdown-item cursor-pointer" @click="scrollTo('story-start', $router.push('/' + story.slug))">
               {{ story.title }}
               <span v-if="index === 0">
                 (to be told)
