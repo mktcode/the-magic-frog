@@ -1,84 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 2370:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const axios = __nccwpck_require__(6545)
-
-const getLatestStoryTweet = (accountId, bearerToken) => {
-  let url = `https://api.twitter.com/2/tweets/search/recent?query=(%23story OR %23Story) from:${accountId}`
-  return axios.get(url, {
-    headers: {
-      'Authorization': `Bearer ${bearerToken}`
-    }
-  }).then((response) => {
-    if (response.data && response.data.meta && response.data.meta.result_count) {
-      return response.data.data[0]
-    }
-    return null
-  })
-}
-
-module.exports = getLatestStoryTweet
-
-/***/ }),
-
-/***/ 9807:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const axios = __nccwpck_require__(6545)
-
-const getTweetImage = (id, bearerToken) => {
-  const fields = 'author_id'
-  let url = `https://api.twitter.com/2/tweets?ids=${id}&tweet.fields=${fields}&media.fields=url&expansions=attachments.media_keys`
-  return axios.get(url, {
-    headers: {
-      'Authorization': `Bearer ${bearerToken}`
-    }
-  }).then((response) => {
-    if (response.data && response.data.includes && response.data.includes.media) {
-      return response.data.includes.media[0].url
-    }
-    return null
-  })
-}
-
-module.exports = getTweetImage
-
-/***/ }),
-
-/***/ 622:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const axios = __nccwpck_require__(6545)
-
-const getTweetReplies = (id, bearerToken, replies, nextToken) => {
-  const fields = 'author_id,public_metrics,in_reply_to_user_id'
-  let url = `https://api.twitter.com/2/tweets/search/recent?tweet.fields=${fields}&query=conversation_id:${id} -is:retweet`
-  if (nextToken) {
-    url += '&next_token=' + nextToken
-  }
-  return axios.get(url, {
-    headers: {
-      'Authorization': `Bearer ${bearerToken}`
-    }
-  }).then((response) => {
-    if (response.data.data && response.data.data.length) {
-      replies.push(...response.data.data)
-      if (response.data.meta.next_token) {
-        return getTweetReplies(id, bearerToken, replies, response.data.meta.next_token)
-      }
-      return replies
-    }
-    return replies
-  })
-}
-
-module.exports = getTweetReplies
-
-/***/ }),
-
 /***/ 8791:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -4174,65 +4096,21 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186)
-const getLatestStoryTweet = __nccwpck_require__(2370)
-const getTweetReplies = __nccwpck_require__(622)
-const getTweetImage = __nccwpck_require__(9807)
 const getUser = __nccwpck_require__(8791)
 
 async function run() {
   try {
     const twitterAccountId = core.getInput('twitter-account-id')
     const twitterBearerToken = core.getInput('twitter-bearer-token')
-
-    const latestStoryTweet = await getLatestStoryTweet(twitterAccountId, twitterBearerToken)
-    if (!latestStoryTweet) {
-      throw Error('No story tweet found!')
+    
+    const user = await getUser(twitterAccountId, twitterBearerToken)
+    if (!user) {
+      throw Error('User not found.')
     }
-    const foundNumber = latestStoryTweet.text.match(/#story (\d+)/i)
-    if (!foundNumber) {
-      throw Error('No story number found!')
-    }
-    const storyNumber = foundNumber[1]
 
-    const replies = (await getTweetReplies(latestStoryTweet.id, twitterBearerToken, [])).filter(reply => reply.in_reply_to_user_id == twitterAccountId)
-
-    if (replies.length) {
-      const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
-      // https://www.regextester.com/53716
-      const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gmi
-      const twitterUsernameRegex = /@[A-Za-z0-9_]{1,15}\s/gmi
-      const text = topReply.text.replace(urlRegex, '').replace(twitterUsernameRegex, '')
-      const headlineWithoutDotRegex = /^#\s{1}(.*(?![\.!?]$))+$/gmi
-      const textClean = text.replace(headlineWithoutDotRegex, '$1.').replace(/"/g, '“').replace(/'/g, '’').replace(/\n/g, '<break time=\\\"1500ms\\\"/>')
-      const image = await getTweetImage(topReply.id, twitterBearerToken)
-      if (!text && !image) {
-        throw Error('No text or image found!')
-      }
-      const user = await getUser(topReply.author_id, twitterBearerToken)
-      if (!user) {
-        throw Error('User not found.')
-      }
-      
-      core.info(`Latest Story Tweet:`)
-      core.info(`- ID: ${latestStoryTweet.id}`)
-      core.info(`- Story Number: ${storyNumber}`)
-      core.info('Top Reply:')
-      core.info(`- ID: ${topReply.id}`)
-      core.info(`- Author: ${user.username}`)
-      core.info(`- Text: ${text}`)
-      core.info(`- Clean Text: ${textClean}`)
-      core.info(`- Likes: ${topReply.public_metrics.like_count}`)
-      core.info(`- Image: ${image}`)
-
-      core.setOutput('story-number', storyNumber)
-      core.setOutput('reply-id', topReply.id)
-      core.setOutput('username', user.username)
-      core.setOutput('text', text)
-      core.setOutput('text-clean', textClean)
-      core.setOutput('image', image)
-    } else {
-      throw Error('No replies found!')
-    }
+    const count = user.public_metrics.followers_count
+    core.info(`Follower count: ${count}`)
+    core.setOutput('count', count)
   } catch (error) {
     core.setFailed(error.message)
   }

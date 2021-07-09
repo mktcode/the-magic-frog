@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const getUser = (id, bearerToken) => {
-  return axios.get(`https://api.twitter.com/2/users/${id}`, {
+  return axios.get(`https://api.twitter.com/2/users/${id}?user.fields=public_metrics`, {
     headers: {
       'Authorization': `Bearer ${bearerToken}`
     }

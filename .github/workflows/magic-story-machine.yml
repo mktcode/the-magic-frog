@@ -8,8 +8,8 @@ env:
   END_TEXT: '# The End!'
 
 jobs:
-  tell-story:
-    name: Tell Magical Story
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     steps:
       # First prepare Node.js and checkout the repository, in order to use internal actions in .github/actions.
@@ -21,7 +21,28 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: repo
-      
+
+  storytellers:
+    name: Count Storytellers
+    runs-on: ubuntu-latest
+    needs: [ prepare ]
+    outputs:
+      count: ${{ steps.count.outputs.count }}
+    steps:
+      - name: Count
+        id: count
+        uses: ./repo/.github/actions/count-followers
+        with:
+          twitter-account-id: ${{ secrets.TWITTER_ACCOUNT_ID }}
+          twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
+
+
+  tell-story:
+    name: Tell Magical Story
+    runs-on: ubuntu-latest
+    needs: [ storytellers ]
+    if: ${{ needs.storytellers.outputs.count >= 100 }}
+    steps:
       # Set up Google Cloud for Text to Speech
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@0aa92bcd70fc0929f052b47276d5e61f793c384b

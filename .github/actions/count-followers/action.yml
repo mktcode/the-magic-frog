@@ -1,0 +1,15 @@
+name: Count Followers
+description: Returns the number of followers of the given account ID.
+inputs:
+  twitter-account-id:
+    description: The account ID of the magic frog.
+    required: true
+  twitter-bearer-token:
+    description: The bearer token for the frosg's twitter account.
+    required: true
+outputs:
+  count:
+    description: The number of followers.
+runs:
+  using: node12
+  main: ./dist/index.js
