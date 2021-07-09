@@ -9,11 +9,18 @@ export default {
   target: 'static',
 
   generate: {
+    // generate a route for each story and the default / route, whis is not
+    // automatically generated because we use only a pages/_.vue file and no index.vue
+    // for each story, generate a route like /story-<num> and also, if the story has
+    // a custom title: /<slug>
+    // pages/_.vue redirects /story-<num> to /<slug> if possible
     async routes () {
       const stories = await $content('stories').only(['slug']).fetch()
-      return ['/', ...stories.map((story) => {
+      const routes = ['/', ...stories.map((story) => {
         return '/' + story.slug
       })]
+      stories.forEach((story, index) => (routes.push('/story-' + (index + 1))))
+      return routes
     }
   },
 

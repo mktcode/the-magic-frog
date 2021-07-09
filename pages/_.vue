@@ -175,16 +175,37 @@ import sponsors from '../content/sponsors'
 export default {
   scrollToTop: false,
   async asyncData ({ $content, store, params, redirect }) {
+    // fetch all stories and load them into the store
     const stories = await $content('stories').sortBy('number', 'desc').fetch()
     store.commit('stories', stories)
 
+    // if there's a path, look for a matching story
+    // if the path matches /story-<num> load that story (or reidrect to / if it doesn't exist)
+    // and if it has a custom title slug (story.slug !== path) redirect to /<slug>, otherwise we're done
+    // and can store the story object in the store
+    // if the path does not match /story-<num>, look for a matching story and if none is found
+    // redirect to /
+    // if there's no path at all, just set the latest story as the current one (stories[0])
     const path = params.pathMatch.replace(/\/$/, '')
     if (path) {
-      const [story] = await $content('stories').where({ slug: path }).limit(1).fetch()
-      if (story) {
-        store.commit('currentStory', story)
+      if (/^story-\d+$/.test(path)) {
+        const story = await $content('stories/' + path).fetch()
+        if (story) {
+          if (story.slug !== path) {
+            redirect('/' + story.slug)
+          } else {
+            store.commit('currentStory', story)
+          }
+        } else {
+          redirect('/')
+        }
       } else {
-        redirect('/')
+        const [story] = await $content('stories').where({ slug: path }).limit(1).fetch()
+        if (story) {
+          store.commit('currentStory', story)
+        } else {
+          redirect('/')
+        }
       }
     } else {
       store.commit('currentStory', stories[0])
