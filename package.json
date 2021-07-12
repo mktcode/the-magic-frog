@@ -9,12 +9,6 @@
     "generate": "nuxt generate",
     "deploy": "push-dir --dir=dist --branch=gh-pages",
     "lint": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "build-actions": "npm run build-count-followers-action && npm run build-raffle-action && npm run build-sponsors-action && npm run build-top-reply-action && npm run build-tweet-action",
-    "build-count-followers-action": "ncc build .github/actions/count-followers/index.js -o .github/actions/count-followers/dist",
-    "build-raffle-action": "ncc build .github/actions/raffle/index.js -o .github/actions/raffle/dist",
-    "build-sponsors-action": "ncc build .github/actions/sponsors/index.js -o .github/actions/sponsors/dist",
-    "build-top-reply-action": "ncc build .github/actions/top-reply/index.js -o .github/actions/top-reply/dist",
-    "build-tweet-action": "ncc build .github/actions/tweet/index.js -o .github/actions/tweet/dist",
     "test": "jest"
   },
   "dependencies": {
@@ -32,7 +26,6 @@
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "@vercel/ncc": "^0.28.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.30.0",
     "eslint-plugin-nuxt": "^2.0.0",

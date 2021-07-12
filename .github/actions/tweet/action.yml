@@ -30,4 +30,4 @@ outputs:
     description: The ID of the new tweet.
 runs:
   using: node12
-  main: ./dist/index.js
+  main: ./index.js

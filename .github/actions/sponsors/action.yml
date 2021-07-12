@@ -30,4 +30,4 @@ outputs:
     description: Whether new sponsors have been added.
 runs:
   using: node12
-  main: ./dist/index.js
+  main: ./index.js
