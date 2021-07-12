@@ -1,8 +1,8 @@
-const core = require('@actions/core')
-const getSponsorTransactions = require('../get-sponsor-transactions')
-const { utils: web3utils } = require('web3')
 const fs = require('fs')
+const core = require('@actions/core')
+const { utils: web3utils } = require('web3')
 const Twitter = require('twitter-lite')
+const { getSponsorTransactions, getStartBlock } = require('../../../lib')
 
 async function run() {
   try {
@@ -55,18 +55,6 @@ async function run() {
   } catch (error) {
     core.setFailed(error.message)
   }
-}
-
-const getStartBlock = (sponsors) => {
-  if (sponsors.length) {
-    const blockNumbers = sponsors[sponsors.length - 1].map((sponsor) => Number(sponsor.blockNumber))
-    if (blockNumbers.length) {
-      const highestBlockNumber = Math.max(...blockNumbers)
-      return highestBlockNumber + 1
-    }
-  }
-
-  return 0
 }
 
 run()

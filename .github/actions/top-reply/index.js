@@ -1,8 +1,5 @@
 const core = require('@actions/core')
-const getLatestStoryTweet = require('../get-latest-story-tweet')
-const getTweetReplies = require('../get-tweet-replies')
-const getTweetImage = require('../get-tweet-image')
-const getUser = require('../get-user')
+const { getLatestStoryTweet, getTweetReplies, getTweetImage, getUser } = require('../../../lib')
 
 async function run() {
   try {

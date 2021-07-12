@@ -1,8 +1,7 @@
-const core = require('@actions/core')
-const getUsersFromStory = require('../get-users-from-story')
 const fs = require('fs')
+const core = require('@actions/core')
 const Twitter = require('twitter-lite')
-import { getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } from '../../../lib'
+const { getUsersFromStory, getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } = require('../../../lib')
 
 async function run() {
   try {
@@ -30,11 +29,11 @@ async function run() {
       users = users.filter((user) => user !== winners[0])
       if (users.length) {
         winners[1] = users[Math.floor(Math.random() * users.length)]
-        winnerStrings[1] = `2. @ ${winners[1]}: ${getPotAmountFirst(sponsors)} ETH`
+        winnerStrings[1] = `2. @ ${winners[1]}: ${getPotAmountSecond(sponsors)} ETH`
         users = users.filter((user) => user !== winners[1])
         if (users.length) {
           winners[2] = users[Math.floor(Math.random() * users.length)]
-          winnerStrings[2] = `3. @ ${winners[2]}: ${getPotAmountFirst(sponsors)} ETH`
+          winnerStrings[2] = `3. @ ${winners[2]}: ${getPotAmountThird(sponsors)} ETH`
         }
       }
   

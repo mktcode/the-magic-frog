@@ -124486,43 +124486,45 @@ var __webpack_exports__ = {};
 (() => {
 const fs = __nccwpck_require__(35747)
 const core = __nccwpck_require__(42186)
-const { utils: web3utils } = __nccwpck_require__(98237)
 const Twitter = __nccwpck_require__(92714)
-const { getSponsorTransactions, getStartBlock } = __nccwpck_require__(52909)
+const { getUsersFromStory, getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } = __nccwpck_require__(52909)
 
 async function run() {
   try {
-    const ethAddress = core.getInput('eth-address')
+    const storyNumber = core.getInput('story-number')
     const sponsorsFile = core.getInput('sponsors-file')
-    const etherscanApiUrl = core.getInput('etherscan-api-url')
-    const etherscanApiKey = core.getInput('etherscan-api-key')
     const twitterConsumerKey = core.getInput('twitter-consumer-key')
     const twitterConsumerSecret = core.getInput('twitter-consumer-secret')
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
-    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
-    const startBlock = getStartBlock(sponsors)
-    const sponsorTransactions = await getSponsorTransactions(startBlock, ethAddress, etherscanApiUrl, etherscanApiKey)
-    core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
-
-    if (sponsorTransactions.length) {
-      // update file
-      sponsorTransactions.forEach((tx) => {
-        const input = web3utils.hexToUtf8(tx.input)
-        const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
-        if (!sponsors[Number(storyNumber) - 1]) {
-          sponsors[Number(storyNumber) - 1] = []
+    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))[storyNumber - 1]
+    const potAmount = getPotAmount(sponsors)
+    
+    if (potAmount) {
+      const story = fs.readFileSync(storyFile, 'utf-8')
+      let users = getUsersFromStory(story)
+      core.info(`Users found: ${JSON.stringify(users)}`)
+      core.info(`Unique: ${uniqueUsers.length}`)
+  
+      // pick winners
+      let winners = []
+      let winnerStrings = []
+      winners[0] = users[Math.floor(Math.random() * users.length)]
+      winnerStrings[0] = `1. @ ${winners[0]}: ${getPotAmountFirst(sponsors)} ETH`
+      users = users.filter((user) => user !== winners[0])
+      if (users.length) {
+        winners[1] = users[Math.floor(Math.random() * users.length)]
+        winnerStrings[1] = `2. @ ${winners[1]}: ${getPotAmountSecond(sponsors)} ETH`
+        users = users.filter((user) => user !== winners[1])
+        if (users.length) {
+          winners[2] = users[Math.floor(Math.random() * users.length)]
+          winnerStrings[2] = `3. @ ${winners[2]}: ${getPotAmountThird(sponsors)} ETH`
         }
-        sponsors[Number(storyNumber) - 1].push({
-          blockNumber: tx.blockNumber,
-          transactionHash: tx.transactionHash,
-          url: sponsorLink,
-          value: tx.value
-        })
-      })
-      fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
-
+      }
+  
+      core.info(`Winners: ${winners.join(', ')}`)
+  
       // tweet
       const twitterClient = new Twitter({
         consumer_key: twitterConsumerKey,
@@ -124530,13 +124532,19 @@ async function run() {
         access_token_key: twitterAccessTokenKey,
         access_token_secret: twitterAccessTokenSecret
       })
-      const totalEth = sponsors[sponsors.length - 1].reduce((total, sponsor) => total + BigInt(sponsor.value), BigInt('0'))
-      const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
-      const tweet = await twitterClient.post('statuses/update', { status, media_ids: '1412776562190073856' })
+      const status = `The pot has been raffled. Congratulations to:
+  
+  ${winnerStrings.join('\n')}
+  
+  Please leave an Ethereum address below to receive your price.`
+      const tweet = await twitterClient.post('statuses/update', {
+        status,
+        media_ids: '1412776562190073856',
+        reply_settings: 'mentioned_users'
+      })
       core.info(`Tweet ID: ${tweet.id_str}`)
-      core.setOutput('changed', true)
     } else {
-      core.setOutput('changed', false)
+      core.info('No pot to be raffled.')
     }
   } catch (error) {
     core.setFailed(error.message)

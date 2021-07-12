@@ -1,5 +1,5 @@
 const core = require('@actions/core')
-const getUser = require('../get-user')
+const { getUser } = require('../../../lib')
 
 async function run() {
   try {
