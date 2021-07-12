@@ -10,10 +10,19 @@
       </a>
     </div>
     <div v-else>
-      <h1>Storytelling in progress.</h1>
-      <p class="lead mb-0">
-        Please wait a moment and refresh the page.
-      </p>
+      <div v-if="twitterFollowers < 100" class="lead bg-primary text-white rounded-xl p-3 p-sm-4" style="max-width: 500px">
+        Unfortunately we are not enough storytellers yet. Only if one hundred or more are following the frog, the story can continue.<br>
+        <br>
+        <a href="https://twitter.com/magicstoryfrog" class="btn btn-light rounded-pill">
+          <span class="h4">Follow the Frog!</span>
+        </a>
+      </div>
+      <div v-else>
+        <h1>Storytelling in progress.</h1>
+        <p class="lead mb-0">
+          Please wait a moment and refresh the page.
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +33,8 @@ export default {
     return {
       latestTweet: process.env.LATEST_TWEET,
       secondsLeft: 86400,
-      countdown: ''
+      countdown: '',
+      twitterFollowers: 3
     }
   },
   mounted () {
