@@ -1,0 +1,24 @@
+name: Raffle
+description: Reads users from a story file, picks three random ones and mentions them in a Tweet.
+inputs:
+  story-number:
+    description: The number of the story that has ended.
+    required: true
+  sponsors-file:
+    description: Path to sponsors JSON file
+    required: true
+  twitter-consumer-key:
+    description: The consumer key frog's twitter account.
+    required: true
+  twitter-consumer-secret:
+    description: The consumer secret for the frog's twitter account.
+    required: true
+  twitter-access-token-key:
+    description: The access token key for the frog's twitter account.
+    required: true
+  twitter-access-token-secret:
+    description: The access token secret for the frog's twitter account.
+    required: true
+runs:
+  using: node12
+  main: ./dist/index.js
