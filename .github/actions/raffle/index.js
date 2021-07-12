@@ -1,7 +1,7 @@
 const fs = require('fs')
 const core = require('@actions/core')
 const Twitter = require('twitter-lite')
-const { getUsersFromStory, getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } = require('../../../lib')
+const { getUsersFromStory, getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird, potImageMediaId } = require('../../../lib')
 
 async function run() {
   try {
@@ -53,7 +53,7 @@ async function run() {
   Please leave an Ethereum address below to receive your price.`
       const tweet = await twitterClient.post('statuses/update', {
         status,
-        media_ids: '1412776562190073856',
+        media_ids: potImageMediaId,
         reply_settings: 'mentioned_users'
       })
       core.info(`Tweet ID: ${tweet.id_str}`)

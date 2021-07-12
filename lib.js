@@ -112,6 +112,8 @@ const getUsersFromStory = (storyString) => {
   return usernames
 }
 
+const potImageMediaId = '1414612311810232334'
+
 module.exports = {
   getUser,
   getLatestStoryTweet,
@@ -123,5 +125,6 @@ module.exports = {
   getPotAmountFirst,
   getPotAmountSecond,
   getPotAmountThird,
-  getUsersFromStory
+  getUsersFromStory,
+  potImageMediaId
 }

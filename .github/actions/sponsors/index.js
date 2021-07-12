@@ -2,7 +2,7 @@ const fs = require('fs')
 const core = require('@actions/core')
 const { utils: web3utils } = require('web3')
 const Twitter = require('twitter-lite')
-const { getSponsorTransactions, getStartBlock } = require('../../../lib')
+const { getSponsorTransactions, getStartBlock, potImageMediaId } = require('../../../lib')
 
 async function run() {
   try {
@@ -46,7 +46,7 @@ async function run() {
       })
       const totalEth = sponsors[sponsors.length - 1].reduce((total, sponsor) => total + BigInt(sponsor.value), BigInt('0'))
       const status = `The pot of gold just got bigger! There are now ${ Number(web3utils.fromWei(totalEth.toString(), 'ether')) * 0.75} ETH to win.`
-      const tweet = await twitterClient.post('statuses/update', { status, media_ids: '1412776562190073856' })
+      const tweet = await twitterClient.post('statuses/update', { status, media_ids: potImageMediaId })
       core.info(`Tweet ID: ${tweet.id_str}`)
       core.setOutput('changed', true)
     } else {

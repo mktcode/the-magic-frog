@@ -4,10 +4,12 @@ const {
   getUsersFromStory,
   getSponsorTransactions,
   getLatestStoryTweet,
-  getTweetReplies
+  getTweetReplies,
+  getTweetImage
 } = require('./lib')
 
 const accountId = '1408717257505714179'
+const imageTweetId = '1414612317791207425'
 const testStory = `---
 title: Test Story
 slug: test-story
@@ -58,4 +60,9 @@ test('get replies to latest story tweet', async () => {
 test('get user', async () => {
   const user = await getUser(accountId, process.env.TWITTER_BEARER_TOKEN)
   expect(user.username).toEqual('magicstoryfrog')
+})
+
+test('get tweet image', async () => {
+  const image = await getTweetImage(imageTweetId, process.env.TWITTER_BEARER_TOKEN)
+  expect(image).toEqual('https://pbs.twimg.com/media/E6G2ZxRX0A4f0ra.png')
 })
