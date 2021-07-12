@@ -168,6 +168,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Web3, { utils as ethUtils } from 'web3'
+import { getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } from '../lib'
 
 import sponsors from '../content/sponsors'
 
@@ -248,17 +249,16 @@ export default {
       return null
     },
     potAmount () {
-      const potAmount = this.currentStorySponsors.reduce((value, sponsor) => (value + BigInt(sponsor.value)), BigInt(0))
-      return Number(ethUtils.fromWei(potAmount.toString(), 'ether')) * 0.75
+      return getPotAmount(this.currentStorySponsors)
     },
     potAmountFirst () {
-      return (this.potAmount * 0.5).toFixed(6).replace(/0+$/, '')
+      return getPotAmountFirst(this.currentStorySponsors)
     },
     potAmountSecond () {
-      return (this.potAmount * 0.3).toFixed(6).replace(/0+$/, '')
+      return getPotAmountSecond(this.currentStorySponsors)
     },
     potAmountThird () {
-      return (this.potAmount * 0.2).toFixed(6).replace(/0+$/, '')
+      return getPotAmountThird(this.currentStorySponsors)
     }
   },
   methods: {
