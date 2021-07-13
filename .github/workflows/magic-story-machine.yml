@@ -124,6 +124,7 @@ jobs:
           # (so that other workflows can redeploy the page without setting env vars)
           sed -i -E "s/NEXT_UPDATE: '[0-9]+'/NEXT_UPDATE: '$(date --date="tomorrow 12:00:00" +%s)'/" nuxt.config.js
           sed -i -E "s/LATEST_TWEET: '[0-9]+'/LATEST_TWEET: '${{ steps.new-tweet.outputs.tweet-id }}'/" nuxt.config.js
+          sed -i -E "s/FOLLOWERS: [0-9]+/FOLLOWERS: ${{ needs.storytellers.outputs.count }}/" nuxt.config.js
           
           # Commit and push new files
           git config --global user.name github-actions

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="twitterFollowers < 100" class="lead bg-primary text-white rounded-xl p-3 p-sm-4" style="max-width: 500px">
+    <div v-if="followers < 100" class="lead bg-primary text-white rounded-xl p-3 p-sm-4" style="max-width: 500px">
       Unfortunately we are not enough storytellers yet. Only if one hundred or more are following the frog, the story can continue.<br>
       <br>
       <a href="https://twitter.com/magicstoryfrog" class="btn btn-light rounded-pill">
@@ -35,10 +35,10 @@
 export default {
   data () {
     return {
+      followers: process.env.FOLLOWERS,
       latestTweet: process.env.LATEST_TWEET,
       secondsLeft: 86400,
-      countdown: '',
-      twitterFollowers: 3
+      countdown: ''
     }
   },
   mounted () {
