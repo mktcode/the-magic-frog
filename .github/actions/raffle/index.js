@@ -15,7 +15,7 @@ async function run() {
     const potAmount = sponsors[storyNumber - 1] ? getPotAmount(sponsors[storyNumber - 1]) : 0
     
     if (potAmount) {
-      const story = fs.readFileSync(`../../../content/story-${storyNumber}.md`, 'utf-8')
+      const story = fs.readFileSync(`../../../content/stories/story-${storyNumber}.md`, 'utf-8')
       let users = getUsersFromStory(story)
       core.info(`Users found: ${JSON.stringify(users)}`)
       core.info(`Unique: ${uniqueUsers.length}`)
