@@ -1,23 +1,23 @@
 <template>
   <div>
-    <div v-if="secondsLeft">
-      <p class="lead mb-0">
-        The story will be continued in:
-      </p>
-      <h2>{{ countdown }}</h2>
-      <a :href="`https://twitter.com/intent/tweet?in_reply_to=${latestTweet}&text=And then the magic frog came and saved the day.`" class="btn btn-lg btn-success rounded-pill mt-3">
+    <div v-if="twitterFollowers < 100" class="lead bg-primary text-white rounded-xl p-3 p-sm-4" style="max-width: 500px">
+      Unfortunately we are not enough storytellers yet. Only if one hundred or more are following the frog, the story can continue.<br>
+      <br>
+      <a href="https://twitter.com/magicstoryfrog" class="btn btn-light rounded-pill">
+        <span class="h4">Follow the Frog!</span>
+      </a>
+      <div>and you can already</div>
+      <a :href="`https://twitter.com/intent/tweet?in_reply_to=${latestTweet}&text=And then the magic frog came and saved the day.`" class="btn btn-lg btn-light rounded-pill">
         Share your idea and vote for others!
       </a>
     </div>
     <div v-else>
-      <div v-if="twitterFollowers < 100" class="lead bg-primary text-white rounded-xl p-3 p-sm-4" style="max-width: 500px">
-        Unfortunately we are not enough storytellers yet. Only if one hundred or more are following the frog, the story can continue.<br>
-        <br>
-        <a href="https://twitter.com/magicstoryfrog" class="btn btn-light rounded-pill">
-          <span class="h4">Follow the Frog!</span>
-        </a>
-        <div>and</div>
-        <a :href="`https://twitter.com/intent/tweet?in_reply_to=${latestTweet}&text=And then the magic frog came and saved the day.`" class="btn btn-lg btn-light rounded-pill">
+      <div v-if="secondsLeft">
+        <p class="lead mb-0">
+          The story will be continued in:
+        </p>
+        <h2>{{ countdown }}</h2>
+        <a :href="`https://twitter.com/intent/tweet?in_reply_to=${latestTweet}&text=And then the magic frog came and saved the day.`" class="btn btn-lg btn-success rounded-pill mt-3">
           Share your idea and vote for others!
         </a>
       </div>
