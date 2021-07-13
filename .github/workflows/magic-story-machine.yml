@@ -27,6 +27,7 @@ jobs:
     if: ${{ needs.storytellers.outputs.count >= 3 }}
     outputs:
       ended: ${{ steps.top-reply.outputs.ended }}
+      story-number: ${{ steps.top-reply.outputs.story-number }}
     steps:
       # First prepare Node.js and checkout the repository, in order to use internal actions in .github/actions.
       # Using GITHUB_TOKEN to be able to push changes and redeploy the GitHub Page later.
@@ -146,7 +147,7 @@ jobs:
       - run: npm ci
       - uses: ./.github/actions/raffle
         with:
-          story-number: ${{ steps.top-reply.outputs.story-number }}
+          story-number: ${{ needs.tell-story.outputs.story-number }}
           sponsors-file: ./sponsors.json
           twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           twitter-consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
