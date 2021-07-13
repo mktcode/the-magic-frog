@@ -23,7 +23,7 @@ jobs:
         id: sponsors
         with:
           eth-address: ${{ secrets.ETH_ADDRESS }}
-          sponsors-file: ./content/sponsors.json
+          sponsors-file: ./sponsors.json
           etherscan-api-url: ${{ secrets.ETHERSCAN_API_URL }}
           etherscan-api-key: ${{ secrets.ETHERSCAN_API_KEY }}
           twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}

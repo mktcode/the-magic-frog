@@ -170,7 +170,7 @@ import { mapGetters } from 'vuex'
 import Web3, { utils as ethUtils } from 'web3'
 import { getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird } from '../lib'
 
-import sponsors from '../content/sponsors'
+import sponsors from '../sponsors'
 
 export default {
   scrollToTop: false,
