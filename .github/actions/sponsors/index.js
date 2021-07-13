@@ -35,7 +35,8 @@ async function run() {
           value: tx.value
         })
       })
-      fs.writeFileSync(sponsorsFile, JSON.stringify(sponsors, null, 2))
+      const updatedSponsors = sponsors.map(item => !item ? [] : item)
+      fs.writeFileSync(sponsorsFile, JSON.stringify(updatedSponsors, null, 2))
 
       // tweet
       const twitterClient = new Twitter({
