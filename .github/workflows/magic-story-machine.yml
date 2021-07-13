@@ -148,7 +148,6 @@ jobs:
       - uses: ./.github/actions/raffle
         with:
           story-number: ${{ needs.tell-story.outputs.story-number }}
-          sponsors-file: ./sponsors.json
           twitter-consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           twitter-consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           twitter-access-token-key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}

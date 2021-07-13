@@ -4,18 +4,17 @@ const { utils: web3utils } = require('web3')
 const Twitter = require('twitter-lite')
 const { getSponsorTransactions, getStartBlock, getPotAmountAll, potImageMediaId } = require('../../../lib')
 const cryptoConf = require('../../../package').crypto
+const sponsors = require('../../../sponsors')
 
 async function run() {
   try {
-    const sponsorsFile = core.getInput('sponsors-file')
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
     const twitterConsumerKey = core.getInput('twitter-consumer-key')
     const twitterConsumerSecret = core.getInput('twitter-consumer-secret')
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
-    
-    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
+
     const startBlock = getStartBlock(sponsors)
     const sponsorTransactions = await getSponsorTransactions(startBlock, cryptoConf.address, etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
@@ -25,10 +24,11 @@ async function run() {
       sponsorTransactions.forEach((tx) => {
         const input = web3utils.hexToUtf8(tx.input)
         const [ storyNumber, sponsorLink ] = input.split(/:(.+)/)
-        if (!sponsors[Number(storyNumber) - 1]) {
-          sponsors[Number(storyNumber) - 1] = []
+        const index = Number(storyNumber) - 1
+        if (!sponsors[index]) {
+          sponsors[index] = []
         }
-        sponsors[Number(storyNumber) - 1].push({
+        sponsors[index].push({
           blockNumber: tx.blockNumber,
           transactionHash: tx.transactionHash,
           url: sponsorLink,

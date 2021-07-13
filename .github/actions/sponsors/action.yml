@@ -1,9 +1,6 @@
 name: Sponsors
 description: Reads transactions to frog's address and adds sponsors.
 inputs:
-  sponsors-file:
-    description: Path to sponsors JSON file
-    required: true
   etherscan-api-url:
     description: Etherscan API url
     required: true

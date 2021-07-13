@@ -4,9 +4,6 @@ inputs:
   story-number:
     description: The number of the story that has ended.
     required: true
-  sponsors-file:
-    description: Path to sponsors JSON file
-    required: true
   twitter-consumer-key:
     description: The consumer key frog's twitter account.
     required: true

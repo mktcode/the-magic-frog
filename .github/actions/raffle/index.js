@@ -2,18 +2,17 @@ const fs = require('fs')
 const core = require('@actions/core')
 const Twitter = require('twitter-lite')
 const { getUsersFromStory, getPotAmount, getPotAmountFirst, getPotAmountSecond, getPotAmountThird, potImageMediaId } = require('../../../lib')
+const sponsors = require('../../../sponsors')
 
 async function run() {
   try {
     const storyNumber = core.getInput('story-number')
-    const sponsorsFile = core.getInput('sponsors-file')
     const twitterConsumerKey = core.getInput('twitter-consumer-key')
     const twitterConsumerSecret = core.getInput('twitter-consumer-secret')
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
-    const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))[storyNumber - 1]
-    const potAmount = sponsors ? getPotAmount(sponsors) : 0
+    const potAmount = sponsors[storyNumber - 1] ? getPotAmount(sponsors[storyNumber - 1]) : 0
     
     if (potAmount) {
       const story = fs.readFileSync(storyFile, 'utf-8')
