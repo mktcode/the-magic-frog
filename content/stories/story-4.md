@@ -1,7 +1,7 @@
 ---
 title: Untitled Story
 number: 4
-ended: false
+ended: true
 ---
 
 <story-part username="magicstoryfrog" image="">
@@ -17,5 +17,12 @@ He said: "Croak!", and everybody was happy!
 <story-part username="magicstoryfrog" image="">
 
 But the story has not ended yet. Or has it?
+
+</story-part>
+<story-part username="magicstoryfrog" image="">
+
+And they lived happily ever after.
+
+# The End!
 
 </story-part>
