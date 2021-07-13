@@ -34,6 +34,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          path: repo
       - run: npm ci
 
       # Set up Google Cloud for Text to Speech
@@ -47,7 +48,7 @@ jobs:
       # Fetch info about the reply with the most likes, for the most recent story tweet.
       - name: Get Top Reply
         id: top-reply
-        uses: ./.github/actions/top-reply
+        uses: ./repo/.github/actions/top-reply
         with:
           twitter-account-id: ${{ secrets.TWITTER_ACCOUNT_ID }}
           twitter-bearer-token: ${{ secrets.TWITTER_BEARER_TOKEN }}
@@ -56,7 +57,7 @@ jobs:
       - name: Write Story
         env:
           STORY_NUMBER: ${{ steps.top-reply.outputs.story-number }}
-          FILE: content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
+          FILE: repo/content/stories/story-${{ steps.top-reply.outputs.story-number }}.md
           TEXT: ${{ steps.top-reply.outputs.text }}
           IMAGE: ${{ steps.top-reply.outputs.image }}
           AUTHOR: ${{ steps.top-reply.outputs.username }}
@@ -69,7 +70,7 @@ jobs:
           if $ENDED
           then
             sed -i '0,/ended: false/s//ended: true/' $FILE
-            export NEXT_FILE=content/stories/story-$(( $STORY_NUMBER + 1 )).md
+            export NEXT_FILE=repo/content/stories/story-$(( $STORY_NUMBER + 1 )).md
             printf "%s\n" "---" >> $NEXT_FILE
             printf "%s\n" "title: Untitled Story" >> $NEXT_FILE
             printf "%s\n" "number: $(( $STORY_NUMBER + 1 ))" >> $NEXT_FILE
@@ -87,19 +88,19 @@ jobs:
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
           -d '{"input":{"ssml":"<speak>${{ steps.top-reply.outputs.text-clean }}</speak>"},"voice":{"languageCode":"en-GB","name":"en-GB-Wavenet-D"},"audioConfig":{"audioEncoding":"MP3","pitch": -3}}' \
-          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> static/audio/story-$STORY_NUMBER.mp3
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> repo/static/audio/story-$STORY_NUMBER.mp3
 
           # Prepare next story audio file
           if $ENDED
           then
-            cp static/audio/once-upon-a-time.mp3 static/audio/story-$(( $STORY_NUMBER + 1 )).mp3
+            cp repo/static/audio/once-upon-a-time.mp3 repo/static/audio/story-$(( $STORY_NUMBER + 1 )).mp3
           fi
 
 
       # Publish a new tweet, where people can again share ideas.
       - name: New Tweet
         id: new-tweet
-        uses: ./.github/actions/tweet
+        uses: ./repo/.github/actions/tweet
         with:
           last-username: ${{ steps.top-reply.outputs.username }}
           last-reply-id: ${{ steps.top-reply.outputs.reply-id }}
@@ -113,6 +114,8 @@ jobs:
       # Redeploy the GitHub Page with the ID of the new story tweet.
       - name: Update Repo and Website
         run: |
+          cd repo
+          
           # Replace and commit env vars in nuxt.config.js
           # (so that other workflows can redeploy the page without setting env vars)
           sed -i -E "s/NEXT_UPDATE: '[0-9]+'/NEXT_UPDATE: '$(date --date="tomorrow 12:00:00" +%s)'/" nuxt.config.js
