@@ -35,7 +35,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: repo
-      - run: npm ci
+      - run: |
+          cd repo
+          npm ci
+          cd ..
 
       # Set up Google Cloud for Text to Speech
       - name: Set up Cloud SDK
