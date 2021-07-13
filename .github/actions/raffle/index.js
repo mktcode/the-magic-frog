@@ -12,7 +12,8 @@ async function run() {
     const twitterAccessTokenKey = core.getInput('twitter-access-token-key')
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
-    const potAmount = sponsors[storyNumber - 1] ? getPotAmount(sponsors[storyNumber - 1]) : 0
+    const storySponsors = sponsors[storyNumber - 1]
+    const potAmount = storySponsors ? getPotAmount(storySponsors) : 0
     
     if (potAmount) {
       const story = fs.readFileSync(`${__dirname}/../../../content/stories/story-${storyNumber}.md`, 'utf-8')
@@ -23,15 +24,15 @@ async function run() {
       let winners = []
       let winnerStrings = []
       winners[0] = users[Math.floor(Math.random() * users.length)]
-      winnerStrings[0] = `1. @ ${winners[0]}: ${getPotAmountFirst(sponsors)} ETH`
+      winnerStrings[0] = `1. @ ${winners[0]}: ${getPotAmountFirst(storySponsors)} ETH`
       users = users.filter((user) => user !== winners[0])
       if (users.length) {
         winners[1] = users[Math.floor(Math.random() * users.length)]
-        winnerStrings[1] = `2. @ ${winners[1]}: ${getPotAmountSecond(sponsors)} ETH`
+        winnerStrings[1] = `2. @ ${winners[1]}: ${getPotAmountSecond(storySponsors)} ETH`
         users = users.filter((user) => user !== winners[1])
         if (users.length) {
           winners[2] = users[Math.floor(Math.random() * users.length)]
-          winnerStrings[2] = `3. @ ${winners[2]}: ${getPotAmountThird(sponsors)} ETH`
+          winnerStrings[2] = `3. @ ${winners[2]}: ${getPotAmountThird(storySponsors)} ETH`
         }
       }
   
