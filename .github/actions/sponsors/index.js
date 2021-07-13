@@ -3,10 +3,10 @@ const core = require('@actions/core')
 const { utils: web3utils } = require('web3')
 const Twitter = require('twitter-lite')
 const { getSponsorTransactions, getStartBlock, getPotAmountAll, potImageMediaId } = require('../../../lib')
+const cryptoConf = require('../../../package').crypto
 
 async function run() {
   try {
-    const ethAddress = core.getInput('eth-address')
     const sponsorsFile = core.getInput('sponsors-file')
     const etherscanApiUrl = core.getInput('etherscan-api-url')
     const etherscanApiKey = core.getInput('etherscan-api-key')
@@ -17,7 +17,7 @@ async function run() {
     
     const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))
     const startBlock = getStartBlock(sponsors)
-    const sponsorTransactions = await getSponsorTransactions(startBlock, ethAddress, etherscanApiUrl, etherscanApiKey)
+    const sponsorTransactions = await getSponsorTransactions(startBlock, cryptoConf.address, etherscanApiUrl, etherscanApiKey)
     core.info(`New sponsors found: ${JSON.stringify(sponsorTransactions)}`)
 
     if (sponsorTransactions.length) {
