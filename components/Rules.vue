@@ -7,7 +7,7 @@
     Every day at 12:00 (UTC) the comment with the most likes will be appended to the story and a new tweet will be posted. That means: Be early and be creative!<br>
     <b>Comments on comments will be ignored! So make sure to actually reply to the frog's tweet, continuing the story where it stopped, and not some other persons's comment.</b><br>
     <br>
-    In your comment you can add text or an image or both. Links will be removed. Add whole sentences or build a ramp for others.<br>
+    In your comment you can add text or an image or both. Links and Twitter usernames (@someuser) will be removed. Add whole sentences or build a ramp for others.<br>
     <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
       They could hardly believe their eyes. In front of them stood a gigantic...
     </div>
@@ -21,18 +21,28 @@
     <br>
     To add a headline, e.g. to start a new chapter, use a <i>#</i>:<br>
     <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
-      <i># Chapter 2: A New Chapter</i><br>
+      # Chapter 2: A New Chapter<br>
       <br>
       After surviving the last chapter, our heros stumbled right into the next one.
     </div>
     <br>
-    If you believe the story has found its worthy end, add (exactly) this headline without any further text:<br>
+    When you think the story has reached its worthy end, add a headline that says it as the last (or only) line of your comment:<br>
     <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
-      <i># The End!</i>
+      And they lived happily ever after.<br>
+      <br>
+      # The End!
+    </div>
+    Also valid:
+    <div class="border rounded-xl py-3 px-3 px-sm-4 px-md-5 mt-2 mb-3 bg-white">
+      # The End.<br>
+      <span class="text-muted">or</span><br>
+      # The End<br>
+      <span class="text-muted">or</span><br>
+      # the end
     </div>
     If such a comment already exists, you can add a like instead and if the community agrees, a new story will start the next day, with <i> Once upon a time...</i><br>
     <br>
-    <b>Pro tip! Proper grammar and punctuation will result in a better audio version. Check it out <a href="https://cloud.google.com/text-to-speech#section-2" target="__blank">here</a> before submitting.</b>
+    <b>Pro tip! Proper grammar and punctuation will result in a better audio version. Check it out <a href="https://cloud.google.com/text-to-speech#section-2" target="__blank">here</a> before submitting. (# will be filtered.)</b>
   </div>
 </template>
 

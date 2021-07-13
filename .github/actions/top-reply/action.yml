@@ -20,6 +20,8 @@ outputs:
     description: The text of the top reply, cleaned up for audio conversion
   image:
     description: The image of the top reply
+  ended:
+    description: Whether the story has ended or not
 runs:
   using: node12
   main: ./index.js

@@ -20,13 +20,37 @@ async function run() {
 
     if (replies.length) {
       const topReply = replies.sort((a, b) => b.public_metrics.like_count - a.public_metrics.like_count)[0]
+      
       // https://www.regextester.com/53716
       const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gmi
       const twitterUsernameRegex = /@[A-Za-z0-9_]{1,15}\s/gmi
       const text = topReply.text.replace(urlRegex, '').replace(twitterUsernameRegex, '')
+      
+      /**
+       * Possible ways to end a story:
+      # The End!
+      // or
+      Some text...
+      # The End!
+      // or
+      Some text...
+
+      # The End!
+      // or
+      # the end.
+      // or
+      Some text...
+
+      # The End
+       */
+      const endedRegex = /^(.*\n+)?# The End(!|\.)?$/igm
+      const ended = endedRegex.test(text)
+      
       const headlineWithoutDotRegex = /^#\s{1}(.*(?![\.!?]$))+$/gmi
       const textClean = text.replace(headlineWithoutDotRegex, '$1.').replace(/"/g, '“').replace(/'/g, '’').replace(/\n/g, '<break time=\\\"1500ms\\\"/>')
+      
       const image = await getTweetImage(topReply.id, twitterBearerToken)
+
       if (!text && !image) {
         throw Error('No text or image found!')
       }
@@ -45,6 +69,7 @@ async function run() {
       core.info(`- Clean Text: ${textClean}`)
       core.info(`- Likes: ${topReply.public_metrics.like_count}`)
       core.info(`- Image: ${image}`)
+      core.info(`- Ended: ${ended}`)
 
       core.setOutput('story-number', storyNumber)
       core.setOutput('reply-id', topReply.id)
@@ -52,6 +77,7 @@ async function run() {
       core.setOutput('text', text)
       core.setOutput('text-clean', textClean)
       core.setOutput('image', image)
+      core.setOutput('ended', ended)
     } else {
       throw Error('No replies found!')
     }
