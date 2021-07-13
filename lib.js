@@ -91,7 +91,7 @@ const getStartBlock = (sponsors) => {
 
 const getPotAmount = (sponsors) => {
   const potAmount = sponsors.reduce((value, sponsor) => (value + BigInt(sponsor.value)), BigInt(0))
-  return Number(web3utils.fromWei(potAmount.toString(), 'ether')) * 0.75
+  return Number(web3utils.fromWei(potAmount.toString(), 'ether')) * 0.66
 }
 
 const getPotAmountAll = (sponsors) => {

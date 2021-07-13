@@ -66,7 +66,7 @@
             Thank you very much for your sponsorship! It might take up to one hour for your link to appear on the website.
           </div>
           <small class="d-block text-center text-muted mt-4">
-            25% of the sponsored amount will be used to maintain and improve the project.
+            33% of the sponsored amount will be used to maintain and improve the project.
             The current <u>minimum amount is 0.01</u> ETH and subject to adjustments. Inappropriate links will be removed without a refund.
             If you want to support me personally, without appearing as a sponsor, go <a href="https://github.com/mktcode" target="__blank">here</a>.
           </small>
