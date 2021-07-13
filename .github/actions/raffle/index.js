@@ -18,7 +18,6 @@ async function run() {
       const story = fs.readFileSync(`${__dirname}/../../../content/stories/story-${storyNumber}.md`, 'utf-8')
       let users = getUsersFromStory(story)
       core.info(`Users found: ${JSON.stringify(users)}`)
-      core.info(`Unique: ${uniqueUsers.length}`)
   
       // pick winners
       let winners = []
@@ -47,9 +46,9 @@ async function run() {
       })
       const status = `The pot has been raffled. Congratulations to:
   
-  ${winnerStrings.join('\n')}
+${winnerStrings.join('\n')}
   
-  Please leave an Ethereum address below to receive your price.`
+Please leave an Ethereum address below to receive your price.`
       const tweet = await twitterClient.post('statuses/update', {
         status,
         media_ids: potImageMediaId,
