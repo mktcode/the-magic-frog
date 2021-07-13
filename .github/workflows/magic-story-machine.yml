@@ -135,7 +135,7 @@ jobs:
     name: Raffle the Pot
     runs-on: ubuntu-latest
     needs: [ tell-story ]
-    if: ${{ needs.tell-story.outputs.ended }}
+    if: ${{ needs.tell-story.outputs.ended == 'true' }}
     steps:
       - uses: actions/setup-node@v2
       - uses: actions/checkout@v2
