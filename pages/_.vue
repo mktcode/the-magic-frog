@@ -303,7 +303,7 @@ export default {
     sponsorStory () {
       const web3 = new Web3(window.ethereum)
       if (this.sponsorEthAddress) {
-        if (Number(this.sponsorAmount) < this.minimumSponsorAmount) {
+        if (Number(this.sponsorAmount) <= this.minimumSponsorAmount) {
           this.sendingSponsorship = true
           this.showSponsorshipSuccessMessage = false
           const data = `${this.currentStory.number}:${this.sponsorUrl}`
