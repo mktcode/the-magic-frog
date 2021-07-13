@@ -13,7 +13,7 @@ async function run() {
     const twitterAccessTokenSecret = core.getInput('twitter-access-token-secret')
     
     const sponsors = JSON.parse(fs.readFileSync(sponsorsFile, 'utf-8'))[storyNumber - 1]
-    const potAmount = getPotAmount(sponsors)
+    const potAmount = sponsors ? getPotAmount(sponsors) : 0
     
     if (potAmount) {
       const story = fs.readFileSync(storyFile, 'utf-8')
