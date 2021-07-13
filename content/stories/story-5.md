@@ -9,3 +9,8 @@ ended: false
 a magic frog...
 
 </story-part>
+<story-part username="thecodelander" image="">
+
+and his friend the wizard...
+
+</story-part>
