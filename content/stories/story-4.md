@@ -14,3 +14,8 @@ a magic frog came and saved the day.
 He said: "Croak!", and everybody was happy!
 
 </story-part>
+<story-part username="magicstoryfrog" image="">
+
+But the story has not ended yet. Or has it?
+
+</story-part>
