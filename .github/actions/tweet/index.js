@@ -20,12 +20,14 @@ async function run() {
       access_token_secret: twitterAccessTokenSecret
     })
 
-    let status = `#Story ${storyNumber} continues. @${lastUsername} helped me to remember. https://twitter.com/${lastUsername}/status/${lastReplyId}
+    let status = `#Story ${storyNumber} continues. Thanks @${lastUsername} for helping me to remember. https://twitter.com/${lastUsername}/status/${lastReplyId}
 
-But what happens next? Read the full story at https://the-magic-frog.com and share your ideas below.`
+But what happens next? Read the story at https://the-magic-frog.com and share your ideas below.`
     
     if (theEnd === 'true') {
-      status = `Story ${storyNumber} ended! Thanks @${lastUsername} and everyone else.
+      status = `Story ${storyNumber} has found its worthy end! Thanks @${lastUsername} and everyone else for helping me to remember it, after all this time.
+
+Ready for another one?
 
 #Story ${Number(storyNumber) + 1} begins with:
 
