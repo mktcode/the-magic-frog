@@ -9,3 +9,8 @@ ended: false
 a magic frog came and saved the day.
 
 </story-part>
+<story-part username="magicstoryfrog" image="">
+
+He said: "Croak!", and everybody was happy!
+
+</story-part>
