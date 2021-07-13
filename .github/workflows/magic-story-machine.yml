@@ -24,7 +24,7 @@ jobs:
     name: Tell Magical Story
     runs-on: ubuntu-latest
     needs: [ storytellers ]
-    if: ${{ needs.storytellers.outputs.count >= 100 }}
+    if: ${{ needs.storytellers.outputs.count >= 3 }}
     env:
       END_TEXT: '# The End!'
     outputs:
