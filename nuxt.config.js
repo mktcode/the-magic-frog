@@ -26,7 +26,7 @@ export default {
 
   env: {
     NEXT_UPDATE: '1626264000',
-    LATEST_TWEET: '1414990322245963783',
+    LATEST_TWEET: '1414993312709292037',
     ETH_ADDRESS: pkg.crypto.address
   },
 
