@@ -94,6 +94,10 @@ const getPotAmount = (sponsors) => {
   return Number(web3utils.fromWei(potAmount.toString(), 'ether')) * 0.75
 }
 
+const getPotAmountAll = (sponsors) => {
+  return getPotAmount(sponsors).toFixed(6).replace(/0+$/, '')
+}
+
 const getPotAmountFirst = (sponsors) => {
   return (getPotAmount(sponsors) * 0.5).toFixed(6).replace(/0+$/, '')
 }
@@ -122,6 +126,7 @@ module.exports = {
   getSponsorTransactions,
   getStartBlock,
   getPotAmount,
+  getPotAmountAll,
   getPotAmountFirst,
   getPotAmountSecond,
   getPotAmountThird,
