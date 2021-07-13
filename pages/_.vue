@@ -132,7 +132,9 @@
         The more you have contributed to a story, the more likely fate will be on your side, unless... you are unlucky.
         You also need to follow <a href="https://twitter.com/@magicstoryfrog">The Magic Frog</a> in order for fate to even care about you at all.
       </p>
-      <img src="/pot-of-gold.png" class="my-4">
+      <a :href="'https://etherscan.io/address/' + potEthAddress" target="__blank">
+        <img src="/pot-of-gold.png" class="my-4">
+      </a>
       <div v-if="potAmount" class="text-center mb-4">
         <h1><span class="text-muted">1.</span> {{ potAmountFirst }} <small class="text-muted">ETH</small></h1>
         <h2><span class="text-muted">2.</span> {{ potAmountSecond }} <small class="text-muted">ETH</small></h2>
@@ -221,7 +223,8 @@ export default {
       sponsorEthAddress: null,
       ethereumEnabled: window.ethereum,
       showSponsorshipSuccessMessage: false,
-      minimumSponsorAmount: 0.01
+      minimumSponsorAmount: 0.01,
+      potEthAddress: process.env.ETH_ADDRESS
     }
   },
   head () {
@@ -311,7 +314,7 @@ export default {
           const extraGas = Math.ceil(bytes * 16 * 1.1) // * 1.1 as a little buffer
           web3.eth.sendTransaction({
             from: this.sponsorEthAddress,
-            to: process.env.ETH_ADDRESS,
+            to: this.potEthAddress,
             value: ethUtils.toWei(this.sponsorAmount, 'ether'),
             data: ethUtils.toHex(data),
             gas: 21000 + extraGas
