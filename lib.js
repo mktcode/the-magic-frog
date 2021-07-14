@@ -67,10 +67,8 @@ const getLatestStoryTweet = (accountId, bearerToken) => {
 
 const getSponsorTransactions = (startBlock, ethAddress, etherscanApiUrl, etherscanApiKey) => {
   const inputRegex = /^\d+:(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])$/i
-  const url = `${etherscanApiUrl}?module=account&action=txlist&address=${ethAddress}&startblock=${startBlock}&sort=asc&apikey=${etherscanApiKey}`
-  console.log(url)
   return axios.get(
-    url
+    `${etherscanApiUrl}?module=account&action=txlist&address=${ethAddress}&startblock=${startBlock}&sort=asc&apikey=${etherscanApiKey}`
   ).then((response) => {
     return response.data.result.filter((tx) => {
       const input = web3utils.hexToUtf8(tx.input)
