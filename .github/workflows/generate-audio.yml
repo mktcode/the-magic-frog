@@ -31,11 +31,11 @@ jobs:
       - name: Convert Text To Audio
         run: |
           # Use Google text to speech
-          TEXT=$(cat repo/generated-audio.txt)
+          export TEXT=$(cat repo/generated-audio.txt)
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
-          -d '{"input":{"ssml":"<speak>$TEXT</speak>"},"voice":{"languageCode":"en-GB","name":"${{ env.VOICE }}"},"audioConfig":{"audioEncoding":"MP3","pitch": ${{ env.PITCH }}}}' \
+          -d '{"input":{"ssml":"<speak>'"$TEXT"'</speak>"},"voice":{"languageCode":"en-GB","name":"${{ env.VOICE }}"},"audioConfig":{"audioEncoding":"MP3","pitch": ${{ env.PITCH }}}}' \
           https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> repo/generated-audio.mp3
       
       # Update Repo
