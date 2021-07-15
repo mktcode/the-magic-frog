@@ -1,6 +1,12 @@
+# This workflow is only to generate audio manually.
+# The audio for stories is generated in magic-story-machine workflow.
 name: Generate Audio
 on:
   workflow_dispatch:
+
+env:
+  VOICE: en-GB-Wavenet-F
+  PITCH: 7
 
 jobs:
   generate-audio:
@@ -25,12 +31,12 @@ jobs:
       - name: Convert Text To Audio
         run: |
           # Use Google text to speech
-          export AUDIO_FILE=repo/static/audio/audio-${{ secrets.AUDIO_TO_GENERATE_FILENAME }}.mp3
+          TEXT=$(cat repo/generated-audio.txt)
           curl -X POST \
           -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
           -H "Content-Type: application/json; charset=utf-8" \
-          -d '{"input":{"ssml":"<speak>${{ secrets.AUDIO_TO_GENERATE }}</speak>"},"voice":{"languageCode":"en-GB","name":"${{ secrets.AUDIO_TO_GENERATE_VOICE }}"},"audioConfig":{"audioEncoding":"MP3","pitch": ${{ secrets.AUDIO_TO_GENERATE_PITCH }}}}' \
-          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> $AUDIO_FILE
+          -d '{"input":{"ssml":"<speak>$TEXT</speak>"},"voice":{"languageCode":"en-GB","name":"${{ env.VOICE }}"},"audioConfig":{"audioEncoding":"MP3","pitch": ${{ env.PITCH }}}}' \
+          https://texttospeech.googleapis.com/v1/text:synthesize | jq -r '.audioContent' | base64 -d >> repo/generated-audio.mp3
       
       # Update Repo
       - name: Update Repo
