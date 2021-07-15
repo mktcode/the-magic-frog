@@ -1,1 +1,3 @@
-Here is how it works.
+The Magic Frog.
+
+A project to bring the joy of collaborative storytelling to Twitter. Presented by. The magic frog, himself.
